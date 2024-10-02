@@ -12,7 +12,7 @@ public class Game {
         // Create Players
         m_players = new Player[4];
         for (int i = 0; i < 4; ++i) {
-            m_players[i] = new Player();
+            m_players[i] = new Player(i);
         }
 
         // Distribute Cards
