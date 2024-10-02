@@ -15,7 +15,7 @@ public class Player {
     }
 
     public void addCardToHand(AdventureCard newCard) {
-
+        m_hand.add(newCard);
     }
 
 

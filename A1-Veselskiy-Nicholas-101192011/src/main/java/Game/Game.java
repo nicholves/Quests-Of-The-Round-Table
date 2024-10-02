@@ -9,9 +9,17 @@ public class Game {
         m_eventDeck = new EventDeck();
         m_adventureDeck = new AdventureDeck();
 
+        // Create Players
         m_players = new Player[4];
         for (int i = 0; i < 4; ++i) {
             m_players[i] = new Player();
+        }
+
+        // Distribute Cards
+        for (Player player : m_players) {
+            for (int card = 0; card < 12; ++card) {
+                player.addCardToHand(m_adventureDeck.drawCard());
+            }
         }
     }
 
