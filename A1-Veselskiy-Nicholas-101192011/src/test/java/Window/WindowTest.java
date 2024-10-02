@@ -64,6 +64,6 @@ class WindowTest {
         String secondLine = result.split("\n")[1];
 
         assertTrue(firstLine.contains(String.valueOf(playerId)));
-        assertTrue("Player 3, your hand contains: F5, F5, F10, F25, F35, F50, F70, D5, D5, S10, H10, L20".trim().equals(secondLine));
+        assertTrue("Player 3, your hand contains: F5, F5, F10, F25, F35, F50, F70, D5, D5, S10, H10, L20".equals(secondLine.strip()));
     }
 }
