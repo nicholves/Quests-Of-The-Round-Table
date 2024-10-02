@@ -22,6 +22,23 @@ public class WeaponCard implements AdventureCard{
         return m_value;
     }
 
+    @Override
+    public int compareTo(AdventureCard other) {
+        if (other.getLetter() == 'F') {
+            return 1;
+        }
+
+        if (m_value != other.getValue()) {
+            return m_value - other.getValue();
+        }
+
+        // we must be either swords or horses
+        int newValueThis = m_letter == 'S' ? 1 : 0;
+        int newValueOther = other.getLetter() == 'S' ? 1 : 0;
+
+        return newValueOther - newValueThis;
+    }
+
     private final char m_letter;
     private final int m_value;
 }

@@ -22,6 +22,15 @@ public class FoeCard implements AdventureCard {
         return m_value;
     }
 
+    @Override
+    public int compareTo(AdventureCard other) {
+        if (other.getLetter() != 'F') {
+            return -1;
+        }
+
+        return m_value - other.getValue();
+    }
+
     private final char m_letter;
     private final int m_value;
 }

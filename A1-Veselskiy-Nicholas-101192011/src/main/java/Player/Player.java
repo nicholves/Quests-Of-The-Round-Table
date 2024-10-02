@@ -3,6 +3,7 @@ package Player;
 import AdventureCard.AdventureCard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Player {
@@ -12,6 +13,7 @@ public class Player {
     }
 
     public List<AdventureCard> getHand() {
+        sortHand();
         return m_hand;
     }
 
@@ -20,11 +22,11 @@ public class Player {
     }
 
     private void sortHand() {
-
+        Collections.sort(m_hand);
     }
 
     public int getPlayerId() {
-        return 0;
+        return m_playerID;
     }
 
 

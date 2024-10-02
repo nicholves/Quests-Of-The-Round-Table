@@ -1,6 +1,6 @@
 package AdventureCard;
 
-public interface AdventureCard {
+public interface AdventureCard extends Comparable<AdventureCard> {
     public default String asString() {
         return "";
     }
