@@ -46,7 +46,7 @@ public class AdventureDeck {
             Integer count = foesMap.get(power);
 
             for (int i = 0; i < count; i++) {
-                m_deck.push(new FoeCard('F', power));
+                m_deck.push(new FoeCard(power));
             }
         }
 

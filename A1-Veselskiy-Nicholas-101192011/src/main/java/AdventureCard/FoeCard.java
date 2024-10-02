@@ -2,8 +2,8 @@ package AdventureCard;
 
 public class FoeCard implements AdventureCard {
 
-    public FoeCard(char letter, int value) {
-        m_letter = letter;
+    public FoeCard(int value) {
+        m_letter = 'F';
         m_value = value;
     }
 
