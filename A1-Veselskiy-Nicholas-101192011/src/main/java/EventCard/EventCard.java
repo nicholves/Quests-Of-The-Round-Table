@@ -1,13 +1,26 @@
 package EventCard;
 
-public class EventCard {
+public class EventCard implements EventDeckCard {
     public EventCard(EventType event) {
+        m_eventCardType = EventCardType.EVENTTYPE;
 
+        m_eventType = event;
     }
+
+    @Override
     public String asString() {
-        return "";
+        return switch (m_eventType) {
+            case EventType.PLAGUE -> "Plague";
+            case EventType.PROSPERITY -> "Prosperity";
+            case EventType.QUEENS_FAVOR -> "Queen's favor";
+        };
     }
 
-    private EventCardType m_eventCardType;
-    private EventType m_eventType;
+    @Override
+    public EventCardType getType() {
+        return m_eventCardType;
+    }
+
+    private final EventCardType m_eventCardType;
+    private final EventType m_eventType;
 }

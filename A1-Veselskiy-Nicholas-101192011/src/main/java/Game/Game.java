@@ -5,7 +5,8 @@ import EventDeck.EventDeck;
 
 public class Game {
     public Game() {
-
+        m_eventDeck = new EventDeck();
+        m_adventureDeck = new AdventureDeck();
     }
 
     public EventDeck getEventDeck() {

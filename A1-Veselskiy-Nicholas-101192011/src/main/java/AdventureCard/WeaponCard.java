@@ -3,24 +3,25 @@ package AdventureCard;
 public class WeaponCard implements AdventureCard{
 
     public WeaponCard(char letter, int value) {
-
+        m_letter = letter;
+        m_value = value;
     }
 
     @Override
     public String asString() {
-        return "";
+        return String.valueOf(m_letter) + m_value;
     }
 
     @Override
     public char getLetter() {
-        return 0;
+        return m_letter;
     }
 
     @Override
     public int getValue() {
-        return 0;
+        return m_value;
     }
 
-    private char m_letter;
-    private int m_value;
+    private final char m_letter;
+    private final int m_value;
 }
