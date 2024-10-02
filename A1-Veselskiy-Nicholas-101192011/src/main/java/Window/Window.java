@@ -1,4 +1,5 @@
 package Window;
+import Player.Player;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -11,5 +12,13 @@ public class Window {
         for (int i = 0; i < 100; i++) {
             output.println();
         }
+    }
+
+    public void promptForNewPlayerTurn(Scanner input, PrintWriter output, Player player) {
+
+    }
+
+    public void displayPlayerHand(Scanner input, PrintWriter output, Player player) {
+
     }
 }

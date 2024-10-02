@@ -19,6 +19,10 @@ public class Player {
         m_hand.add(newCard);
     }
 
+    private void sortHand() {
+
+    }
+
     public int getPlayerId() {
         return 0;
     }
