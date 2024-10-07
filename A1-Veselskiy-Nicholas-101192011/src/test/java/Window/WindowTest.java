@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WindowTest {
     @Test
     @DisplayName("The interface prompts the user to press enter to end their turn and then flushes the screen")
-    void RESP_03_TEST_01() {
+    public void RESP_03_TEST_01() {
         Window window = new Window();
 
         String input = "\n";
@@ -34,7 +34,7 @@ class WindowTest {
     @Test
     @DisplayName("Prompts the next player for their next turn. After the new player has confirmed that they are ready" +
             " to play by pressing enter the game should display their hand.")
-    void RESP_04_TEST_01() {
+    public void RESP_04_TEST_01() {
         Window window = new Window();
         int playerId = 3;
         Player player = new Player(playerId);

@@ -12,7 +12,7 @@ class EventDeckTest {
 
     @Test
     @DisplayName("Check the Event Deck has 17 Cards After Initialisation")
-    void RESP_01_TEST_02() {
+    public void RESP_01_TEST_02() {
         EventDeck eventDeck = new EventDeck();
 
         assertEquals(17, eventDeck.getDeckSize());
@@ -20,7 +20,7 @@ class EventDeckTest {
 
     @Test
     @DisplayName("Check the Event Deck has the correct card distribution")
-    void RESP_01_TEST_04() {
+    public void RESP_01_TEST_04() {
         EventDeck eventDeck = new EventDeck();
 
         HashMap<String, Integer> cards = new HashMap<String, Integer>();

@@ -8,11 +8,11 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AdventureDeckTest {
+public class AdventureDeckTest {
 
     @Test
     @DisplayName("Check the Adventure Deck has 100 Cards After Initialisation")
-    void RESP_01_TEST_01() {
+    public void RESP_01_TEST_01() {
         AdventureDeck adventureDeck = new AdventureDeck();
 
         assertEquals(100, adventureDeck.getDeckSize());
@@ -20,7 +20,7 @@ class AdventureDeckTest {
 
     @Test
     @DisplayName("Check the Adventure Deck has the correct card distribution")
-    void RESP_01_TEST_03() {
+    public void RESP_01_TEST_03() {
         AdventureDeck adventureDeck = new AdventureDeck();
 
         HashMap<String, Integer> cards = new HashMap<String, Integer>();

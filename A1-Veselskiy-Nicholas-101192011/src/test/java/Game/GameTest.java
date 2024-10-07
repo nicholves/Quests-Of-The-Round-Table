@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     @Test
     @DisplayName("Check that cards are distributed to players on game initialization")
-    void RESP_02_TEST_01() {
+    public void RESP_02_TEST_01() {
         Game game = new Game();
 
         for (int i = 0; i < 4; i++) {
