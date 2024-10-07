@@ -67,6 +67,7 @@ public class Game {
             List<Player> winners = computeWinners();
 
             if (!winners.isEmpty()) {
+                m_outputWindow.congratulateWinners(m_writer, winners);
                 break;
             }
         }

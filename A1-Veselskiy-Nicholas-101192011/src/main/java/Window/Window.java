@@ -41,6 +41,20 @@ public class Window {
     }
 
     public void congratulateWinners(PrintWriter output, List<Player> players) {
+        // some empty lines
+        output.println();
+        output.println();
+        output.println();
 
+        String winnersString = "";
+        for (Player p : players) {
+            if (!winnersString.isEmpty()) {
+                winnersString = winnersString + ", ";
+            }
+
+            winnersString += p.getPlayerId();
+        }
+
+        output.println("Congratulations! Player(s) " + winnersString + " You are knighted and thus victorious!");
     }
 }
