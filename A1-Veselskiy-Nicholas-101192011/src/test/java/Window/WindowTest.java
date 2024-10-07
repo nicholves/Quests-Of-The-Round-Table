@@ -9,6 +9,8 @@ import AdventureCard.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,5 +67,44 @@ class WindowTest {
 
         assertTrue(firstLine.contains(String.valueOf(playerId)));
         assertTrue("Player 3, your hand contains: F5, F5, F10, F25, F35, F50, F70, D5, D5, S10, H10, L20".equals(secondLine.strip()));
+    }
+
+    @Test
+    @DisplayName("The interface displays the winners of the game correctly with multiple winners")
+    public void RESP_06_TEST_01() {
+        Window window = new Window();
+
+        Player player0 = new Player(0);
+        Player player3 = new Player(3);
+        List<Player> winners = new ArrayList<Player>();
+        winners.add(player0);
+        winners.add(player3);
+
+
+        StringWriter output = new StringWriter();
+        window.congratulateWinners(new PrintWriter(output), winners);
+
+
+        String resultString = output.toString();
+        assertTrue(resultString.contains("0"));
+        assertTrue(resultString.contains("3"));
+    }
+
+
+    @Test
+    @DisplayName("The interface displays the winners of the game correctly with a single winner")
+    public void RESP_06_TEST_02() {
+        Window window = new Window();
+        Player player3 = new Player(2);
+        List<Player> winners = new ArrayList<Player>();
+        winners.add(player3);
+
+
+        StringWriter output = new StringWriter();
+        window.congratulateWinners(new PrintWriter(output), winners);
+
+
+        String resultString = output.toString();
+        assertTrue(resultString.contains("2"));
     }
 }

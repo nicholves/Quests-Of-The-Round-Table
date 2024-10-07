@@ -39,4 +39,8 @@ public class Window {
 
         output.println();
     }
+
+    public void congratulateWinners(PrintWriter output, List<Player> players) {
+
+    }
 }
