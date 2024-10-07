@@ -39,7 +39,33 @@ public class Game {
     }
 
     public List<Player> computeWinners() {
-        return new ArrayList<Player>();
+        List<Player> winners = new ArrayList<Player>();
+
+        for (Player p : m_players) {
+            if (p.getNumShields() >= 7) {
+                winners.add(p);
+            }
+        }
+
+        return winners;
+    }
+
+    public void gameLoop() {
+        int currentPlayerTurn = 0;
+        while (true) {
+            take_player_turn(currentPlayerTurn);
+
+            currentPlayerTurn = (currentPlayerTurn + 1) % 4;
+            List<Player> winners = computeWinners();
+
+            if (!winners.isEmpty()) {
+                break;
+            }
+        }
+    }
+
+    public void take_player_turn(int playerID) {
+
     }
 
     private EventDeck m_eventDeck;

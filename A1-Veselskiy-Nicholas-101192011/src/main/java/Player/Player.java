@@ -31,11 +31,11 @@ public class Player {
     }
 
     public int getNumShields() {
-        return 0;
+        return m_numShields;
     }
 
     public void setNumShields(int shields) {
-
+        m_numShields = shields;
     }
 
 
