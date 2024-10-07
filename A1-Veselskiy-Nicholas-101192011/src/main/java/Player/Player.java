@@ -10,6 +10,7 @@ public class Player {
     public Player(int playerID) {
         m_hand = new ArrayList<>();
         m_playerID = playerID;
+        m_numShields = 0;
     }
 
     public List<AdventureCard> getHand() {
@@ -29,7 +30,16 @@ public class Player {
         return m_playerID;
     }
 
+    public int getNumShields() {
+        return 0;
+    }
+
+    public void setNumShields(int shields) {
+
+    }
+
 
     private List<AdventureCard> m_hand;
+    private int m_numShields;
     private final int m_playerID;
 }

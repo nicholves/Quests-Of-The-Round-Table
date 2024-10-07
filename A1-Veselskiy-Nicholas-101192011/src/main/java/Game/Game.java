@@ -4,6 +4,9 @@ import AdventureDeck.AdventureDeck;
 import EventDeck.EventDeck;
 import Player.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
     public Game() {
         m_eventDeck = new EventDeck();
@@ -33,6 +36,10 @@ public class Game {
 
     public Player getPlayer(int playerNumber) {
         return m_players[playerNumber];
+    }
+
+    public List<Player> computeWinners() {
+        return new ArrayList<Player>();
     }
 
     private EventDeck m_eventDeck;
