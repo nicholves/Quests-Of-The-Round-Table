@@ -3,18 +3,24 @@ package Game;
 import AdventureDeck.AdventureDeck;
 import EventDeck.EventDeck;
 import Player.Player;
+import Window.Window;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Game {
     public Game() {
         m_eventDeck = new EventDeck();
         m_adventureDeck = new AdventureDeck();
+        m_outputWindow = new Window();
+        m_scanner = new Scanner(System.in);
+        m_writer = new PrintWriter(System.out, true);
 
         // Create Players
         m_players = new Player[4];
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             m_players[i] = new Player(i);
         }
 
@@ -53,6 +59,8 @@ public class Game {
     public void gameLoop() {
         int currentPlayerTurn = 0;
         while (true) {
+            m_outputWindow.promptForNewPlayerTurn(m_scanner, m_writer, m_players[currentPlayerTurn]);
+
             take_player_turn(currentPlayerTurn);
 
             currentPlayerTurn = (currentPlayerTurn + 1) % 4;
@@ -66,9 +74,13 @@ public class Game {
 
     public void take_player_turn(int playerID) {
 
+        m_outputWindow.promptToEndTurn(m_scanner, m_writer);
     }
 
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;
     private Player[] m_players;
+    private Window m_outputWindow;
+    private Scanner m_scanner;
+    private PrintWriter m_writer;
 }

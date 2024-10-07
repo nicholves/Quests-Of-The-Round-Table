@@ -26,7 +26,7 @@ public class Window {
     public void displayPlayerHand(Scanner input, PrintWriter output, Player player) {
         List<AdventureCard> hand =  player.getHand();
 
-        output.print("Player 3, your hand contains: ");
+        output.print("Player " + player.getPlayerId() + ", your hand contains: ");
 
         for (int i = 0; i < hand.size(); ++i) {
             AdventureCard card = hand.get(i);
