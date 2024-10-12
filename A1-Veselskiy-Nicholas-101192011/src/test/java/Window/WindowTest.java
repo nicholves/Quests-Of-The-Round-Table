@@ -1,17 +1,20 @@
 package Window;
 
+import Game.Game;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import Window.Window;
 import Player.Player;
 import AdventureCard.*;
+import AdventureDeck.AdventureDeck;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -124,5 +127,40 @@ class WindowTest {
         assertFalse(result.contains("0"));
         assertFalse(result.contains("1"));
         assertFalse(result.contains("2"));
+    }
+
+    @Test
+    @DisplayName("The interface prompts the user with their hand and asks them which card they would like to discard")
+    public void RESP_08_TEST_01() {
+        Window window = new Window();
+        Player player = new Player(3);
+        Game game = new Game();
+
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new FoeCard(10));
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('D', 5));
+        player.addCardToHand(new WeaponCard('L', 20));
+        player.addCardToHand(new FoeCard(70));
+        player.addCardToHand(new WeaponCard('D', 5));
+        player.addCardToHand(new FoeCard(25));
+        player.addCardToHand(new FoeCard(50));
+        player.addCardToHand(new WeaponCard('H', 10));
+        player.addCardToHand(new WeaponCard('S', 10));
+        player.addCardToHand(new FoeCard(35));
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+        String input = "\n0\n\n12\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        int cardToRemove = window.discardCard(scanner, new PrintWriter(output), player);
+
+        assertEquals(0, cardToRemove);
+
+        cardToRemove = window.discardCard(scanner, new PrintWriter(output), player);
+        assertEquals(12, cardToRemove);
     }
 }

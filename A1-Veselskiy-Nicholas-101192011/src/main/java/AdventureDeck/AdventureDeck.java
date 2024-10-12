@@ -81,6 +81,11 @@ public class AdventureDeck {
         return m_deck.size();
     }
 
+    public Stack<AdventureCard> getDiscardPile() {
+        return m_discardPile;
+    }
+
+
     private Stack<AdventureCard> m_deck;
     private Stack<AdventureCard> m_discardPile;
 }

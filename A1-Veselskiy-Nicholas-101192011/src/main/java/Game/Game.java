@@ -80,6 +80,10 @@ public class Game {
         m_outputWindow.promptToEndTurn(m_scanner, m_writer);
     }
 
+    public void trimPlayerHand(Player player) {
+
+    }
+
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;
     private Player[] m_players;

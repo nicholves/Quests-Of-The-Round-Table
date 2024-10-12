@@ -18,6 +18,10 @@ public class Player {
         return m_hand;
     }
 
+    public int getHandSize() {
+        return m_hand.size();
+    }
+
     public void addCardToHand(AdventureCard newCard) {
         m_hand.add(newCard);
     }
@@ -36,6 +40,10 @@ public class Player {
 
     public void setNumShields(int shields) {
         m_numShields = shields;
+    }
+
+    public void discardCard(int cardIndex, List<AdventureCard> discardPile) {
+
     }
 
 

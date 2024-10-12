@@ -67,4 +67,8 @@ public class Window {
         output.println("Player: " + player.getPlayerId() + ", press <Enter> when you are in control ");
         input.nextLine();
     }
+
+    public int discardCard(Scanner input, PrintWriter output, Player player) {
+        return 0;
+    }
 }
