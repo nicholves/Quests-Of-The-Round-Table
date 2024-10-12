@@ -2,7 +2,9 @@ package Game;
 
 import AdventureCard.FoeCard;
 import AdventureDeck.AdventureDeck;
+import EventCard.EventCardType;
 import EventDeck.EventDeck;
+import EventCard.EventCard;
 import EventCard.EventDeckCard;
 import Player.Player;
 import Window.Window;
@@ -125,11 +127,21 @@ public class Game {
     }
 
     public void drawFromEventDeck(Player player) {
+        EventDeckCard card = m_eventDeck.drawCard();
 
+        if (card.getType() == EventCardType.EVENTTYPE) {
+            EventCard eCard = (EventCard) card;
+
+            applyEvent(eCard, player);
+        }
     }
 
-    public void applyEvent(EventDeckCard card, Player drawer) {
-
+    public void applyEvent(EventCard card, Player drawer) {
+        switch (card.getEventType()) {
+            case PLAGUE -> applyPlague(drawer);
+            case PROSPERITY -> applyProsperity();
+            case QUEENS_FAVOR -> applyQueenFavor(drawer);
+        }
     }
 
     private EventDeck m_eventDeck;

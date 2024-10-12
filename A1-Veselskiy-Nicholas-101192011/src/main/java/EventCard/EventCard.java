@@ -16,6 +16,10 @@ public class EventCard implements EventDeckCard {
         };
     }
 
+    public EventType getEventType() {
+        return m_eventType;
+    }
+
     @Override
     public EventCardType getType() {
         return m_eventCardType;
