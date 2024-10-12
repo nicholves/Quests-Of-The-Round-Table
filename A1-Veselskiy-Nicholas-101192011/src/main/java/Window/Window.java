@@ -79,4 +79,8 @@ public class Window {
 
         return Integer.parseInt(userInput);
     }
+
+    public void promptToDrawEventDeckCard(Scanner input, PrintWriter output, Player player) {
+
+    }
 }

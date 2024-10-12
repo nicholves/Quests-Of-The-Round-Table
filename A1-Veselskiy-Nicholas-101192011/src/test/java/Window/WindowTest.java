@@ -163,4 +163,20 @@ class WindowTest {
         cardToRemove = window.discardCard(scanner, new PrintWriter(output), player);
         assertEquals(12, cardToRemove);
     }
+
+    @Test
+    @DisplayName("The interface prompts the user to press enter before drawing a card")
+    public void RESP_13_TEST_01() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        window.promptToDrawEventDeckCard(scanner, new PrintWriter(output), player);
+
+        String result = output.toString();
+        assertTrue(result.contains("3"));
+    }
 }
