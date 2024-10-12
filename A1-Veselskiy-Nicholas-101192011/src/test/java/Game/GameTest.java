@@ -2,6 +2,8 @@ package Game;
 
 import AdventureCard.AdventureCard;
 import AdventureCard.WeaponCard;
+import EventCard.EventCard;
+import EventCard.EventType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -279,5 +281,103 @@ class GameTest {
 
         int numPlayersWhoDiscarded = 3;
         assertEquals(2 * numPlayersWhoDiscarded, game.getAdventureDeck().getDiscardPile().size());
+    }
+
+    @Test
+    @DisplayName("Applies the plague event to a player who drew that card")
+    public void RESP_12_TEST_01() {
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        game.getEventDeck().getDeck().push(new EventCard(EventType.PLAGUE));
+
+        Player player = game.getPlayer(0);
+        player.setNumShields(3);
+
+
+        game.drawFromEventDeck(player);
+
+        assertEquals(1, player.getNumShields());
+    }
+
+    @Test
+    @DisplayName("Applies the queen's favor event to a player who drew that card")
+    public void RESP_12_TEST_02() {
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        game.getEventDeck().getDeck().push(new EventCard(EventType.QUEENS_FAVOR));
+
+        Player player = game.getPlayer(0);
+        player.getHand().removeFirst();
+        player.getHand().removeFirst();
+
+        assertEquals(10, player.getHandSize());
+
+        game.drawFromEventDeck(player);
+
+        assertEquals(12, player.getHandSize());
+    }
+
+    @Test
+    @DisplayName("Applies the prosperity event when drawn")
+    public void RESP_12_TEST_03() {
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        game.getEventDeck().getDeck().push(new EventCard(EventType.PROSPERITY));
+
+        int beforeProsperity = game.getAdventureDeck().getDeckSize();
+        Player player1 = game.getPlayer(0);
+        player1.getHand().removeFirst();
+        player1.getHand().removeFirst();
+
+        Player player2 = game.getPlayer(1);
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+
+        Player player3 = game.getPlayer(2);
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+
+        Player player4 = game.getPlayer(3);
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+
+        assertEquals(10, player1.getHandSize());
+        assertEquals(8, player2.getHandSize());
+        assertEquals(6, player3.getHandSize());
+        assertEquals(4, player4.getHandSize());
+
+        game.drawFromEventDeck(player1);
+
+        assertEquals(12, player1.getHandSize());
+        assertEquals(10, player2.getHandSize());
+        assertEquals(8, player3.getHandSize());
+        assertEquals(6, player4.getHandSize());
+
+        int numPlayers = 4;
+        assertEquals(beforeProsperity - numPlayers * 2,  game.getAdventureDeck().getDeckSize());
     }
 }

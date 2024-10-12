@@ -59,6 +59,10 @@ public class EventDeck {
         return m_deck.size();
     }
 
+    public Stack<EventDeckCard> getDeck() {
+        return m_deck;
+    }
+
     public Stack<EventDeckCard> getDiscardPile() {
         return m_discardPile;
     }

@@ -3,6 +3,7 @@ package Game;
 import AdventureCard.FoeCard;
 import AdventureDeck.AdventureDeck;
 import EventDeck.EventDeck;
+import EventCard.EventDeckCard;
 import Player.Player;
 import Window.Window;
 
@@ -121,6 +122,14 @@ public class Game {
             // discard to hand size
             trimPlayerHand(player);
         }
+    }
+
+    public void drawFromEventDeck(Player player) {
+
+    }
+
+    public void applyEvent(EventDeckCard card, Player drawer) {
+
     }
 
     private EventDeck m_eventDeck;
