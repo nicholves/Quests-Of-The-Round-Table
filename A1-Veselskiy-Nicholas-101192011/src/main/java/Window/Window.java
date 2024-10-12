@@ -57,4 +57,7 @@ public class Window {
 
         output.println("Congratulations! Player(s) " + winnersString + " You are knighted and thus victorious!");
     }
+
+    public void promptToTakeControl(Scanner input, PrintWriter output, Player player) {
+    }
 }

@@ -107,4 +107,22 @@ class WindowTest {
         String resultString = output.toString();
         assertTrue(resultString.contains("2"));
     }
+
+    @Test
+    @DisplayName("The interface prompts the user to press enter only when they are that player in the seat")
+    public void RESP_07_TEST_01() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "\n";
+        StringWriter output = new StringWriter();
+
+        window.promptToTakeControl(new Scanner(input), new PrintWriter(output), player);
+
+        String result = output.toString();
+        assertTrue(result.contains("3"));
+        assertFalse(result.contains("0"));
+        assertFalse(result.contains("1"));
+        assertFalse(result.contains("2"));
+    }
 }
