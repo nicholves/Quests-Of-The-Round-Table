@@ -106,7 +106,11 @@ public class Game {
     }
 
     public void applyQueenFavor(Player player) {
+        player.addCardToHand(m_adventureDeck.drawCard());
+        player.addCardToHand(m_adventureDeck.drawCard());
 
+        // discard to hand size
+        trimPlayerHand(player);
     }
 
     private EventDeck m_eventDeck;
