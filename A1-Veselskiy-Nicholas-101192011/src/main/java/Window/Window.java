@@ -1,5 +1,6 @@
 package Window;
 import AdventureCard.AdventureCard;
+import EventCard.EventDeckCard;
 import Player.Player;
 
 import java.io.PrintWriter;
@@ -85,5 +86,9 @@ public class Window {
                 "card to be drawn");
 
         input.nextLine();
+    }
+
+    public void displayEventDeckCard(Scanner input, PrintWriter output, EventDeckCard card) {
+
     }
 }

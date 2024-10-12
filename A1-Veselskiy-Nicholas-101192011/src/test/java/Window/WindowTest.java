@@ -1,6 +1,10 @@
 package Window;
 
+import EventCard.EventCard;
+import EventCard.EventDeckCard;
 import Game.Game;
+import EventCard.EventType;
+import EventCard.QuestCard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -178,5 +182,95 @@ class WindowTest {
 
         String result = output.toString();
         assertTrue(result.contains("3"));
+    }
+
+    @Test
+    @DisplayName("The game displays a quest card to the user and waits for input to proceed")
+    public void RESP_14_TEST_01() {
+        Window window = new Window();
+
+        String input = "\nn\nn\nn\nn\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+        game.getEventDeck().getDeck().push(new QuestCard(3));
+
+        game.drawFromEventDeck(game.getPlayer(0));
+
+        String result = output.toString();
+        assertTrue(result.contains("The card drawn was a: Quest of 3 Stages!"));
+    }
+
+    @Test
+    @DisplayName("The game displays a plague card to the user and waits for input to proceed")
+    public void RESP_14_TEST_02() {
+        Window window = new Window();
+
+        String input = "\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+        game.getEventDeck().getDeck().push(new EventCard(EventType.PLAGUE));
+
+        game.drawFromEventDeck(game.getPlayer(0));
+
+        String result = output.toString();
+        assertTrue(result.contains("The card drawn was a: Plague, causing you to lose two shields"));
+    }
+
+    @Test
+    @DisplayName("The game displays a Queen's Favor card to the user and waits for input to proceed")
+    public void RESP_14_TEST_03() {
+        Window window = new Window();
+
+        String input = "\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+        game.getEventDeck().getDeck().push(new EventCard(EventType.QUEENS_FAVOR));
+
+        Player player = game.getPlayer(0);
+        player.getHand().clear();
+
+        game.drawFromEventDeck(game.getPlayer(0));
+
+        String result = output.toString();
+        assertTrue(result.contains("The card drawn was a: Queen's Favor, causing you to draw two cards"));
+    }
+
+    @Test
+    @DisplayName("The game displays a Prosperity card to the user and waits for input to proceed")
+    public void RESP_14_TEST_04() {
+        Window window = new Window();
+
+        String input = "\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+        Player player0 = game.getPlayer(0);
+        Player player1 = game.getPlayer(1);
+        Player player2 = game.getPlayer(2);
+        Player player3 = game.getPlayer(3);
+
+        player0.getHand().clear();
+        player1.getHand().clear();
+        player2.getHand().clear();
+        player3.getHand().clear();
+
+
+        game.getEventDeck().getDeck().push(new EventCard(EventType.PROSPERITY));
+
+        game.drawFromEventDeck(game.getPlayer(0));
+
+        String result = output.toString();
+        assertTrue(result.contains("The card drawn was a: Prosperity, causing everyone to draw two cards"));
     }
 }
