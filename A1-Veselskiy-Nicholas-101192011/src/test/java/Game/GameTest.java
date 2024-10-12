@@ -1,12 +1,18 @@
 package Game;
 
+import AdventureCard.AdventureCard;
+import AdventureCard.WeaponCard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import Player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
+import java.util.Scanner;
 
 class GameTest {
     @Test
@@ -143,5 +149,54 @@ class GameTest {
 
         assertEquals(0, player1.getNumShields());
         assertEquals(0, player2.getNumShields());
+    }
+
+    @Test
+    @DisplayName("Applies the queen's favor event to a player and forces them to discard down to 12 cards")
+    public void RESP_10_TEST_01() {
+        String input = "\n0\n\n0\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        // fabricate two excalibers to be drawn so they won't be discarded
+        game.getAdventureDeck().getDeck().push(new WeaponCard('E', 30));
+        game.getAdventureDeck().getDeck().push(new WeaponCard('E', 30));
+
+        Player player = game.getPlayer(0);
+
+        game.applyQueenFavor(player);
+
+        assertEquals(12, player.getHandSize());
+
+        int excaliberCount = 0;
+        for (AdventureCard card : player.getHand()) {
+            if (card.getLetter() == 'E') {
+                excaliberCount++;
+            }
+        }
+
+        assertTrue(excaliberCount >= 2);
+    }
+
+    @Test
+    @DisplayName("Applies the queen's favor event to a player when that player does not need to discard")
+    public void RESP_10_TEST_02() {
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.getPlayer(0);
+        player.getHand().removeFirst();
+        player.getHand().removeFirst();
+
+        assertEquals(10, player.getHandSize());
+
+        game.applyQueenFavor(player);
+
+        assertEquals(12, player.getHandSize());
     }
 }

@@ -12,6 +12,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
+    public Game(Scanner scanner, PrintWriter writer) {
+        m_eventDeck = new EventDeck();
+        m_adventureDeck = new AdventureDeck();
+        m_outputWindow = new Window();
+        m_scanner = scanner;
+        m_writer = writer;
+    }
+
     public Game() {
         m_eventDeck = new EventDeck();
         m_adventureDeck = new AdventureDeck();
@@ -95,6 +103,10 @@ public class Game {
         newNumShields = Math.max(0, newNumShields);
 
         player.setNumShields(newNumShields);
+    }
+
+    public void applyQueenFavor(Player player) {
+
     }
 
     private EventDeck m_eventDeck;
