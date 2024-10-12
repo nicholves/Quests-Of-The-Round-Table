@@ -17,7 +17,9 @@ public class Game {
         m_outputWindow = new Window();
         m_scanner = new Scanner(System.in);
         m_writer = new PrintWriter(System.out, true);
+    }
 
+    public void initGame() {
         // Create Players
         m_players = new Player[4];
         for (int i = 0; i < 4; i++) {

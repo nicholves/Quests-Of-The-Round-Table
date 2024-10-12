@@ -13,6 +13,7 @@ class GameTest {
     @DisplayName("Check that cards are distributed to players on game initialization")
     public void RESP_02_TEST_01() {
         Game game = new Game();
+        game.initGame();
 
         for (int i = 0; i < 4; i++) {
             assertEquals(12, game.getPlayer(i).getHand().size());
@@ -25,6 +26,7 @@ class GameTest {
     @DisplayName("Check to ensure the game returns and empty list of winners if there are no winners")
     public void RESP_05_TEST_01() {
         Game game = new Game();
+        game.initGame();
 
         Player player0 = game.getPlayer(0);
         Player player1 = game.getPlayer(1);
@@ -45,6 +47,7 @@ class GameTest {
     @DisplayName("Check to ensure the game returns a singleton list of winners if there is exactly 1 winner")
     public void RESP_05_TEST_02() {
         Game game = new Game();
+        game.initGame();
 
         Player player0 = game.getPlayer(0);
         Player player1 = game.getPlayer(1);
@@ -67,6 +70,7 @@ class GameTest {
             "winner who won greater than 7 shields")
     public void RESP_05_TEST_03() {
         Game game = new Game();
+        game.initGame();
 
         Player player0 = game.getPlayer(0);
         Player player1 = game.getPlayer(1);
@@ -88,6 +92,7 @@ class GameTest {
     @DisplayName("Check to ensure the game returns multiple winners if there are multiple winners")
     public void RESP_05_TEST_04() {
         Game game = new Game();
+        game.initGame();
 
         Player player0 = game.getPlayer(0);
         Player player1 = game.getPlayer(1);
