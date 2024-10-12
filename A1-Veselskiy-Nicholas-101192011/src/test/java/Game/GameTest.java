@@ -111,4 +111,37 @@ class GameTest {
         assertTrue(winners.contains(player2));
         assertTrue(winners.contains(player0));
     }
+
+    @Test
+    @DisplayName("Applies the plague event to a player with greater than 2 shields and ensures they have two less than they started with")
+    public void RESP_09_TEST_01() {
+        Game game = new Game();
+        game.initGame();
+
+        Player player = game.getPlayer(0);
+        player.setNumShields(5);
+
+        game.applyPlague(player);
+
+        assertEquals(3, player.getNumShields());
+    }
+
+    @Test
+    @DisplayName("Applies the plague event to a player with less than or equal to 2 shields and ensures they have two 0 shields remaining")
+    public void RESP_09_TEST_02() {
+        Game game = new Game();
+        game.initGame();
+
+        Player player1 = game.getPlayer(0);
+        player1.setNumShields(1);
+
+        Player player2 = game.getPlayer(0);
+        player2.setNumShields(2);
+
+        game.applyPlague(player1);
+        game.applyPlague(player2);
+
+        assertEquals(0, player1.getNumShields());
+        assertEquals(0, player2.getNumShields());
+    }
 }
