@@ -114,7 +114,13 @@ public class Game {
     }
 
     public void applyProsperity() {
+        for (Player player : m_players) {
+            player.addCardToHand(m_adventureDeck.drawCard());
+            player.addCardToHand(m_adventureDeck.drawCard());
 
+            // discard to hand size
+            trimPlayerHand(player);
+        }
     }
 
     private EventDeck m_eventDeck;
