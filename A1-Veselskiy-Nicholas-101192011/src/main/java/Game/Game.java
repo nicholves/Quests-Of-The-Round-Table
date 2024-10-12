@@ -91,7 +91,10 @@ public class Game {
     }
 
     public void applyPlague(Player player) {
+        int newNumShields = player.getNumShields() - 2;
+        newNumShields = Math.max(0, newNumShields);
 
+        player.setNumShields(newNumShields);
     }
 
     private EventDeck m_eventDeck;
