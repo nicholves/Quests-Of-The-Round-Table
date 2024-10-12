@@ -113,6 +113,10 @@ public class Game {
         trimPlayerHand(player);
     }
 
+    public void applyProsperity() {
+
+    }
+
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;
     private Player[] m_players;

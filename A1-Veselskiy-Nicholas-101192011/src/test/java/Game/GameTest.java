@@ -199,4 +199,85 @@ class GameTest {
 
         assertEquals(12, player.getHandSize());
     }
+
+    @Test
+    @DisplayName("Applies the prosperity event to a group of players where none will need to discard")
+    public void RESP_11_TEST_01() {
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        int beforeProsperity = game.getAdventureDeck().getDeckSize();
+
+        Player player1 = game.getPlayer(0);
+        player1.getHand().removeFirst();
+        player1.getHand().removeFirst();
+
+        Player player2 = game.getPlayer(1);
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+        player2.getHand().removeFirst();
+
+        Player player3 = game.getPlayer(2);
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+        player3.getHand().removeFirst();
+
+        Player player4 = game.getPlayer(3);
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+        player4.getHand().removeFirst();
+
+        assertEquals(10, player1.getHandSize());
+        assertEquals(8, player2.getHandSize());
+        assertEquals(6, player3.getHandSize());
+        assertEquals(4, player4.getHandSize());
+
+        game.applyProsperity();
+
+        assertEquals(12, player1.getHandSize());
+        assertEquals(10, player2.getHandSize());
+        assertEquals(8, player3.getHandSize());
+        assertEquals(6, player4.getHandSize());
+
+        int numPlayers = 4;
+        assertEquals(beforeProsperity - numPlayers * 2,  game.getAdventureDeck().getDeckSize());
+    }
+
+    @Test
+    @DisplayName("Applies the prosperity event to a group of players where multiple will need to discard")
+    public void RESP_11_TEST_02() {
+        String input = "\n0\n\n0\n" + "\n0\n\n0\n" + "\n0\n\n0\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.getPlayer(0);
+        player.getHand().removeFirst();
+        player.getHand().removeFirst();
+
+        assertEquals(10, player.getHandSize());
+
+        game.applyProsperity();
+
+        assertEquals(12, game.getPlayer(0).getHandSize());
+        assertEquals(12, game.getPlayer(1).getHandSize());
+        assertEquals(12, game.getPlayer(2).getHandSize());
+        assertEquals(12, game.getPlayer(3).getHandSize());
+
+        int numPlayersWhoDiscarded = 3;
+        assertEquals(2 * numPlayersWhoDiscarded, game.getAdventureDeck().getDiscardPile().size());
+    }
 }
