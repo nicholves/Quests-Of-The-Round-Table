@@ -139,6 +139,12 @@ public class Game {
 
             applyEvent(eCard, player);
         }
+
+        if (card.getType() == EventCardType.QUESTTYPE) {
+            QuestCard qCard = (QuestCard) card;
+
+            Player sponsor = findSponsor(qCard, player.getPlayerId());
+        }
     }
 
     public void applyEvent(EventCard card, Player drawer) {
@@ -150,6 +156,18 @@ public class Game {
     }
 
     public Player findSponsor(QuestCard questCard, int startingPlayerIndex) {
+        int playersAsked = 0;
+
+        int playerToAsk = startingPlayerIndex;
+        while (playersAsked < 4) {
+            if (m_outputWindow.askToSponsor(m_scanner, m_writer, m_players[playerToAsk], questCard)) {
+                return m_players[playerToAsk];
+            }
+
+            playersAsked++;
+            playerToAsk = (playerToAsk + 1) % 4;
+        }
+
         return null;
     }
 

@@ -1,6 +1,7 @@
 package Window;
 import AdventureCard.AdventureCard;
 import EventCard.EventDeckCard;
+import EventCard.QuestCard;
 import Player.Player;
 
 import java.io.PrintWriter;
@@ -94,5 +95,20 @@ public class Window {
         output.flush();
 
         input.nextLine();
+    }
+
+    public boolean askToSponsor(Scanner input, PrintWriter output, Player player, QuestCard quest) {
+        for (int i = 0; i < 100; i++) {
+            output.println();
+        }
+
+        output.println("Player " + player.getPlayerId() + " would you like to sponsor");
+        output.println(quest.display());
+        output.print("y for yes or n for no: ");
+        output.flush();
+
+        String result = input.nextLine();
+
+        return result.startsWith("y");
     }
 }
