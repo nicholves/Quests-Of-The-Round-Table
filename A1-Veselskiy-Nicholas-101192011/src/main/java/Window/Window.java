@@ -59,5 +59,12 @@ public class Window {
     }
 
     public void promptToTakeControl(Scanner input, PrintWriter output, Player player) {
+        for (int i = 0; i < 100; i++) {
+            output.println();
+        }
+
+        output.println("Player " + player.getPlayerId() + ", now needs to take an action which contains private information");
+        output.println("Player: " + player.getPlayerId() + ", press <Enter> when you are in control ");
+        input.nextLine();
     }
 }
