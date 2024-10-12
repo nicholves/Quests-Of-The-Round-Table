@@ -81,6 +81,9 @@ public class Window {
     }
 
     public void promptToDrawEventDeckCard(Scanner input, PrintWriter output, Player player) {
+        output.println("Player " + player.getPlayerId() + ", press <Enter> when you are ready for an event deck " +
+                "card to be drawn");
 
+        input.nextLine();
     }
 }

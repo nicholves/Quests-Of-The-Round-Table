@@ -89,6 +89,9 @@ public class Game {
     }
 
     public void take_player_turn(int playerID) {
+        m_outputWindow.promptToDrawEventDeckCard(m_scanner, m_writer, m_players[playerID]);
+
+        drawFromEventDeck(m_players[playerID]);
 
         m_outputWindow.promptToEndTurn(m_scanner, m_writer);
     }
