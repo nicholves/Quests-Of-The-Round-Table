@@ -69,6 +69,14 @@ public class Window {
     }
 
     public int discardCard(Scanner input, PrintWriter output, Player player) {
-        return 0;
+        promptToTakeControl(input, output, player);
+
+        displayPlayerHand(input, output, player);
+        output.print("\nPlayer " + player.getPlayerId() + ", select a card to discard by its index and then press <Enter>: ");
+        output.flush();
+
+        String userInput = input.nextLine();
+
+        return Integer.parseInt(userInput);
     }
 }

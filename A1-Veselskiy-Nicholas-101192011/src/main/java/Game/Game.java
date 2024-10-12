@@ -1,5 +1,6 @@
 package Game;
 
+import AdventureCard.FoeCard;
 import AdventureDeck.AdventureDeck;
 import EventDeck.EventDeck;
 import Player.Player;
@@ -60,6 +61,7 @@ public class Game {
 
     public void gameLoop() {
         int currentPlayerTurn = 0;
+
         while (true) {
             m_outputWindow.promptForNewPlayerTurn(m_scanner, m_writer, m_players[currentPlayerTurn]);
 
@@ -81,7 +83,11 @@ public class Game {
     }
 
     public void trimPlayerHand(Player player) {
+        while (player.getHandSize() > 12) {
+            int cardToDiscard = m_outputWindow.discardCard(m_scanner, m_writer, player);
 
+            player.discardCard(cardToDiscard, m_adventureDeck.getDiscardPile());
+        }
     }
 
     private EventDeck m_eventDeck;

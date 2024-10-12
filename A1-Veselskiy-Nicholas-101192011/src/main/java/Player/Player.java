@@ -43,7 +43,9 @@ public class Player {
     }
 
     public void discardCard(int cardIndex, List<AdventureCard> discardPile) {
+        AdventureCard removedCard = m_hand.remove(cardIndex);
 
+        discardPile.add(removedCard);
     }
 
 
