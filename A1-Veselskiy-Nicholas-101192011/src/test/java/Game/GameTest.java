@@ -4,6 +4,7 @@ import AdventureCard.AdventureCard;
 import AdventureCard.WeaponCard;
 import EventCard.EventCard;
 import EventCard.EventType;
+import EventCard.QuestCard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -379,5 +380,71 @@ class GameTest {
 
         int numPlayers = 4;
         assertEquals(beforeProsperity - numPlayers * 2,  game.getAdventureDeck().getDeckSize());
+    }
+
+    @Test
+    @DisplayName("The game asks the users of the game whether they would like to sponsor and the first player does")
+    public void RESP_15_TEST_01() {
+        String input = "y\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.findSponsor(new QuestCard(3),1);
+
+        assertEquals(game.getPlayer(1), player);
+    }
+
+    @Test
+    @DisplayName("The game asks the users of the game whether they would like to sponsor and the third player does after the first two refuse")
+    public void RESP_15_TEST_02() {
+        String input = "n\nn\ny\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.findSponsor(new QuestCard(3),1);
+
+        assertEquals(game.getPlayer(3), player);
+    }
+
+    @Test
+    @DisplayName("The game asks the users of the game whether they would like to sponsor and they all refuse")
+    public void RESP_15_TEST_03() {
+        String input = "n\nn\nn\nn\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.findSponsor(new QuestCard(3),1);
+
+        assertNull(player);
+    }
+
+    @Test
+    @DisplayName("The game correctly outputs the quest information for each player who would like to sponsor")
+    public void RESP_15_TEST_04() {
+        String input = "n\ny\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+        game.initGame();
+
+        Player player = game.findSponsor(new QuestCard(3), 1);
+
+        String result = output.toString();
+        String[] lines = result.split("\n");
+
+        int questInfoCount = 0;
+        for (String line : lines) {
+            if (line.contains("Quest of 3 Stages!")) {
+                questInfoCount++;
+            }
+        }
+
+        assertEquals(2, questInfoCount);
     }
 }

@@ -5,6 +5,7 @@ import AdventureDeck.AdventureDeck;
 import EventCard.EventCardType;
 import EventDeck.EventDeck;
 import EventCard.EventCard;
+import EventCard.QuestCard;
 import EventCard.EventDeckCard;
 import Player.Player;
 import Window.Window;
@@ -146,6 +147,10 @@ public class Game {
             case PROSPERITY -> applyProsperity();
             case QUEENS_FAVOR -> applyQueenFavor(drawer);
         }
+    }
+
+    public Player findSponsor(QuestCard questCard, int startingPlayerIndex) {
+        return null;
     }
 
     private EventDeck m_eventDeck;
