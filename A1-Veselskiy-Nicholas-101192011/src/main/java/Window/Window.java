@@ -89,6 +89,10 @@ public class Window {
     }
 
     public void displayEventDeckCard(Scanner input, PrintWriter output, EventDeckCard card) {
+        output.println("The card drawn was a: " + card.display() + "!");
+        output.print("Press <Enter> to continue");
+        output.flush();
 
+        input.nextLine();
     }
 }

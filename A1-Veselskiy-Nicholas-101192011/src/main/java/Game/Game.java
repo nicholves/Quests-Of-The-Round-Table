@@ -131,6 +131,7 @@ public class Game {
 
     public void drawFromEventDeck(Player player) {
         EventDeckCard card = m_eventDeck.drawCard();
+        m_outputWindow.displayEventDeckCard(m_scanner, m_writer, card);
 
         if (card.getType() == EventCardType.EVENTTYPE) {
             EventCard eCard = (EventCard) card;

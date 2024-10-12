@@ -25,6 +25,27 @@ public class EventCard implements EventDeckCard {
         return m_eventCardType;
     }
 
+    @Override
+    public String display() {
+        String type = "";
+        String effect = "";
+
+        switch (m_eventType) {
+            case EventType.PLAGUE -> type += "Plague";
+            case EventType.QUEENS_FAVOR -> type += "Queen's Favor";
+            case EventType.PROSPERITY -> type += "Prosperity";
+        }
+
+
+        switch (m_eventType) {
+            case EventType.PLAGUE -> effect += "causing you to lose two shields!";
+            case EventType.QUEENS_FAVOR -> effect += "causing you to draw two cards!";
+            case EventType.PROSPERITY -> effect += "causing everyone to draw two cards!";
+        }
+
+        return type + ", " + effect;
+    }
+
     private final EventCardType m_eventCardType;
     private final EventType m_eventType;
 }
