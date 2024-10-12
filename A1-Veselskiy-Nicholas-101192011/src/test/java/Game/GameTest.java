@@ -286,7 +286,7 @@ class GameTest {
     @Test
     @DisplayName("Applies the plague event to a player who drew that card")
     public void RESP_12_TEST_01() {
-        String input = "";
+        String input = "\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
         Game game = new Game(scanner, new PrintWriter(output));
@@ -306,7 +306,7 @@ class GameTest {
     @Test
     @DisplayName("Applies the queen's favor event to a player who drew that card")
     public void RESP_12_TEST_02() {
-        String input = "";
+        String input = "\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
         Game game = new Game(scanner, new PrintWriter(output));
@@ -328,7 +328,7 @@ class GameTest {
     @Test
     @DisplayName("Applies the prosperity event when drawn")
     public void RESP_12_TEST_03() {
-        String input = "";
+        String input = "\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
         Game game = new Game(scanner, new PrintWriter(output));
