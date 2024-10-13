@@ -89,6 +89,10 @@ public class AdventureDeck {
         return m_discardPile;
     }
 
+    public void discardCard(AdventureCard card) {
+
+    }
+
 
     private Stack<AdventureCard> m_deck;
     private Stack<AdventureCard> m_discardPile;

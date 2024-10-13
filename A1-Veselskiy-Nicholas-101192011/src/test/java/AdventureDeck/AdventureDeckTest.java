@@ -1,5 +1,7 @@
 package AdventureDeck;
 import AdventureCard.AdventureCard;
+import AdventureCard.FoeCard;
+import AdventureCard.WeaponCard;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,4 +71,25 @@ public class AdventureDeckTest {
         }
     }
 
+    @Test
+    @DisplayName("The adventure deck should shuffle the discard pile back into itself when there are no more cards in the deck")
+    public void RESP_17_TEST_01() {
+        AdventureDeck deck = new AdventureDeck();
+
+        deck.getDeck().clear();
+
+        deck.getDeck().push(new FoeCard(5));
+        deck.getDeck().push(new WeaponCard('L', 20));
+
+        assertEquals(2, deck.getDeckSize());
+
+        AdventureCard drawnCard = deck.drawCard();
+        deck.discardCard(drawnCard);
+        assertEquals(1, deck.getDeckSize());
+
+        deck.drawCard();
+        assertEquals(1, deck.getDeckSize());
+
+        assertEquals(drawnCard, deck.getDeck().pop());
+    }
 }
