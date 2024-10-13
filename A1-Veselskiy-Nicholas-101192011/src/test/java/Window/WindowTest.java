@@ -308,4 +308,151 @@ class WindowTest {
         String result = output.toString();
         assertTrue(result.contains("The card drawn was a: Prosperity, causing everyone to draw two cards"));
     }
+
+    @Test
+    @DisplayName("The game builds a quest stage when valid positions are entered")
+    public void RESP_19_TEST_01() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "1\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 0);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+    }
+
+    @Test
+    @DisplayName("The game handles invalid positions being entered when building a quest stage")
+    public void RESP_19_TEST_02() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "1\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 0);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+
+        String result = output.toString();
+
+        assertTrue(result.contains("Invalid index"));
+    }
+
+    @Test
+    @DisplayName("The game handles producing a warning when trying to add multiple foes to a quest")
+    public void RESP_19_TEST_03() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "1\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new FoeCard(5));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 0);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+
+        String result = output.toString();
+
+        assertTrue(result.contains("a maximum of 1 foe"));
+
+        // the card shouldn't be removed if it was invalid to add
+        assertEquals(1, player.getHandSize());
+    }
+
+    @Test
+    @DisplayName("The game handles producing a warning when trying to add duplicate weapons to a quest")
+    public void RESP_19_TEST_04() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "1\n1\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+
+        player.addCardToHand(new WeaponCard('L', 20));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 0);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+
+        String result = output.toString();
+
+        assertTrue(result.contains("1 copy of a weapon"));
+
+        // the card shouldn't be removed if it was invalid to add
+        assertEquals(1, player.getHandSize());
+    }
+
+    @Test
+    @DisplayName("The game should not accept a quest stage without a foe and produce a warning")
+    public void RESP_19_TEST_05() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "1\nQuit\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 0);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+
+        String result = output.toString();
+
+        assertTrue(result.contains("cannot contain 0 foes"));
+
+        // the card shouldn't be removed if it was invalid to add
+        assertEquals(0, player.getHandSize());
+    }
+
+    @Test
+    @DisplayName("The game should not accept a quest stage without a greater value than the previous stage")
+    public void RESP_19_TEST_06() {
+        Window window = new Window();
+        Player player = new Player(3);
+
+        String input = "0\nQuit\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+
+        ArrayList<AdventureCard> stage = window.buildQuestStage(scanner, new PrintWriter(output), player, 5);
+
+        assertTrue(Game.validateQuestStage(stage, 0));
+
+        String result = output.toString();
+
+        assertTrue(result.contains("greater than"));
+
+        // the card shouldn't be removed if it was invalid to add
+        assertEquals(0, player.getHandSize());
+    }
 }

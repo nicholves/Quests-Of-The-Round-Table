@@ -5,6 +5,7 @@ import EventCard.QuestCard;
 import Player.Player;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
@@ -118,5 +119,9 @@ public class Window {
         String result = input.nextLine();
 
         return result.startsWith("y");
+    }
+
+    public ArrayList<AdventureCard> buildQuestStage(Scanner input, PrintWriter output, Player player, int previousStageValue) {
+        return null;
     }
 }
