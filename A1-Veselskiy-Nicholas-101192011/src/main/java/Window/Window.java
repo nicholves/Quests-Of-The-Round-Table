@@ -3,6 +3,7 @@ import AdventureCard.AdventureCard;
 import EventCard.EventDeckCard;
 import EventCard.QuestCard;
 import Player.Player;
+import Game.Game;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -122,6 +123,99 @@ public class Window {
     }
 
     public ArrayList<AdventureCard> buildQuestStage(Scanner input, PrintWriter output, Player player, int previousStageValue) {
-        return null;
+        ArrayList<AdventureCard> result = new ArrayList<AdventureCard>();
+
+        while (true) {
+            output.println("You must now create a quest with value greater than: " + previousStageValue);
+            displayPlayerHand(input, output, player);
+
+            output.print("Enter a valid card index: ");
+            output.flush();
+
+            String answer = input.nextLine();
+
+            // Quit with a valid quest
+            if (answer.equals("Quit") && Game.validateQuestStage(result, previousStageValue)) {
+                return result;
+            }
+
+            if (answer.equals("Quit")) { // Quit with an invalid quest
+                displayErrorWithStage(output, result, previousStageValue);
+                continue;
+            }
+
+
+            int indexChoice = Integer.parseInt(answer);
+            if (player.getHandSize() == 0) { // if the player has no cards in hand they must quit
+                output.println("You have no more Adventure Cards in hand you must Quit");
+                continue;
+            }
+
+            if (indexChoice >= player.getHandSize() || indexChoice < 0) { // invalid index entered
+                output.println("Invalid index chosen. Valid index is >= 0 or <= " + (player.getHandSize() - 1));
+                continue;
+            }
+
+            AdventureCard cardChosenToAdd = player.getHand().remove(indexChoice);
+
+            if (validateCardAddedToStage(output, result, cardChosenToAdd)) {
+                result.add(cardChosenToAdd);
+            }
+            else {
+                player.addCardToHand(cardChosenToAdd);
+            }
+        }
+    }
+
+    private void displayErrorWithStage(PrintWriter output, ArrayList<AdventureCard> stage, int previousStageValue) {
+        boolean containsFoe = false;
+        for (AdventureCard card : stage) {
+            if (card.getLetter() == 'F') {
+                containsFoe = true;
+            }
+        }
+
+        if (!containsFoe) {
+            output.println("Your Quest stage cannot contain 0 foes");
+            return;
+        }
+
+        // calculate the sum of this quest stage
+        int sum = 0;
+        for (AdventureCard card : stage) {
+            sum += card.getValue();
+        }
+
+        if (sum <= previousStageValue) {
+            output.println("Your quest stage must be greater than the previous stage's value which was: " + previousStageValue + ". Your value was: " + sum);
+        }
+    }
+
+    private boolean validateCardAddedToStage(PrintWriter output, ArrayList<AdventureCard> stage, AdventureCard cardToAdd) {
+        if (cardToAdd.getLetter() == 'F') { // Trying to add a foe
+            boolean containsFoe = false;
+            for (AdventureCard card : stage) {
+                if (card.getLetter() == 'F') {
+                    containsFoe = true;
+                    break;
+                }
+            }
+
+            if (containsFoe) {
+                output.println("a maximum of 1 foe is allowed per quest stage");
+                return false;
+            }
+        }
+
+        else {
+            for (AdventureCard card : stage) {
+                if (card.getLetter() == cardToAdd.getLetter()) {
+                    output.println("A maximum of 1 copy of a weapon is allowed per quest stage");
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
