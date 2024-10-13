@@ -67,6 +67,10 @@ public class EventDeck {
         return m_discardPile;
     }
 
+    public void discardCard(EventDeckCard card) {
+
+    }
+
     private Stack<EventDeckCard> m_deck;
     private Stack<EventDeckCard> m_discardPile;
 }

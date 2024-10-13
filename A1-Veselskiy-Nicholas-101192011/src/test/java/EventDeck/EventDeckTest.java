@@ -1,5 +1,8 @@
 package EventDeck;
+import EventCard.EventCard;
 import EventCard.EventDeckCard;
+import EventCard.EventType;
+import EventCard.QuestCard;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,5 +61,27 @@ class EventDeckTest {
         for (int value : cards.values()) {
             assertEquals(0, value);
         }
+    }
+
+    @Test
+    @DisplayName("The event deck should shuffle the discard pile back into itself when there are no more cards in the deck")
+    public void RESP_16_TEST_01() {
+        EventDeck deck = new EventDeck();
+
+        deck.getDeck().clear();
+
+        deck.getDeck().push(new EventCard(EventType.PLAGUE));
+        deck.getDeck().push(new QuestCard(3));
+
+        assertEquals(2, deck.getDeckSize());
+
+        EventDeckCard drawnCard = deck.drawCard();
+        deck.discardCard(drawnCard);
+        assertEquals(1, deck.getDeckSize());
+
+        deck.drawCard();
+        assertEquals(1, deck.getDeckSize());
+
+        assertEquals(drawnCard, deck.getDeck().pop());
     }
 }
