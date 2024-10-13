@@ -52,7 +52,17 @@ public class EventDeck {
     }
 
     public EventDeckCard drawCard() {
-        return m_deck.pop();
+        EventDeckCard result =  m_deck.pop();
+
+        if (m_deck.isEmpty()) {
+            m_deck.addAll(m_discardPile);
+            m_discardPile.clear();
+
+            Collections.shuffle(m_deck);
+        }
+
+
+        return result;
     }
 
     public int getDeckSize() {
@@ -68,7 +78,7 @@ public class EventDeck {
     }
 
     public void discardCard(EventDeckCard card) {
-
+        m_discardPile.push(card);
     }
 
     private Stack<EventDeckCard> m_deck;
