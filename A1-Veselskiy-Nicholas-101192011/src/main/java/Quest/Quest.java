@@ -14,7 +14,7 @@ public class Quest {
     }
 
     public void addStage(List<AdventureCard> stage) {
-
+        m_stages.add(stage);
     }
 
     public QuestCard getOriginatorCard() {
@@ -22,7 +22,13 @@ public class Quest {
     }
 
     public static int getQuestStageValue(List<AdventureCard> stage) {
-        return 0;
+        int sum = 0;
+
+        for (AdventureCard card : stage) {
+            sum += card.getValue();
+        }
+
+        return sum;
     }
 
     public int getNumStages() {
@@ -34,7 +40,7 @@ public class Quest {
     }
 
     public boolean validQuest() {
-        return false;
+        return m_stages.size() == m_originatorCard.getValue();
     }
 
 

@@ -211,7 +211,18 @@ public class Game {
     }
 
     public Quest buildQuest(Player sponsor, QuestCard originatorCard) {
-        return null;
+        Quest result = new Quest(originatorCard);
+
+        int previousStage = 0;
+        while (!result.validQuest()) {
+            ArrayList<AdventureCard> stage = m_outputWindow.buildQuestStage(m_scanner, m_writer, sponsor, previousStage);
+
+            previousStage = Quest.getQuestStageValue(stage);
+
+            result.addStage(stage);
+        }
+
+        return result;
     }
 
     private EventDeck m_eventDeck;
