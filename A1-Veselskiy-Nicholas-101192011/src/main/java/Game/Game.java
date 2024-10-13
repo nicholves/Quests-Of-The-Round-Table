@@ -1,5 +1,6 @@
 package Game;
 
+import AdventureCard.AdventureCard;
 import AdventureCard.FoeCard;
 import AdventureDeck.AdventureDeck;
 import EventCard.EventCardType;
@@ -169,6 +170,10 @@ public class Game {
         }
 
         return null;
+    }
+
+    public static boolean validateQuestStage(List<AdventureCard> cards, int previousStageValue) {
+        return false;
     }
 
     private EventDeck m_eventDeck;

@@ -2,6 +2,7 @@ package Game;
 
 import AdventureCard.AdventureCard;
 import AdventureCard.WeaponCard;
+import AdventureCard.FoeCard;
 import EventCard.EventCard;
 import EventCard.EventType;
 import EventCard.QuestCard;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -446,5 +448,69 @@ class GameTest {
         }
 
         assertEquals(2, questInfoCount);
+    }
+
+    @Test
+    @DisplayName("The game invalidates a quest which does not have a foe card")
+    public void RESP_18_TEST_01() {
+        ArrayList<AdventureCard> stage = new ArrayList<AdventureCard>();
+
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('D', 5));
+
+        assertFalse(Game.validateQuestStage(stage, 0));
+    }
+
+    @Test
+    @DisplayName("The game invalidates a quest which does not have a greater total then the previous stage")
+    public void RESP_18_TEST_02() {
+        ArrayList<AdventureCard> stage = new ArrayList<AdventureCard>();
+
+        stage.add(new FoeCard(5));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('D', 5));
+
+        assertFalse(Game.validateQuestStage(stage, 30));
+        assertFalse(Game.validateQuestStage(stage, 31));
+    }
+
+    @Test
+    @DisplayName("The game invalidates a quest which has 1 repeated weapon")
+    public void RESP_18_TEST_03() {
+        ArrayList<AdventureCard> stage = new ArrayList<AdventureCard>();
+
+        stage.add(new FoeCard(5));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('D', 5));
+
+        assertFalse(Game.validateQuestStage(stage, 0));
+    }
+
+    @Test
+    @DisplayName("The game invalidates a quest which has multiple repeated weapon")
+    public void RESP_18_TEST_04() {
+        ArrayList<AdventureCard> stage = new ArrayList<AdventureCard>();
+
+        stage.add(new FoeCard(5));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('D', 5));
+        stage.add(new WeaponCard('D', 5));
+        stage.add(new WeaponCard('D', 5));
+
+        assertFalse(Game.validateQuestStage(stage, 0));
+    }
+
+    @Test
+    @DisplayName("The game validates a valid quest")
+    public void RESP_18_TEST_05() {
+        ArrayList<AdventureCard> stage = new ArrayList<AdventureCard>();
+
+        stage.add(new FoeCard(5));
+        stage.add(new WeaponCard('L', 20));
+        stage.add(new WeaponCard('D', 5));
+
+        assertTrue(Game.validateQuestStage(stage, 25));
     }
 }
