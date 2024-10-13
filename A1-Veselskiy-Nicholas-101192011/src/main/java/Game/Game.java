@@ -13,6 +13,7 @@ import Window.Window;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -173,7 +174,39 @@ public class Game {
     }
 
     public static boolean validateQuestStage(List<AdventureCard> cards, int previousStageValue) {
-        return false;
+        // A quest must contain exactly one foe card
+        boolean containsFoe = false;
+        for (AdventureCard card : cards) {
+            if (card.getLetter() == 'F') {
+                if (containsFoe) {
+                    return false; // We have more than one foe card in the stage
+                }
+                containsFoe = true;
+            }
+        }
+
+        if (!containsFoe) {
+            return false;
+        }
+
+        // A quest must have a unique set of weapons
+        HashSet<Character> includedWeapons = new HashSet<Character>();
+        for (AdventureCard card : cards) {
+            if (includedWeapons.contains(card.getLetter())) {
+                return false;
+            }
+
+            includedWeapons.add(card.getLetter());
+        }
+
+        // calculate the sum of this quest stage
+        int sum = 0;
+        for (AdventureCard card : cards) {
+            sum += card.getValue();
+        }
+
+        // this stage must have a strictly greater value than the previous stage of the quest
+        return sum > previousStageValue;
     }
 
     private EventDeck m_eventDeck;
