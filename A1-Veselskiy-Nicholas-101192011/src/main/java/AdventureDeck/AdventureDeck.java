@@ -74,7 +74,17 @@ public class AdventureDeck {
     }
 
     public AdventureCard drawCard() {
-        return m_deck.pop();
+        AdventureCard result =  m_deck.pop();
+
+        if (m_deck.isEmpty()) {
+            m_deck.addAll(m_discardPile);
+            m_discardPile.clear();
+
+            Collections.shuffle(m_deck);
+        }
+
+
+        return result;
     }
 
     public int getDeckSize() {
@@ -90,7 +100,7 @@ public class AdventureDeck {
     }
 
     public void discardCard(AdventureCard card) {
-
+        m_discardPile.push(card);
     }
 
 
