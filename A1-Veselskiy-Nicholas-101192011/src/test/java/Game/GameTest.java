@@ -6,6 +6,7 @@ import AdventureCard.FoeCard;
 import EventCard.EventCard;
 import EventCard.EventType;
 import EventCard.QuestCard;
+import Quest.Quest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -512,5 +513,37 @@ class GameTest {
         stage.add(new WeaponCard('D', 5));
 
         assertTrue(Game.validateQuestStage(stage, 25));
+    }
+
+    @Test
+    @DisplayName("The game can build a full valid quest with all stages")
+    public void RESP_20_TEST_01() {
+        String input = "0\nQuit\n" + "0\n1\n1\nQuit\n" + "0\n0\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        Player player = new Player(3);
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new FoeCard(10));
+        player.addCardToHand(new FoeCard(15));
+        player.addCardToHand(new WeaponCard('S', 10));
+        player.addCardToHand(new WeaponCard('H', 10));
+        player.addCardToHand(new WeaponCard('L', 20));
+        player.addCardToHand(new WeaponCard('E', 30));
+
+        QuestCard card = new QuestCard(3);
+        Quest result = game.buildQuest(player, card);
+
+        assertEquals(card, result.getOriginatorCard());
+
+        assertEquals(3, result.getNumStages());
+
+        assertEquals(5, Quest.getQuestStageValue(result.getStage(0)));
+        assertEquals(30, Quest.getQuestStageValue(result.getStage(1)));
+        assertEquals(35, Quest.getQuestStageValue(result.getStage(2)));
+
+        assertTrue(result.validQuest());
     }
 }

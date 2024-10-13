@@ -10,6 +10,7 @@ import EventCard.QuestCard;
 import EventCard.EventDeckCard;
 import Player.Player;
 import Window.Window;
+import Quest.Quest;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -207,6 +208,10 @@ public class Game {
 
         // this stage must have a strictly greater value than the previous stage of the quest
         return sum > previousStageValue;
+    }
+
+    public Quest buildQuest(Player sponsor, QuestCard originatorCard) {
+        return null;
     }
 
     private EventDeck m_eventDeck;

@@ -24,6 +24,10 @@ public class QuestCard implements EventDeckCard {
         return "Quest of " + m_value + " Stages!";
     }
 
+    public int getValue() {
+        return m_value;
+    }
+
     private final EventCardType m_eventCardType;
     private final int m_value;
 }
