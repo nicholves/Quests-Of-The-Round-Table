@@ -169,6 +169,41 @@ class WindowTest {
     }
 
     @Test
+    @DisplayName("The interface prompts the user with their hand and asks them which card they would like to discard ignoring invalid entries")
+    public void RESP_08_TEST_02() {
+        Window window = new Window();
+        Player player = new Player(3);
+        Game game = new Game();
+
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new FoeCard(10));
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('D', 5));
+        player.addCardToHand(new WeaponCard('L', 20));
+        player.addCardToHand(new FoeCard(70));
+        player.addCardToHand(new WeaponCard('D', 5));
+        player.addCardToHand(new FoeCard(25));
+        player.addCardToHand(new FoeCard(50));
+        player.addCardToHand(new WeaponCard('H', 10));
+        player.addCardToHand(new WeaponCard('S', 10));
+        player.addCardToHand(new FoeCard(35));
+        player.addCardToHand(new FoeCard(5));
+
+        String input = "\n15\n0\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        int cardToRemove = window.discardCard(scanner, new PrintWriter(output), player);
+
+        assertEquals(0, cardToRemove);
+
+        String result = output.toString();
+
+        assertTrue(result.contains("An invalid selection was made. Please choose a value between: 0 and 12"));
+    }
+
+    @Test
     @DisplayName("The interface prompts the user to press enter before drawing a card")
     public void RESP_13_TEST_01() {
         Window window = new Window();

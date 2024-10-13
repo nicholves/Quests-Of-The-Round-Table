@@ -73,13 +73,21 @@ public class Window {
     public int discardCard(Scanner input, PrintWriter output, Player player) {
         promptToTakeControl(input, output, player);
 
-        displayPlayerHand(input, output, player);
-        output.print("\nPlayer " + player.getPlayerId() + ", select a card to discard by its index and then press <Enter>: ");
-        output.flush();
+        while(true) {
+            displayPlayerHand(input, output, player);
+            output.print("\nPlayer " + player.getPlayerId() + ", select a card to discard by its index and then press <Enter>: ");
+            output.flush();
 
-        String userInput = input.nextLine();
+            String userInput = input.nextLine();
 
-        return Integer.parseInt(userInput);
+            int choice = Integer.parseInt(userInput);
+
+            if (choice >= 0 && choice < player.getHandSize()) {
+                return choice;
+            }
+
+            output.println("An invalid selection was made. Please choose a value between: " + 0 + " and " + (player.getHandSize() - 1));
+        }
     }
 
     public void promptToDrawEventDeckCard(Scanner input, PrintWriter output, Player player) {
