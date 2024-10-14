@@ -263,7 +263,7 @@ public class Game {
     }
 
     public static boolean resolveQuestStage(Attack attack, Quest quest, int stage) {
-        return false;
+        return attack.computeAttackValue() >= quest.computeStageValue(stage);
     }
 
     private EventDeck m_eventDeck;

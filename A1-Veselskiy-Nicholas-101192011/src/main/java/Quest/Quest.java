@@ -43,6 +43,15 @@ public class Quest {
         return m_stages.size() == m_originatorCard.getValue();
     }
 
+    public int computeStageValue(int stage) {
+        int sum = 0;
+        for (AdventureCard card : m_stages.get(stage)) {
+            sum += card.getValue();
+        }
+
+        return sum;
+    }
+
 
     private List<List<AdventureCard>> m_stages;
     private QuestCard m_originatorCard;
