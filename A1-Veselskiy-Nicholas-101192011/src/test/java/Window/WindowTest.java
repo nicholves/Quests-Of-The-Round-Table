@@ -512,13 +512,13 @@ class WindowTest {
 
         String input = "";
         Scanner scanner = new Scanner(input);
-        PrintWriter output = new PrintWriter(new StringWriter());
+        StringWriter output = new StringWriter();
 
         Attack attack = new Attack();
         attack.addCardToAttack(new WeaponCard('D', 5));
         attack.addCardToAttack(new WeaponCard('L', 20));
 
-        window.printAttack(scanner, output, attack);
+        window.printAttack(scanner, new PrintWriter(output), attack);
 
         String result = output.toString();
 

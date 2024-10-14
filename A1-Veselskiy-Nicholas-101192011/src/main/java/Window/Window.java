@@ -326,6 +326,13 @@ public class Window {
     }
 
     public void printAttack(Scanner input, PrintWriter output, Attack attack) {
+        output.println();
+        output.print("The attack currently contains:");
+        for (WeaponCard weaponCard : attack.getCardsInAttack()) {
+            output.print(" " + weaponCard.asString());
+        }
 
+        output.flush();
+        output.println();
     }
 }

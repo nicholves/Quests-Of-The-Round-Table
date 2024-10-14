@@ -325,6 +325,10 @@ public class Game {
                 m_outputWindow.reportDuplicateWeaponAdding(m_writer);
                 player.getHand().add(card);
             }
+
+            if (!attack.getCardsInAttack().isEmpty()) {
+                m_outputWindow.printAttack(m_scanner, m_writer, attack);
+            }
         }
     }
 
