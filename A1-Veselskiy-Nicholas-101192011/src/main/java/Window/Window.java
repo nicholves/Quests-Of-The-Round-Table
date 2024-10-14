@@ -337,6 +337,12 @@ public class Window {
     }
 
     public void displayParticipants(PrintWriter output, List<Player> players) {
+        output.println("The remaining eligible participants in the quest are:");
 
+        for (Player player : players) {
+            output.print(" " + player.getPlayerId());
+        }
+
+        output.println();
     }
 }

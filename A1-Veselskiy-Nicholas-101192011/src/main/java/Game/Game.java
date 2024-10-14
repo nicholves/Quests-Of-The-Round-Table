@@ -196,6 +196,8 @@ public class Game {
                 break;
             }
 
+            m_outputWindow.displayParticipants(m_writer, eligibleParticipants);
+
             // each participant draws a card then trims
             for (Player player : eligibleParticipants) {
                 player.addCardToHand(m_adventureDeck.drawCard());
