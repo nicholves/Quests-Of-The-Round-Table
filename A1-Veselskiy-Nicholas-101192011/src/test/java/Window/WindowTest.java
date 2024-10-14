@@ -73,8 +73,8 @@ class WindowTest {
         String firstLine = result.split("\n")[0];
         String secondLine = result.split("\n")[1];
 
-        assertTrue(firstLine.contains(String.valueOf(playerId)));
-        assertTrue("Player 3, your hand contains: F5, F5, F10, F25, F35, F50, F70, D5, D5, S10, H10, L20".equals(secondLine.strip()));
+        assertTrue(firstLine.contains(String.valueOf(playerId + 1)));
+        assertTrue("Player 4, your hand contains: F5, F5, F10, F25, F35, F50, F70, D5, D5, S10, H10, L20".equals(secondLine.strip()));
     }
 
     @Test
@@ -94,8 +94,8 @@ class WindowTest {
 
 
         String resultString = output.toString();
-        assertTrue(resultString.contains("0"));
-        assertTrue(resultString.contains("3"));
+        assertTrue(resultString.contains("1"));
+        assertTrue(resultString.contains("4"));
     }
 
 
@@ -113,7 +113,7 @@ class WindowTest {
 
 
         String resultString = output.toString();
-        assertTrue(resultString.contains("2"));
+        assertTrue(resultString.contains("3"));
     }
 
     @Test
@@ -128,10 +128,10 @@ class WindowTest {
         window.promptToTakeControl(new Scanner(input), new PrintWriter(output), player);
 
         String result = output.toString();
-        assertTrue(result.contains("3"));
-        assertFalse(result.contains("0"));
+        assertTrue(result.contains("4"));
         assertFalse(result.contains("1"));
         assertFalse(result.contains("2"));
+        assertFalse(result.contains("3"));
     }
 
     @Test
@@ -217,7 +217,7 @@ class WindowTest {
         window.promptToDrawEventDeckCard(scanner, new PrintWriter(output), player);
 
         String result = output.toString();
-        assertTrue(result.contains("3"));
+        assertTrue(result.contains("4"));
     }
 
     @Test
@@ -541,7 +541,7 @@ class WindowTest {
 
         String result = output.toString();
 
-        assertTrue(result.contains("0"));
-        assertTrue(result.contains("3"));
+        assertTrue(result.contains("1"));
+        assertTrue(result.contains("4"));
     }
 }

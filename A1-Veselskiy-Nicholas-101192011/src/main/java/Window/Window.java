@@ -25,7 +25,7 @@ public class Window {
     }
 
     public void promptForNewPlayerTurn(Scanner input, PrintWriter output, Player player) {
-        output.println("It is now your turn Player: " + player.getPlayerId() + ", press <Enter> to continue:");
+        output.println("It is now your turn Player: " + (player.getPlayerId() + 1) + ", press <Enter> to continue:");
         input.nextLine();
 
         displayPlayerHand(input, output, player);
@@ -34,7 +34,7 @@ public class Window {
     public void displayPlayerHand(Scanner input, PrintWriter output, Player player) {
         List<AdventureCard> hand =  player.getHand();
 
-        output.print("Player " + player.getPlayerId() + ", your hand contains: ");
+        output.print("Player " + (player.getPlayerId() + 1) + ", your hand contains: ");
 
         for (int i = 0; i < hand.size(); ++i) {
             AdventureCard card = hand.get(i);
@@ -80,7 +80,7 @@ public class Window {
                 winnersString = winnersString + ", ";
             }
 
-            winnersString += p.getPlayerId();
+            winnersString += (p.getPlayerId() + 1);
         }
 
         output.println("Congratulations! Player(s) " + winnersString + " You are knighted and thus victorious!");
@@ -91,15 +91,15 @@ public class Window {
             output.println();
         }
 
-        output.println("Player " + player.getPlayerId() + ", now needs to take an action which contains private information");
-        output.println("Player: " + player.getPlayerId() + ", press <Enter> when you are in control ");
+        output.println("Player " + (player.getPlayerId() + 1) + ", now needs to take an action which contains private information");
+        output.println("Player: " + (player.getPlayerId() + 1) + ", press <Enter> when you are in control ");
         input.nextLine();
     }
 
     public int discardCard(Scanner input, PrintWriter output, Player player) {
         while(true) {
             displayPlayerHand(input, output, player);
-            output.print("\nPlayer " + player.getPlayerId() + ", select a card to discard by its index and then press <Enter>: ");
+            output.print("\nPlayer " + (player.getPlayerId() + 1) + ", select a card to discard by its index and then press <Enter>: ");
             output.flush();
 
             String userInput = input.nextLine();
@@ -115,7 +115,7 @@ public class Window {
     }
 
     public void promptToDrawEventDeckCard(Scanner input, PrintWriter output, Player player) {
-        output.println("Player " + player.getPlayerId() + ", press <Enter> when you are ready for an event deck " +
+        output.println("Player " + (player.getPlayerId() + 1) + ", press <Enter> when you are ready for an event deck " +
                 "card to be drawn");
 
         input.nextLine();
@@ -134,7 +134,7 @@ public class Window {
             output.println();
         }
 
-        output.println("Player " + player.getPlayerId() + " would you like to sponsor");
+        output.println("Player " + (player.getPlayerId() + 1) + " would you like to sponsor");
         output.println(quest.display());
         output.print("y for yes or n for no: ");
         output.flush();
@@ -291,7 +291,7 @@ public class Window {
         ArrayList<Player> participants = new ArrayList<Player>();
 
         for (int i = 0; i < players.size(); ++i) {
-            output.print("Player: " + players.get(i).getPlayerId() + " would you like to tackle the current stage of the quest (y/n): ");
+            output.print("Player: " + (players.get(i).getPlayerId() + 1) + " would you like to tackle the current stage of the quest (y/n): ");
             output.flush();
 
             String in = input.nextLine();
@@ -308,7 +308,7 @@ public class Window {
 
         output.print("Player(s)");
         for (Player player : players) {
-            output.print(" " + player.getPlayerId());
+            output.print(" " + (player.getPlayerId() + 1));
         }
 
         output.print(" are victorious and can proceed to the next stage!");
@@ -340,7 +340,7 @@ public class Window {
         output.println("The remaining eligible participants in the quest are:");
 
         for (Player player : players) {
-            output.print(" " + player.getPlayerId());
+            output.print(" " + (player.getPlayerId() + 1));
         }
 
         output.println();
