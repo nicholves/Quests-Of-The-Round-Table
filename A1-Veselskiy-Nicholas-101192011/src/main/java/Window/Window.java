@@ -282,4 +282,9 @@ public class Window {
     public void reportAddingFoeToAttack(PrintWriter output) {
         output.println("Foe cards cannot be added to an attack");
     }
+
+
+    public List<Player> askForParticipation(Scanner input, PrintWriter output, List<Player> players) {
+        return players;
+    }
 }

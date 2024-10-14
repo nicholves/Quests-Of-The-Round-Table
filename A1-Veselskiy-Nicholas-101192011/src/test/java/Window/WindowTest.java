@@ -455,4 +455,52 @@ class WindowTest {
         // the card shouldn't be removed if it was invalid to add
         assertEquals(0, player.getHandSize());
     }
+
+    @Test
+    @DisplayName("The game asks each player in turn order whether they would like to participate in the current stage of the quest. all refuse")
+    public void RESP_22_TEST_01() {
+        Window window = new Window();
+
+        String input = "n\nn\nn\n";
+        Scanner scanner = new Scanner(input);
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Player player0 = new Player(0);
+        Player player2 = new Player(2);
+        Player player3 = new Player(3);
+
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(player0);
+        players.add(player2);
+        players.add(player3);
+
+        List<Player> playersAfterReduce = window.askForParticipation(scanner, output, players);
+
+        assertEquals(0, playersAfterReduce.size());
+    }
+
+    @Test
+    @DisplayName("The game asks each player in turn order whether they would like to participate in the current stage of the quest. 1 refuse 2 accept")
+    public void RESP_22_TEST_02() {
+        Window window = new Window();
+
+        String input = "n\ny\ny\n";
+        Scanner scanner = new Scanner(input);
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Player player0 = new Player(0);
+        Player player2 = new Player(2);
+        Player player3 = new Player(3);
+
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(player0);
+        players.add(player2);
+        players.add(player3);
+
+        List<Player> playersAfterReduce = window.askForParticipation(scanner, output, players);
+
+        assertEquals(2, playersAfterReduce.size());
+        assertEquals(player2, playersAfterReduce.getFirst());
+        assertEquals(player3, playersAfterReduce.get(1));
+    }
 }
