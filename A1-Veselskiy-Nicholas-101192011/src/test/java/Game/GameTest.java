@@ -688,4 +688,88 @@ class GameTest {
 
         assertFalse(Game.resolveQuestStage(attack, quest, 0));
     }
+
+    @Test
+    @DisplayName("the game draws the appropriate number of cards for the sponsor and trims their hand when resolving a quest")
+    public void RESP_24_TEST_01() {
+        Game game = new Game();
+        Quest quest = new Quest(new QuestCard(3));
+
+        ArrayList<AdventureCard> stage1 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage2 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage3 = new ArrayList<AdventureCard>();
+
+        stage1.add(new FoeCard(5));
+        stage2.add(new FoeCard(10));
+        stage3.add(new FoeCard(15));
+
+        quest.addStage(stage1);
+        quest.addStage(stage2);
+        quest.addStage(stage3);
+
+        Player sponsor = new Player(3);
+
+        game.resolveQuest(quest, sponsor);
+
+        assertEquals(6, sponsor.getHandSize());
+    }
+
+    @Test
+    @DisplayName("the game discards cards approprietly when resolving a quest")
+    public void RESP_24_TEST_02() {
+        Game game = new Game();
+        Quest quest = new Quest(new QuestCard(3));
+
+        ArrayList<AdventureCard> stage1 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage2 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage3 = new ArrayList<AdventureCard>();
+
+        stage1.add(new FoeCard(5));
+        stage2.add(new FoeCard(10));
+        stage3.add(new FoeCard(15));
+
+        quest.addStage(stage1);
+        quest.addStage(stage2);
+        quest.addStage(stage3);
+
+        Player sponsor = new Player(3);
+
+        game.resolveQuest(quest, sponsor);
+
+        assertEquals(1, game.getEventDeck().getDiscardPile().size());
+        assertEquals(3, game.getAdventureDeck().getDiscardPile().size());
+    }
+
+    @Test
+    @DisplayName("the game draws trims the sponsor's hand if their hand size is greater than 12 after resolving a quest")
+    public void RESP_24_TEST_03() {
+        String input = "\n0\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+
+        Quest quest = new Quest(new QuestCard(3));
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        ArrayList<AdventureCard> stage1 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage2 = new ArrayList<AdventureCard>();
+        ArrayList<AdventureCard> stage3 = new ArrayList<AdventureCard>();
+
+        stage1.add(new FoeCard(5));
+        stage2.add(new FoeCard(10));
+        stage3.add(new FoeCard(15));
+
+        quest.addStage(stage1);
+        quest.addStage(stage2);
+        quest.addStage(stage3);
+
+        Player sponsor = new Player(3);
+
+        for (int i = 0; i < 7; ++i) {
+            sponsor.addCardToHand(new FoeCard(5));
+        }
+
+        game.resolveQuest(quest, sponsor);
+
+        assertEquals(12, sponsor.getHandSize());
+    }
 }

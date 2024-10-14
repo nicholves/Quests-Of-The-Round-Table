@@ -323,6 +323,11 @@ public class Game {
         return attack.computeAttackValue() >= quest.computeStageValue(stage);
     }
 
+    public void resolveQuest(Quest quest, Player sponsor) {
+
+    }
+
+
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;
     private Player[] m_players;
