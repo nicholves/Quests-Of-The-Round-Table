@@ -9,6 +9,7 @@ import AdventureCard.WeaponCard;
 import Attack.Attack;
 
 import java.io.PrintWriter;
+import java.nio.file.LinkPermission;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -322,5 +323,9 @@ public class Window {
         output.println();
 
         input.nextLine();
+    }
+
+    public void printAttack(Scanner input, PrintWriter output, Attack attack) {
+
     }
 }

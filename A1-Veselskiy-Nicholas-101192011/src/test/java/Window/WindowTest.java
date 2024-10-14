@@ -1,5 +1,6 @@
 package Window;
 
+import Attack.Attack;
 import EventCard.EventCard;
 import EventCard.EventDeckCard;
 import Game.Game;
@@ -502,5 +503,26 @@ class WindowTest {
         assertEquals(2, playersAfterReduce.size());
         assertEquals(player2, playersAfterReduce.getFirst());
         assertEquals(player3, playersAfterReduce.get(1));
+    }
+
+    @Test
+    @DisplayName("The game correctly outputs the weapons involved in an attack")
+    public void RESP_25_TEST_01() {
+        Window window = new Window();
+
+        String input = "";
+        Scanner scanner = new Scanner(input);
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Attack attack = new Attack();
+        attack.addCardToAttack(new WeaponCard('D', 5));
+        attack.addCardToAttack(new WeaponCard('L', 20));
+
+        window.printAttack(scanner, output, attack);
+
+        String result = output.toString();
+
+        assertTrue(result.contains("D5"));
+        assertTrue(result.contains("L20"));
     }
 }
