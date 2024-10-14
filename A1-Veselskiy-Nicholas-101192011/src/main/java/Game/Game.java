@@ -262,6 +262,10 @@ public class Game {
         }
     }
 
+    public static boolean resolveQuestStage(Attack attack, Quest quest, int stage) {
+        return false;
+    }
+
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;
     private Player[] m_players;

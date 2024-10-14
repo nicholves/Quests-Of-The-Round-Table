@@ -642,4 +642,50 @@ class GameTest {
         String result = output.toString();
         assertTrue(result.contains("invalid index"));
     }
+
+    @Test
+    @DisplayName("The game correctly identifies an attack with equal value to the quest stage as succeeding")
+    public void RESP_23_TEST_01() {
+        Quest quest = new Quest(new QuestCard(1));
+
+        ArrayList<AdventureCard> questStage = new ArrayList<AdventureCard>();
+        questStage.add(new FoeCard(5));
+        quest.addStage(questStage);
+
+        Attack attack = new Attack();
+        attack.addCardToAttack(new WeaponCard('D', 5));
+
+        assertTrue(Game.resolveQuestStage(attack, quest, 0));
+    }
+
+    @Test
+    @DisplayName("The game correctly identifies an attack with greater value to the quest stage as succeeding")
+    public void RESP_23_TEST_02() {
+        Quest quest = new Quest(new QuestCard(1));
+
+        ArrayList<AdventureCard> questStage = new ArrayList<AdventureCard>();
+        questStage.add(new FoeCard(5));
+        quest.addStage(questStage);
+
+        Attack attack = new Attack();
+        attack.addCardToAttack(new WeaponCard('D', 5));
+        attack.addCardToAttack(new WeaponCard('L', 20));
+
+        assertTrue(Game.resolveQuestStage(attack, quest, 0));
+    }
+
+    @Test
+    @DisplayName("The game correctly identifies an attack with less value to the quest stage as succeeding")
+    public void RESP_23_TEST_03() {
+        Quest quest = new Quest(new QuestCard(1));
+
+        ArrayList<AdventureCard> questStage = new ArrayList<AdventureCard>();
+        questStage.add(new FoeCard(10));
+        quest.addStage(questStage);
+
+        Attack attack = new Attack();
+        attack.addCardToAttack(new WeaponCard('D', 5));
+
+        assertFalse(Game.resolveQuestStage(attack, quest, 0));
+    }
 }
