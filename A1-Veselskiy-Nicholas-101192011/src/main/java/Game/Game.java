@@ -324,7 +324,14 @@ public class Game {
     }
 
     public void resolveQuest(Quest quest, Player sponsor) {
+        int numStages = quest.getNumStages();
+        int cardsToDraw = quest.discardAll(m_eventDeck.getDiscardPile(), m_adventureDeck.getDiscardPile()) + numStages;
 
+        for (int i = 0; i < cardsToDraw; ++i) {
+            sponsor.addCardToHand(m_adventureDeck.drawCard());
+        }
+
+        trimPlayerHand(sponsor);
     }
 
 
