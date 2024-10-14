@@ -4,6 +4,7 @@ import EventCard.EventDeckCard;
 import EventCard.QuestCard;
 import Player.Player;
 import Game.Game;
+import Quest.Quest;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,6 +45,26 @@ public class Window {
         output.println();
     }
 
+    public void displayQuestStage(PrintWriter output, List<AdventureCard> stage) {
+        output.print("The quest stage currently contains: ");
+
+        for (int i = 0; i < stage.size(); ++i) {
+            AdventureCard card = stage.get(i);
+
+            output.print(card.asString());
+            if (i != stage.size() - 1) {
+                output.print(", ");
+            }
+        }
+
+        output.println();
+
+        output.println("The value of this quest stage so far is: " + Quest.getQuestStageValue(stage));
+
+        output.println();
+        output.println();
+    }
+
     public void congratulateWinners(PrintWriter output, List<Player> players) {
         // some empty lines
         output.println();
@@ -73,8 +94,6 @@ public class Window {
     }
 
     public int discardCard(Scanner input, PrintWriter output, Player player) {
-        promptToTakeControl(input, output, player);
-
         while(true) {
             displayPlayerHand(input, output, player);
             output.print("\nPlayer " + player.getPlayerId() + ", select a card to discard by its index and then press <Enter>: ");
@@ -125,8 +144,9 @@ public class Window {
     public ArrayList<AdventureCard> buildQuestStage(Scanner input, PrintWriter output, Player player, int previousStageValue) {
         ArrayList<AdventureCard> result = new ArrayList<AdventureCard>();
 
+        output.println();
+        output.println("You must now create a quest stage with value greater than: " + previousStageValue);
         while (true) {
-            output.println("You must now create a quest with value greater than: " + previousStageValue);
             displayPlayerHand(input, output, player);
 
             output.print("Enter a valid card index: ");
@@ -160,6 +180,7 @@ public class Window {
 
             if (validateCardAddedToStage(output, result, cardChosenToAdd)) {
                 result.add(cardChosenToAdd);
+                displayQuestStage(output, result);
             }
             else {
                 player.addCardToHand(cardChosenToAdd);

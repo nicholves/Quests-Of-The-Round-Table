@@ -156,7 +156,7 @@ class WindowTest {
         player.addCardToHand(new FoeCard(5));
         player.addCardToHand(new WeaponCard('L', 20));
 
-        String input = "\n0\n\n12\n";
+        String input = "0\n12\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
 
@@ -190,7 +190,7 @@ class WindowTest {
         player.addCardToHand(new FoeCard(35));
         player.addCardToHand(new FoeCard(5));
 
-        String input = "\n15\n0\n";
+        String input = "15\n0\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
 

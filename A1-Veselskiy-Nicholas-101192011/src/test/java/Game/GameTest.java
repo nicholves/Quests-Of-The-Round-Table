@@ -7,6 +7,7 @@ import EventCard.EventCard;
 import EventCard.EventType;
 import EventCard.QuestCard;
 import Quest.Quest;
+import Attack.Attack;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -160,7 +161,7 @@ class GameTest {
     @Test
     @DisplayName("Applies the queen's favor event to a player and forces them to discard down to 12 cards")
     public void RESP_10_TEST_01() {
-        String input = "\n0\n\n0\n";
+        String input = "\n0\n0\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
         Game game = new Game(scanner, new PrintWriter(output));
@@ -264,7 +265,7 @@ class GameTest {
     @Test
     @DisplayName("Applies the prosperity event to a group of players where multiple will need to discard")
     public void RESP_11_TEST_02() {
-        String input = "\n0\n\n0\n" + "\n0\n\n0\n" + "\n0\n\n0\n";
+        String input = "\n0\n0\n" + "\n0\n0\n" + "\n0\n0\n";
         Scanner scanner = new Scanner(input);
         StringWriter output = new StringWriter();
         Game game = new Game(scanner, new PrintWriter(output));

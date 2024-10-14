@@ -101,6 +101,9 @@ public class Game {
     }
 
     public void trimPlayerHand(Player player) {
+        if (player.getHandSize() > 12) {
+            m_outputWindow.promptToTakeControl(m_scanner, m_writer, player);
+        }
         while (player.getHandSize() > 12) {
             int cardToDiscard = m_outputWindow.discardCard(m_scanner, m_writer, player);
 
@@ -146,7 +149,16 @@ public class Game {
         if (card.getType() == EventCardType.QUESTTYPE) {
             QuestCard qCard = (QuestCard) card;
 
+            // find a sponsor for the quest
             Player sponsor = findSponsor(qCard, player.getPlayerId());
+
+            if (sponsor == null) { // everyone declined to sponsor
+                m_eventDeck.discardCard(qCard);
+                return;
+            }
+
+            // build the quest
+            Quest quest = buildQuest(sponsor, qCard);
         }
     }
 
