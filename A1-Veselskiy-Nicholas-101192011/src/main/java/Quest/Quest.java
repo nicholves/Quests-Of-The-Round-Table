@@ -1,6 +1,7 @@
 package Quest;
 
 import AdventureCard.AdventureCard;
+import EventCard.EventDeckCard;
 import EventCard.QuestCard;
 
 import java.util.ArrayList;
@@ -52,6 +53,21 @@ public class Quest {
         return sum;
     }
 
+    public int discardAll(List<EventDeckCard> questDeck, List<AdventureCard> adventureDeckDiscardPile) {
+        questDeck.add(m_originatorCard);
+        m_originatorCard = null;
+
+        int numCards = 0;
+        for (List<AdventureCard> stage : m_stages) {
+            numCards += stage.size();
+
+            adventureDeckDiscardPile.addAll(stage);
+        }
+
+        m_stages.clear();
+
+        return numCards;
+    }
 
     private List<List<AdventureCard>> m_stages;
     private QuestCard m_originatorCard;

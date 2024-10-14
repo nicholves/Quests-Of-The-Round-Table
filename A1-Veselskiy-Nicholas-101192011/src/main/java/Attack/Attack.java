@@ -1,5 +1,6 @@
 package Attack;
 
+import AdventureCard.AdventureCard;
 import AdventureCard.WeaponCard;
 
 import java.util.ArrayList;
@@ -33,6 +34,12 @@ public class Attack {
 
         m_cards.add(weapon);
         return true;
+    }
+
+    public void discardAll(List<AdventureCard> discardPile) {
+        discardPile.addAll(m_cards);
+
+        m_cards.clear();
     }
 
     private List<WeaponCard> m_cards;

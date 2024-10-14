@@ -161,7 +161,64 @@ public class Game {
 
             // build the quest
             Quest quest = buildQuest(sponsor, qCard);
+
+            ArrayList<Player> eligibleParticipants = new ArrayList<Player>();
+            for (Player gamer : m_players) {
+                if (gamer != sponsor) {
+                    eligibleParticipants.add(gamer);
+                }
+            }
+
+            List<Player> winners = runQuest(quest, eligibleParticipants);
+
+            for (Player winner : winners) {
+                winner.setNumShields(winner.getNumShields() + quest.getNumStages());
+            }
+
+            resolveQuest(quest, sponsor);
         }
+    }
+
+    public List<Player> runQuest(Quest quest, List<Player> eligibleParticipants) {
+        int currentStage = 0;
+        while (currentStage < quest.getNumStages()) {
+            if (eligibleParticipants.isEmpty()) {
+                break;
+            }
+
+            eligibleParticipants = m_outputWindow.askForParticipation(m_scanner, m_writer, eligibleParticipants);
+
+            if (eligibleParticipants.isEmpty()) {
+                break;
+            }
+
+            // each participant draws a card then trims
+            for (Player player : eligibleParticipants) {
+                player.addCardToHand(m_adventureDeck.drawCard());
+                trimPlayerHand(player);
+            }
+
+            ArrayList<Boolean> victorious = new ArrayList<>();
+            for (Player player : eligibleParticipants) {
+                Attack attack = buildAttack(player);
+
+                victorious.add(resolveQuestStage(attack, quest, currentStage));
+
+                attack.discardAll(m_adventureDeck.getDiscardPile());
+            }
+
+            ArrayList<Player> nextParticipants = new ArrayList<Player>();
+            for (int i = 0; i < eligibleParticipants.size(); i++) {
+                if (victorious.get(i)) {
+                    nextParticipants.add(eligibleParticipants.get(i));
+                }
+            }
+            eligibleParticipants = nextParticipants;
+
+            currentStage++;
+        }
+
+        return eligibleParticipants;
     }
 
     public void applyEvent(EventCard card, Player drawer) {
