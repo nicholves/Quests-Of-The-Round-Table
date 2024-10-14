@@ -171,6 +171,10 @@ public class Game {
 
             List<Player> winners = runQuest(quest, eligibleParticipants);
 
+            if (winners.isEmpty()) {
+                m_outputWindow.questFailedMessage(m_scanner, m_writer);
+            }
+
             for (Player winner : winners) {
                 winner.setNumShields(winner.getNumShields() + quest.getNumStages());
             }
@@ -200,6 +204,7 @@ public class Game {
 
             ArrayList<Boolean> victorious = new ArrayList<>();
             for (Player player : eligibleParticipants) {
+                m_outputWindow.promptToTakeControl(m_scanner, m_writer, player);
                 Attack attack = buildAttack(player);
 
                 victorious.add(resolveQuestStage(attack, quest, currentStage));
@@ -214,6 +219,10 @@ public class Game {
                 }
             }
             eligibleParticipants = nextParticipants;
+
+            if (!eligibleParticipants.isEmpty()) {
+                m_outputWindow.displayWinnersOfQuestStage(m_scanner, m_writer, eligibleParticipants);
+            }
 
             currentStage++;
         }

@@ -301,4 +301,26 @@ public class Window {
         }
         return participants;
     }
+
+    public void displayWinnersOfQuestStage(Scanner input, PrintWriter output, List<Player> players) {
+        output.println("Congratulations!");
+
+        output.print("Player(s)");
+        for (Player player : players) {
+            output.print(" " + player.getPlayerId());
+        }
+
+        output.print(" are victorious and can proceed to the next stage!");
+        output.println();
+        output.println();
+
+        input.nextLine();
+    }
+
+    public void questFailedMessage(Scanner input, PrintWriter output) {
+        output.println("The current quest has failed as there are no more eligible players");
+        output.println();
+
+        input.nextLine();
+    }
 }
