@@ -285,6 +285,20 @@ public class Window {
 
 
     public List<Player> askForParticipation(Scanner input, PrintWriter output, List<Player> players) {
-        return players;
+        output.println();
+
+        ArrayList<Player> participants = new ArrayList<Player>();
+
+        for (int i = 0; i < players.size(); ++i) {
+            output.print("Player: " + players.get(i).getPlayerId() + " would you like to tackle the current stage of the quest (y/n): ");
+            output.flush();
+
+            String in = input.nextLine();
+
+            if (in.equals("y")) {
+                participants.add(players.get(i));
+            }
+        }
+        return participants;
     }
 }
