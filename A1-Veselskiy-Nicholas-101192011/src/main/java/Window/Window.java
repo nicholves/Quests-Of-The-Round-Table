@@ -243,17 +243,43 @@ public class Window {
     }
 
     // returns null if quit is selected
-    public WeaponCard selectWeaponToAddToAttack(Scanner input, PrintWriter output, Player player) {
+    public AdventureCard selectWeaponToAddToAttack(Scanner input, PrintWriter output, Player player) {
+        output.println("Please construct your attack for this stage");
 
+        while (true) {
+            displayPlayerHand(input, output, player);
 
-        return null;
+            output.println();
+            output.print("Select an index for a card to add to your attack or 'Quit' to confirm your attack. (The attack must consist of unique weapons): ");
+            output.flush();
+
+            String in = input.nextLine();
+
+            if (in.equals("Quit")) {
+                return null;
+            }
+
+            int index = Integer.parseInt(in);
+
+            if (player.getHandSize() == 0) {
+                output.println("Your hand is empty you must confirm your attack");
+                continue;
+            }
+
+            if (index < 0 || index > (player.getHandSize() - 1)) {
+                output.println("An invalid index was selected. Please choose a value between 0 and " + (player.getHandSize() - 1));
+                continue;
+            }
+
+            return player.getHand().remove(index);
+        }
     }
 
-    public void displayErrorWithAttackConfirmation(PrintWriter output) {
-
+    public void reportDuplicateWeaponAdding(PrintWriter output) {
+        output.println("You cannot add a duplicate weapon to an attack");
     }
 
-    public void displayErrorWhenAddingWeaponToAttack(PrintWriter output, Attack attack, WeaponCard weapon) {
-
+    public void reportAddingFoeToAttack(PrintWriter output) {
+        output.println("Foe cards cannot be added to an attack");
     }
 }

@@ -2,6 +2,7 @@ package Game;
 
 import AdventureCard.AdventureCard;
 import AdventureCard.FoeCard;
+import AdventureCard.WeaponCard;
 import AdventureDeck.AdventureDeck;
 import EventCard.EventCardType;
 import EventDeck.EventDeck;
@@ -239,7 +240,26 @@ public class Game {
     }
 
     public Attack buildAttack(Player player) {
-        return null;
+        Attack attack = new Attack();
+
+        while (true) {
+            AdventureCard card = m_outputWindow.selectWeaponToAddToAttack(m_scanner, m_writer, player);
+            if (card == null) {
+                return attack;
+            }
+
+            if (card.getLetter() == 'F') { // foe cards cannot be added to attacks
+                m_outputWindow.reportAddingFoeToAttack(m_writer);
+                player.getHand().add(card);
+                continue;
+            }
+
+
+            if (!attack.addCardToAttack((WeaponCard) card)) {
+                m_outputWindow.reportDuplicateWeaponAdding(m_writer);
+                player.getHand().add(card);
+            }
+        }
     }
 
     private EventDeck m_eventDeck;
