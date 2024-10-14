@@ -31,6 +31,15 @@ public class FoeCard implements AdventureCard {
         return m_value - other.getValue();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (!(obj instanceof FoeCard)) return false;
+
+        return m_value == ((FoeCard) obj).m_value && m_letter == ((FoeCard) obj).m_letter;
+    }
+
     private final char m_letter;
     private final int m_value;
 }

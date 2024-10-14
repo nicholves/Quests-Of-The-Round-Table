@@ -39,6 +39,16 @@ public class WeaponCard implements AdventureCard{
         return newValueOther - newValueThis;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (!(obj instanceof WeaponCard)) return false;
+
+        return m_value == ((WeaponCard) obj).m_value && m_letter == ((WeaponCard) obj).m_letter;
+    }
+
+
     private final char m_letter;
     private final int m_value;
 }

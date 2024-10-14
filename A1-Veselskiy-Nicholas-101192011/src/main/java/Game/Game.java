@@ -349,6 +349,10 @@ public class Game {
         trimPlayerHand(sponsor);
     }
 
+    public Window getOutputWindow() {
+        return m_outputWindow;
+    }
+
 
     private EventDeck m_eventDeck;
     private AdventureDeck m_adventureDeck;

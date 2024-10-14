@@ -8,6 +8,9 @@ import EventCard.EventType;
 import EventCard.QuestCard;
 import Quest.Quest;
 import Attack.Attack;
+import EventCard.EventDeckCard;
+import EventCard.EventCardType;
+import Window.Window;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.Writer;
+import java.util.*;
+import java.util.regex.Pattern;
 
 class GameTest {
     @Test
@@ -771,5 +774,348 @@ class GameTest {
         game.resolveQuest(quest, sponsor);
 
         assertEquals(12, sponsor.getHandSize());
+    }
+
+    @Test
+    @DisplayName("Compulsory A test for Assignment 1")
+    public void A_TEST_JP_SCENARIO() {
+        String userInput = "";
+
+
+        userInput += "\n"; // p1 confirms the drawn card (Quest of 4 stages)
+
+        userInput += "n\n"; // p1 declines to accept sponsoring
+        userInput += "y\n"; // p2 accepts sponsoring
+
+        // p2 builds the quest from the slides
+        userInput += "0\n6\nQuit\n"; // Stage 1 being a thief and a horse
+        userInput += "1\n4\nQuit\n"; // Stage 2 being a robber-knight and a sword
+        userInput += "1\n2\n3\nQuit\n"; // Stage 3 being a robber-knight and a dagger and a Battleaxe
+        userInput += "1\n2\nQuit\n"; // Stage 4 being a giant and a Battleaxe
+
+
+        // 6) Stage 1:
+        // all players participate
+        userInput += "y\n";
+        userInput += "y\n";
+        userInput += "y\n";
+
+        // p1's draw
+        userInput += "y\n"; // p1 confirms control
+        userInput += "0\n"; // p1 discards an F5 to trimming
+
+        // p3's draw
+        userInput += "y\n"; // p3 confirms control
+        userInput += "0\n"; // p3 discards an F5 to trimming
+
+        // p4's draw
+        userInput += "y\n"; // p4 confirms control
+        userInput += "0\n"; // p4 discards an F5 to trimming
+
+        // p1's attack
+        userInput += "\n"; // p1 confirms control
+        userInput += "4\n"; // p1 adds a dagger to their attack
+        userInput += "4\n"; // p1 adds a sword to their attack
+        userInput += "Quit\n"; // p1 confirms attack
+
+        // p3's attack
+        userInput += "\n"; // p3 confirms control
+        userInput += "5\n"; // p3 adds a sword to their attack
+        userInput += "3\n"; // p3 adds a dagger to their attack
+        userInput += "Quit\n"; // p3 confirms attack
+
+        // p4's attack
+        userInput += "\n"; // p4 confirms control
+        userInput += "4\n"; // p4 adds a dagger to their attack
+        userInput += "5\n"; // p4 adds a horse to their attack
+        userInput += "Quit\n"; // p4 confirms attack
+
+        // all attack are sufficient
+        userInput += "\n"; // confirm the victory screen
+
+        // 7) Stage 2:
+        // all players participate
+        userInput += "y\n";
+        userInput += "y\n";
+        userInput += "y\n";
+
+
+        // p1's attack
+        userInput += "\n"; // p1 confirms control
+        userInput += "6\n"; // p1 adds a horse to their attack
+        userInput += "5\n"; // p1 adds a sword to their attack
+        userInput += "Quit\n"; // p1 confirms attack
+
+        // p3's attack
+        userInput += "\n"; // p3 confirms control
+        userInput += "8\n"; // p3 adds an axe to their attack
+        userInput += "4\n"; // p3 adds a sword to their attack
+        userInput += "Quit\n"; // p3 confirms attack
+
+        // p4's attack
+        userInput += "\n"; // p4 confirms control
+        userInput += "5\n"; // p4 adds a horse to their attack
+        userInput += "6\n"; // p4 adds an axe to their attack
+        userInput += "Quit\n"; // p4 confirms attack
+
+
+        // p1's attack is insufficient p1 is eliminated
+        userInput += "\n"; // confirm the victory screen
+
+        // 8) Stage 3:
+        // all 2 players participate
+        userInput += "y\n";
+        userInput += "y\n";
+
+        // p3's attack
+        userInput += "\n"; // p3 confirms control
+        userInput += "9\n"; // p3 adds a lance to their attack
+        userInput += "5\n"; // p3 adds a horse to their attack
+        userInput += "4\n"; // p3 adds a sword to their attack
+        userInput += "Quit\n"; // p3 confirms attack
+
+        // p4's attack
+        userInput += "\n"; // p4 confirms control
+        userInput += "6\n"; // p4 adds an axe to their attack
+        userInput += "4\n"; // p4 adds a sword to their attack
+        userInput += "6\n"; // p4 adds a lance to their attack
+        userInput += "Quit\n"; // p4 confirms attack
+
+        // Confirm the winners of this stage, p3 and p4
+        userInput += "\n";
+
+        // 8) Stage 4:
+        // all 2 players participate
+        userInput += "y\n";
+        userInput += "y\n";
+
+        // p3's attack
+        userInput += "\n"; // p3 confirms control
+        userInput += "6\n"; // p3 adds an axe to their attack
+        userInput += "5\n"; // p3 adds a horse to their attack
+        userInput += "5\n"; // p3 adds a Lance to their attack
+        userInput += "Quit\n"; // p3 confirms attack
+
+        // p4's attack
+        userInput += "\n"; // p4 confirms control
+        userInput += "3\n"; // p4 adds a dagger to their attack
+        userInput += "3\n"; // p4 adds a sword to their attack
+        userInput += "3\n"; // p4 adds a lance to their attack
+        userInput += "4\n"; // p4 adds an excalibur to their attack
+        userInput += "Quit\n"; // p4 confirms attack
+
+        // Confirm the winners of this stage, just p4 who is victorious in the entire quest
+        userInput += "\n";
+
+
+        // trim the hand of the quest sponsor (p2) who now has to discard 4 cards
+        userInput += "\n"; // confirm p2 has control
+        userInput += "0\n0\n0\n0\n"; // we just discard the four lowest foes in their hand randomly
+
+        Scanner scanner = new Scanner(userInput);
+
+        boolean useSTDOut = true;
+        Writer output = new StringWriter();
+        Game game = new Game(scanner, useSTDOut ? new PrintWriter(System.out) : new PrintWriter(output));
+        // 1) Start game, decks are created, hands of the 4 players are set up with random cards
+        game.initGame();
+
+        // 2) Rig the 4 hands to the hold the cards of the 4 posted initial hands
+
+        // return all the player hands to the adventure deck
+        for (int i = 0; i < 4; ++i) {
+            game.getAdventureDeck().getDeck().addAll(game.getPlayer(i).getHand());
+            game.getPlayer(i).getHand().clear();
+        }
+
+        List<AdventureCard> p1Hand =  game.getPlayer(0).getHand();
+        // set up P1 hand
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(15));
+        p1Hand.add(new FoeCard(15));
+
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('S', 10));
+        p1Hand.add(new WeaponCard('S', 10));
+        p1Hand.add(new WeaponCard('H', 10));
+        p1Hand.add(new WeaponCard('H', 10));
+        p1Hand.add(new WeaponCard('B', 15));
+        p1Hand.add(new WeaponCard('B', 15));
+        p1Hand.add(new WeaponCard('L', 20));
+
+        for (AdventureCard card : p1Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+
+        List<AdventureCard> p2Hand =  game.getPlayer(1).getHand();
+        // set up P2 hand
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(15));
+        p2Hand.add(new FoeCard(15));
+        p2Hand.add(new FoeCard(40));
+
+        p2Hand.add(new WeaponCard('D', 5));
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('B', 15));
+        p2Hand.add(new WeaponCard('B', 15));
+        p2Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p2Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p3Hand =  game.getPlayer(2).getHand();
+        // set up P3 hand
+        p3Hand.add(new FoeCard(5));
+        p3Hand.add(new FoeCard(5));
+        p3Hand.add(new FoeCard(5));
+        p3Hand.add(new FoeCard(15));
+
+        p3Hand.add(new WeaponCard('D', 5));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('H', 10));
+        p3Hand.add(new WeaponCard('H', 10));
+        p3Hand.add(new WeaponCard('B', 15));
+        p3Hand.add(new WeaponCard('L', 20));
+
+        for (AdventureCard card : p3Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p4Hand =  game.getPlayer(3).getHand();
+        // set up P4 hand
+        p4Hand.add(new FoeCard(5));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(40));
+
+        p4Hand.add(new WeaponCard('D', 5));
+        p4Hand.add(new WeaponCard('D', 5));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('H', 10));
+        p4Hand.add(new WeaponCard('H', 10));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('L', 20));
+        p4Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p4Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        // ensure we have the normal amount of cards
+        assertEquals(12, p1Hand.size());
+        assertEquals(12, p2Hand.size());
+        assertEquals(12, p3Hand.size());
+        assertEquals(12, p4Hand.size());
+
+        int numPlayers = 4;
+        int initialCards = 100;
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+
+
+        Stack<EventDeckCard> eventDeck = game.getEventDeck().getDeck();
+
+        // remove one quest of size 4 from the deck somewhere
+        QuestCard cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 4) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // ensure the top card is a quest of size 4
+        eventDeck.push(new QuestCard(4));
+
+        // build the top of the adventure deck how we need it
+        Stack<AdventureCard> aDeck = game.getAdventureDeck().getDeck();
+
+        Queue<AdventureCard> newCards = new LinkedList<AdventureCard>();
+
+        newCards.add(new WeaponCard('L', 20));
+        newCards.add(new FoeCard(30));
+
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('B', 15));
+
+        newCards.add(new WeaponCard('L', 20));
+        newCards.add(new WeaponCard('L', 20));
+        newCards.add(new FoeCard(10));
+
+        newCards.add(new WeaponCard('B', 15));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new FoeCard(30));
+
+        // remove the cards we don't want duplicates of in the deck
+        removeFromDeck(aDeck, newCards);
+
+        // add the cards we do want on top
+        aDeck.addAll(newCards);
+
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+
+        // run the scenario
+        game.drawFromEventDeck(game.getPlayer(0));
+
+
+        // Assertions
+        assertEquals(0, game.getPlayer(0).getNumShields()); // P1 has zero shields
+
+        // P1 Assertions
+        Window window = game.getOutputWindow();
+        StringWriter player1Hand = new StringWriter();
+        window.displayPlayerHand(scanner, new PrintWriter(player1Hand), game.getPlayer(0));
+
+        String result = player1Hand.toString();
+
+        assertTrue(result.contains("F5, F10, F15, F15, F30, H10, B15, B15, L20")); // P1 should end with the following hand
+
+
+        // ---------------------
+        // P3 Assertions
+        assertEquals(0, game.getPlayer(2).getNumShields()); // P3 has zero shields
+
+        StringWriter player3Hand = new StringWriter();
+        window.displayPlayerHand(scanner, new PrintWriter(player3Hand), game.getPlayer(2));
+
+        result = player3Hand.toString();
+
+        assertTrue(result.contains("F5, F5, F15, F30, S10")); // P3 should end with the following hand
+
+
+        //----------------------
+        // P4 Assertions
+        assertEquals(4, game.getPlayer(3).getNumShields()); // P4 has 4 shields
+
+        StringWriter player4Hand = new StringWriter();
+        window.displayPlayerHand(scanner, new PrintWriter(player4Hand), game.getPlayer(3));
+
+        result = player4Hand.toString();
+
+        assertTrue(result.contains("F15, F15, F40, L20")); // P4 should end with the following hand
+
+
+        //----------------------
+        // P2 Assertions
+        assertEquals(12, game.getPlayer(1).getHandSize());
+    }
+
+    // this small helper function to remove a set of cards from the deck we don't want duplicates of
+    // Note cannot use removeAll() because we want to remove exactly one copy of each card in cardsToRemove
+    private void removeFromDeck(Stack<AdventureCard> deck,  Queue<AdventureCard> cardsToRemove) {
+        for (AdventureCard card : cardsToRemove) {
+            deck.remove(card);
+        }
     }
 }
