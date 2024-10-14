@@ -547,4 +547,99 @@ class GameTest {
 
         assertTrue(result.validQuest());
     }
+
+
+    @Test
+    @DisplayName("The player can add weapon card from their hand to the current attack")
+    public void RESP_21_TEST_01() {
+        Player player = new Player(3);
+
+        String input = "1\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+        Attack attack = game.buildAttack(player);
+
+        assertEquals(1, attack.getCardsInAttack().size());
+        assertEquals(1, player.getHandSize());
+
+        assertEquals(20, attack.computeAttackValue());
+    }
+
+    @Test
+    @DisplayName("The player cannot add a duplicate weapon card from their hand to the current attack")
+    public void RESP_21_TEST_02() {
+        Player player = new Player(3);
+
+        String input = "1\n1\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+        Attack attack = game.buildAttack(player);
+
+        assertEquals(1, attack.getCardsInAttack().size());
+        assertEquals(2, player.getHandSize());
+
+        assertEquals(20, attack.computeAttackValue());
+
+        String result = output.toString();
+        assertTrue(result.contains("duplicate weapon"));
+    }
+
+    @Test
+    @DisplayName("The player cannot add a foe card from their hand to the current attack")
+    public void RESP_21_TEST_03() {
+        Player player = new Player(3);
+
+        String input = "0\n1\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+        Attack attack = game.buildAttack(player);
+
+        assertEquals(1, attack.getCardsInAttack().size());
+        assertEquals(1, player.getHandSize());
+
+        assertEquals(20, attack.computeAttackValue());
+
+        String result = output.toString();
+        assertTrue(result.contains("Foe cards"));
+    }
+
+    @Test
+    @DisplayName("The game validates a reasonable index is chosen for adding weapons to an attack")
+    public void RESP_21_TEST_04() {
+        Player player = new Player(3);
+
+        String input = "-1\n5\n1\nQuit\n";
+        Scanner scanner = new Scanner(input);
+        StringWriter output = new StringWriter();
+        Game game = new Game(scanner, new PrintWriter(output));
+
+        player.addCardToHand(new FoeCard(5));
+        player.addCardToHand(new WeaponCard('L', 20));
+
+        Attack attack = game.buildAttack(player);
+
+        assertEquals(1, attack.getCardsInAttack().size());
+        assertEquals(1, player.getHandSize());
+
+        assertEquals(20, attack.computeAttackValue());
+
+        String result = output.toString();
+        assertTrue(result.contains("invalid index"));
+    }
 }

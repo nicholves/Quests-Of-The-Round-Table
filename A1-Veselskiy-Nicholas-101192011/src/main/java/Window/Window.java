@@ -5,6 +5,8 @@ import EventCard.QuestCard;
 import Player.Player;
 import Game.Game;
 import Quest.Quest;
+import AdventureCard.WeaponCard;
+import Attack.Attack;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -238,5 +240,20 @@ public class Window {
         }
 
         return true;
+    }
+
+    // returns null if quit is selected
+    public WeaponCard selectWeaponToAddToAttack(Scanner input, PrintWriter output, Player player) {
+
+
+        return null;
+    }
+
+    public void displayErrorWithAttackConfirmation(PrintWriter output) {
+
+    }
+
+    public void displayErrorWhenAddingWeaponToAttack(PrintWriter output, Attack attack, WeaponCard weapon) {
+
     }
 }

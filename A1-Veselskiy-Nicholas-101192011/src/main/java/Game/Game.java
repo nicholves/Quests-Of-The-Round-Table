@@ -11,6 +11,7 @@ import EventCard.EventDeckCard;
 import Player.Player;
 import Window.Window;
 import Quest.Quest;
+import Attack.Attack;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -235,6 +236,10 @@ public class Game {
         }
 
         return result;
+    }
+
+    public Attack buildAttack(Player player) {
+        return null;
     }
 
     private EventDeck m_eventDeck;
