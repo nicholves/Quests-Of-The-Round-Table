@@ -286,7 +286,9 @@ public class Window {
 
 
     public List<Player> askForParticipation(Scanner input, PrintWriter output, List<Player> players) {
-        output.println();
+        for (int i = 0; i < 100; i++) {
+            output.println();
+        }
 
         ArrayList<Player> participants = new ArrayList<Player>();
 
