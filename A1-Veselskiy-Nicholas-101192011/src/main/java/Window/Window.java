@@ -335,4 +335,8 @@ public class Window {
         output.flush();
         output.println();
     }
+
+    public void displayParticipants(PrintWriter output, List<Player> players) {
+
+    }
 }

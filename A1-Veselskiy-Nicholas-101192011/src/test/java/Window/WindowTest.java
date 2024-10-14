@@ -525,4 +525,23 @@ class WindowTest {
         assertTrue(result.contains("D5"));
         assertTrue(result.contains("L20"));
     }
+
+    @Test
+    @DisplayName("The game correctly outputs the current eligible participants for the quest stage")
+    public void RESP_26_TEST_01() {
+        Window window = new Window();
+
+        StringWriter output = new StringWriter();
+
+        ArrayList<Player> eligibleParticipants = new ArrayList<Player>();
+        eligibleParticipants.add(new Player(0));
+        eligibleParticipants.add(new Player(3));
+
+        window.displayParticipants(new PrintWriter(output), eligibleParticipants);
+
+        String result = output.toString();
+
+        assertTrue(result.contains("0"));
+        assertTrue(result.contains("3"));
+    }
 }
