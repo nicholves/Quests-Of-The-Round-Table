@@ -19,6 +19,22 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>7.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>
