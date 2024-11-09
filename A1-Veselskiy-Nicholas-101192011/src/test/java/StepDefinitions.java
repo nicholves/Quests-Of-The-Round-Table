@@ -14,13 +14,13 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class A1ScenarioSteps {
+public class StepDefinitions {
     private Game game;
     private PrintWriter writer;
     private Scanner scanner;
     private PrintWriter userInput;
-    PipedOutputStream pos;
-    PipedInputStream pis;
+    private PipedOutputStream pos;
+    private PipedInputStream pis;
 
 
     @Given("the A1 Scenario Deck is setup")
@@ -339,6 +339,227 @@ public class A1ScenarioSteps {
     private void removeFromDeck(Stack<AdventureCard> deck,  Queue<AdventureCard> cardsToRemove) {
         for (AdventureCard card : cardsToRemove) {
             deck.remove(card);
+        }
+    }
+
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+
+    // 0 winner scenario steps
+
+
+
+    @Given("The 0 Winner Scenario Deck is setup")
+    public void the_0_Winner_Scenario_Deck_is_setup()  {
+        try {
+            pos = new PipedOutputStream();
+            pis = new PipedInputStream(pos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        writer = new PrintWriter(new StringWriter());
+        userInput = new PrintWriter(pos);
+        scanner = new Scanner(pis);
+        game = new Game(scanner, writer);
+        game.initGame();
+
+        // 2) Rig the 4 hands to the hold the cards for the scenario
+
+        // return all the player hands to the adventure deck
+        for (int i = 0; i < 4; ++i) {
+            game.getAdventureDeck().getDeck().addAll(game.getPlayer(i).getHand());
+            game.getPlayer(i).getHand().clear();
+        }
+
+        // p1 will have nothing but high level foes
+        List<AdventureCard> p1Hand =  game.getPlayer(0).getHand();
+        // set up P1 hand
+        p1Hand.add(new FoeCard(70));
+        p1Hand.add(new FoeCard(50));
+        p1Hand.add(new FoeCard(50));
+        p1Hand.add(new FoeCard(40));
+        p1Hand.add(new FoeCard(40));
+        p1Hand.add(new FoeCard(35));
+        p1Hand.add(new FoeCard(35));
+        p1Hand.add(new FoeCard(35));
+        p1Hand.add(new FoeCard(35));
+        p1Hand.add(new FoeCard(30));
+        p1Hand.add(new FoeCard(30));
+        p1Hand.add(new FoeCard(30));
+
+        for (AdventureCard card : p1Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        // all other players will only have low level weapons as much as possible while each having at least one dagger
+        List<AdventureCard> p2Hand =  game.getPlayer(1).getHand();
+        // set up P2 hand
+        p2Hand.add(new WeaponCard('D', 5));
+        p2Hand.add(new WeaponCard('D', 5));
+        p2Hand.add(new WeaponCard('D', 5));
+        p2Hand.add(new WeaponCard('D', 5));
+
+
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+
+        for (AdventureCard card : p2Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p3Hand =  game.getPlayer(2).getHand();
+        // set up P3 hand
+        p3Hand.add(new WeaponCard('D', 5));
+
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+
+        for (AdventureCard card : p3Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p4Hand =  game.getPlayer(3).getHand();
+        // set up P4 hand
+        p4Hand.add(new WeaponCard('D', 5));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+
+        for (AdventureCard card : p4Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        // ensure we have the normal amount of cards
+        assertEquals(12, p1Hand.size());
+        assertEquals(12, p2Hand.size());
+        assertEquals(12, p3Hand.size());
+        assertEquals(12, p4Hand.size());
+
+        int numPlayers = 4;
+        int initialCards = 100;
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+
+
+        Stack<EventDeckCard> eventDeck = game.getEventDeck().getDeck();
+
+        // remove one quest of size 2 from the deck somewhere
+        QuestCard cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 2) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // ensure the top card is a quest of size 4
+        eventDeck.push(new QuestCard(2));
+
+        // build the top of the adventure deck how we need it
+        Stack<AdventureCard> aDeck = game.getAdventureDeck().getDeck();
+
+        Queue<AdventureCard> newCards = new LinkedList<AdventureCard>();
+
+        // 3 lances will ensure no small foe or small weapon is drawn by p2, p3, or p4
+        newCards.add(new WeaponCard('L', 20));
+        newCards.add(new WeaponCard('L', 20));
+        newCards.add(new WeaponCard('L', 20));
+
+        // remove the cards we don't want duplicates of in the deck
+        removeFromDeck(aDeck, newCards);
+
+        // add the cards we do want on top
+        aDeck.addAll(newCards);
+
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+        assertEquals(17, eventDeck.size());
+    }
+
+    @When("p1 decides to sponsor")
+    public void P1_Sponsor() {
+        userInput.print("\n"); // p1 confirms the drawn card (Quest of 2 stages)
+
+        userInput.print("y\n"); // p1 accepts sponsoring
+    }
+
+    @When("p1 builds the quest with two massive monsters")
+    public void Build_Big_Quest() {
+        userInput.print("10\nQuit\n"); // Stage 1 being a foe 70
+        userInput.print("10\nQuit\n"); // Stage 2 being a foe 50
+    }
+
+    @When("all players discard their largest card")
+    public void Discard_Biggest_Cards() {
+        // p2's draw
+        userInput.print("y\n"); // p2 confirms control
+        userInput.print("12\n"); // p2 discards their best card
+
+        // p3's draw
+        userInput.print("y\n"); // p3 confirms control
+        userInput.print("12\n"); // p3 discards their best card
+
+        // p4's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("12\n"); // p4 discards their best card
+    }
+
+    @When("Player {int} uses a dagger")
+    public void Dagger_User(int playerNum) {
+        userInput.print("\n"); // confirms control
+        userInput.print("0\n");
+        userInput.print("Quit\n"); // confirms attack
+    }
+
+    @When("all players lose")
+    public void Confirm_Loss() {
+        userInput.print("\n"); // confirm the defeat screen
+    }
+
+    @When("Player {int} discards {int} cards")
+    public void Discard_cards_from_sponsorship_end(int playerNum, int numCards) {
+        // trim the hand of the quest sponsor who now has to discard numCards cards
+        userInput.print("\n"); // confirm player has control
+        for (int i = 0; i < numCards; ++i) {
+            userInput.print("0\n"); // we just discard the lowest foes in their hand randomly
+        }
+    }
+
+    @When("all Players participate")
+    public void All_Players_Participate() {
+        for (int i = 0; i < 3; ++i) {
+            userInput.print("y\n");
         }
     }
 }
