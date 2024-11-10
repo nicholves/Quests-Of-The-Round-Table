@@ -1,4 +1,6 @@
 import AdventureCard.AdventureCard;
+import EventCard.EventCard;
+import EventCard.EventType;
 import EventCard.EventCardType;
 import EventCard.EventDeckCard;
 import EventCard.QuestCard;
@@ -13,6 +15,7 @@ import java.io.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StepDefinitions {
     private Game game;
@@ -21,6 +24,7 @@ public class StepDefinitions {
     private PrintWriter userInput;
     private PipedOutputStream pos;
     private PipedInputStream pis;
+    private StringWriter output;
 
 
     @Given("the A1 Scenario Deck is setup")
@@ -318,6 +322,15 @@ public class StepDefinitions {
         userInput.print("0\n0\n0\n0\n"); // we just discard the four lowest foes in their hand randomly
     }
 
+    @When("the sponsoror trims their highest {int} cards")
+    public void sponsor_trim_best(int numCards) {
+        // trim the hand of the quest sponsor who now has to discard 4 cards
+        userInput.print("\n");
+        for (int i = 0; i < numCards; ++i) {
+            userInput.print("11\n"); // we just discard the numCards highest weapons from his hand
+        }
+    }
+
     @When("player {int} draws from the event deck for their turn")
     public void player_take_turn(int playerid) {
         userInput.close(); // this confirms the user input we inputted
@@ -561,5 +574,544 @@ public class StepDefinitions {
         for (int i = 0; i < 3; ++i) {
             userInput.print("y\n");
         }
+    }
+
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------- //
+
+    // 1 winner scenario with events steps
+
+    @Given("The 1 Winner Scenario With Events Deck is setup")
+    public void The_1_Winner_Scenario_With_Events_Deck_is_setup()  {
+        try {
+            pos = new PipedOutputStream();
+            pis = new PipedInputStream(pos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        output = new StringWriter();
+        writer = new PrintWriter(output);
+        userInput = new PrintWriter(pos);
+        scanner = new Scanner(pis);
+        game = new Game(scanner, writer);
+        game.initGame();
+
+
+
+        // player hand shenanigans
+
+
+
+        // return all the player hands to the adventure deck
+        for (int i = 0; i < 4; ++i) {
+            game.getAdventureDeck().getDeck().addAll(game.getPlayer(i).getHand());
+            game.getPlayer(i).getHand().clear();
+        }
+
+        List<AdventureCard> p1Hand =  game.getPlayer(0).getHand();
+        // set up P1 hand
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(10));
+        p1Hand.add(new FoeCard(15));
+        p1Hand.add(new FoeCard(20));
+
+
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(10));
+        p1Hand.add(new FoeCard(15));
+
+
+        p1Hand.add(new FoeCard(70));
+        p1Hand.add(new FoeCard(50));
+        p1Hand.add(new FoeCard(50));
+        p1Hand.add(new FoeCard(40));
+        p1Hand.add(new FoeCard(40));
+
+        for (AdventureCard card : p1Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+
+        List<AdventureCard> p2Hand =  game.getPlayer(1).getHand();
+        // set up P2 hand
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('B', 15));
+        p2Hand.add(new WeaponCard('L', 20));
+
+        p2Hand.add(new WeaponCard('D', 5));
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('B', 15));
+
+
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+
+        for (AdventureCard card : p2Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p3Hand =  game.getPlayer(2).getHand();
+        // set up P3 hand
+        p3Hand.add(new WeaponCard('D', 5));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('B', 15));
+        p3Hand.add(new WeaponCard('L', 20));
+
+        p3Hand.add(new WeaponCard('D', 5));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('B', 15));
+
+        p3Hand.add(new FoeCard(10));
+        p3Hand.add(new FoeCard(10));
+        p3Hand.add(new FoeCard(10));
+        p3Hand.add(new FoeCard(10));
+        p3Hand.add(new FoeCard(10));
+
+
+
+        for (AdventureCard card : p3Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p4Hand =  game.getPlayer(3).getHand();
+        // set up P4 hand
+        p4Hand.add(new WeaponCard('D', 5));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('L', 20));
+
+        p4Hand.add(new WeaponCard('D', 5));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('D', 5));
+
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+
+
+        for (AdventureCard card : p4Hand) {
+            game.getAdventureDeck().getDeck().remove(card);
+        }
+
+        // ensure we have the normal amount of cards
+        assertEquals(12, p1Hand.size());
+        assertEquals(12, p2Hand.size());
+        assertEquals(12, p3Hand.size());
+        assertEquals(12, p4Hand.size());
+
+        int numPlayers = 4;
+        int initialCards = 100;
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+
+
+
+        // event deck shenanigans
+
+
+        Stack<EventDeckCard> eventDeck = game.getEventDeck().getDeck();
+
+        // remove one quest of size 4 from the deck somewhere
+        QuestCard cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 4) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one quest of size 3 from the deck somewhere
+        cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 3) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one of each event type from the deck
+        EventCard prosper = null;
+        EventCard plague = null;
+        EventCard queen = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.EVENTTYPE) {
+                EventCard qCard = (EventCard) card;
+                if (qCard.getEventType() == EventType.QUEENS_FAVOR) {
+                    queen = qCard;
+                }
+                else if (qCard.getEventType() == EventType.PLAGUE) {
+                    plague = qCard;
+                }
+
+                else if (qCard.getEventType() == EventType.PROSPERITY) {
+                    prosper = qCard;
+                }
+
+            }
+        }
+        eventDeck.remove(prosper);
+        eventDeck.remove(plague);
+        eventDeck.remove(queen);
+
+
+        // ensure the fifth from the top quest card is a quest of 3 stages
+        eventDeck.push(new QuestCard(3));
+        // ensure the fourth from the top quest card is a queens favor
+        eventDeck.push(new EventCard(EventType.QUEENS_FAVOR));
+        // ensure the third from the top quest card is a prosperity
+        eventDeck.push(new EventCard(EventType.PROSPERITY));
+        // ensure the second from the top quest card is a plague
+        eventDeck.push(new EventCard(EventType.PLAGUE));
+        // ensure the top card is a quest of size 4
+        eventDeck.push(new QuestCard(4));
+
+
+
+
+        // adventure deck shenanigans
+
+
+
+        // build the top of the adventure deck how we need it
+        Stack<AdventureCard> aDeck = game.getAdventureDeck().getDeck();
+
+        Queue<AdventureCard> newCards = new LinkedList<AdventureCard>();
+
+
+        // quest two
+        // 2 draws for each player in stage 2 of quest one
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+
+        // 2 draws for each player in stage 2 of quest one
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+
+        // 3 draws for each player in stage 1 of quest one
+        newCards.add(new WeaponCard('B', 15));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new FoeCard(30));
+
+
+        // queen's favor card draw
+        // p4 draws
+        newCards.add(new FoeCard(30));
+        newCards.add(new FoeCard(30));
+
+
+        // propserity card draw
+        // p4 draws
+        newCards.add(new FoeCard(25));
+        newCards.add(new WeaponCard('E', 30));
+
+        // p3 draws
+        newCards.add(new FoeCard(25));
+        newCards.add(new WeaponCard('E', 30));
+
+        // p2 draws
+        newCards.add(new FoeCard(30));
+        newCards.add(new WeaponCard('L', 20));
+
+        // p1 draws
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+
+
+        // quest one
+
+        // p1 cards from sponsoring
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('S', 10));
+
+        // 3 draws for each player in stage 4 of quest one
+        newCards.add(new FoeCard(25));
+        newCards.add(new FoeCard(25));
+        newCards.add(new FoeCard(25));
+
+        // 3 draws for each player in stage 3 of quest one
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(25));
+
+        // 3 draws for each player in stage 2 of quest one
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(20));
+
+        // 3 draws for each player in stage 1 of quest one
+        newCards.add(new FoeCard(5));
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(20));
+
+
+
+        // remove the cards we don't want duplicates of in the deck
+        removeFromDeck(aDeck, newCards);
+
+        // add the cards we do want on top
+        aDeck.addAll(newCards);
+
+        assertEquals(initialCards - (numPlayers * 12), game.getAdventureDeck().getDeckSize());
+        assertEquals(17, eventDeck.size());
+    }
+
+    @When("The game runs")
+    public void game_runs() {
+        userInput.close(); // this confirms the user input we inputted
+        game.gameLoop();
+    }
+
+    @When("Player {int} confirms it is their turn")
+    public void player_confirms_turn(int playerNum) {
+        userInput.print("\n");
+    }
+
+    @When("Player {int} draws from the event deck")
+    public void player_draws_from_edeck(int playerNum) {
+        userInput.print("\n");
+    }
+
+    @When("Player {int} confirms")
+    public void player_confirms(int playerNum) {
+        userInput.print("\n");
+    }
+
+    @When("p1 builds quest one")
+    public void quest_one() {
+        // p1 builds a easy quest
+        userInput.print("0\nQuit\n"); // an f5
+        userInput.print("1\nQuit\n"); // an f10
+        userInput.print("3\nQuit\n"); // an f15
+        userInput.print("3\nQuit\n"); // an f20
+    }
+
+    @When("players act in stage 1 of quest one")
+    public void stage_one() {
+        // p2's draw
+        userInput.print("y\n"); // p2 confirms control
+        userInput.print("0\n"); // p2 discards a foe
+
+        // p3's draw
+        userInput.print("y\n"); // p3 confirms control
+        userInput.print("0\n"); // p3 discards a foe
+
+        // p4's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("0\n"); // p4 discards a foe
+
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("5\n"); // p2 adds a sword to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("5\n"); // p3 adds a dagger to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // p4's attack
+        userInput.print("\n"); // p4 confirms control
+        userInput.print("5\n"); // p4 adds a dagger to their attack
+        userInput.print("Quit\n"); // p4 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players act in stage 2 of quest one")
+    public void stage_two() {
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("6\n"); // p2 adds a sword to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("7\n"); // p3 adds a sword to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // p4's attack
+        userInput.print("\n"); // p4 confirms control
+        userInput.print("8\n"); // p4 adds a sword to their attack
+        userInput.print("Quit\n"); // p4 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players act in stage 3 of quest one")
+    public void stage_three() {
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("9\n"); // p2 adds a battleaxe to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("9\n"); // p3 adds a battleaxe to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // p4's attack
+        userInput.print("\n"); // p4 confirms control
+        userInput.print("10\n"); // p4 adds a battleaxe to their attack
+        userInput.print("Quit\n"); // p4 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players act in stage 4 of quest one")
+    public void stage_four() {
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("11\n"); // p2 adds a lance to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("11\n"); // p3 adds a lance to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // p4's attack
+        userInput.print("\n"); // p4 confirms control
+        userInput.print("11\n"); // p4 adds a lance to their attack
+        userInput.print("Quit\n"); // p4 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players handle the prosperity event")
+    public void handle_prosperity() {
+        // p1's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("11\n"); // p4 discards a big weapon
+        userInput.print("11\n"); // p4 discards a big weapon
+
+        // p2's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("0\n"); // p4 discards a foe
+
+        // p3's draw
+        userInput.print("y\n"); // p2 confirms control
+        userInput.print("0\n"); // p2 discards a foe
+
+        // p4's draw
+        userInput.print("y\n"); // p3 confirms control
+        userInput.print("0\n"); // p3 discards a foe
+    }
+
+    @When("players handle the queen's favor event")
+    public void handle_queen_favor() {
+        // p4's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("0\n"); // p4 discards a foe
+        userInput.print("0\n"); // p4 discards a foe
+    }
+
+    @When("p1 builds quest two")
+    public void build_quest_two() {
+        // p1 builds a easy quest
+        userInput.print("0\nQuit\n"); // an f5
+        userInput.print("0\nQuit\n"); // an f10
+        userInput.print("0\nQuit\n"); // an f15
+    }
+
+    @When("players act in stage 1 of quest two")
+    public void stage_one_q2() {
+        // p2's draw
+        userInput.print("y\n"); // p2 confirms control
+        userInput.print("0\n"); // p2 discards a foe
+
+        // p3's draw
+        userInput.print("y\n"); // p3 confirms control
+        userInput.print("0\n"); // p3 discards a foe
+
+        // p4's draw
+        userInput.print("y\n"); // p4 confirms control
+        userInput.print("0\n"); // p4 discards a foe
+
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("8\n"); // p2 adds a sword to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("7\n"); // p3 adds a dagger to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // p4's attack
+        userInput.print("\n"); // p4 confirms control
+        userInput.print("Quit\n"); // p4 confirms attack
+
+        // all attack are sufficient except p4
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players act in stage 2 of quest two")
+    public void stage_two_q2() {
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("8\n"); // p2 adds a sword to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("7\n"); // p3 adds a dagger to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @When("players act in stage 3 of quest two")
+    public void stage_three_q2() {
+        // p2's attack
+        userInput.print("\n"); // p2 confirms control
+        userInput.print("11\n"); // p2 adds a Battleaxe to their attack
+        userInput.print("Quit\n"); // p2 confirms attack
+
+        // p3's attack
+        userInput.print("\n"); // p3 confirms control
+        userInput.print("11\n"); // p3 adds a Battleaxe to their attack
+        userInput.print("Quit\n"); // p3 confirms attack
+
+        // all attack are sufficient
+        userInput.print("\n"); // confirm the victory screen
+    }
+
+    @Then("player {int} should have won")
+    public void check_output_for_winners(int winningPlayer) {
+        String result = output.toString();
+
+        String victoryString = "Congratulations! Player(s) " + 3 + " You are knighted and thus victorious!";
+
+        assertTrue(result.contains(victoryString));
     }
 }
