@@ -19,5 +19,8 @@ Feature: NO_WINNER_SCENARIO
     And player 3 should have 0 shields
     And player 4 should have 0 shields
     And player 1 should have 12 cards in hand
+    And player 2 should have 11 cards in hand
+    And player 3 should have 11 cards in hand
+    And player 4 should have 11 cards in hand
     # player 1 will have 12 cards in hand if he actually drew after the quest
     # nessesarily it will be different since cards used in a quest are immediatly taken from the player in my implementation
