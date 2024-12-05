@@ -37,7 +37,7 @@ public class NetworkedWindow {
     public void displayPlayerHand(BlockingQueue<String> input, PrintWriter output, Player player) throws InterruptedException {
         List<AdventureCard> hand =  player.getHand();
 
-        output.print("quests/Player " + (player.getPlayerId() + 1) + ", your hand contains: ");
+        output.print("Player " + (player.getPlayerId() + 1) + ", your hand contains: ");
 
         for (int i = 0; i < hand.size(); ++i) {
             AdventureCard card = hand.get(i);
@@ -94,7 +94,7 @@ public class NetworkedWindow {
             output.println();
         }
 
-        output.println("quests/Player " + (player.getPlayerId() + 1) + ", now needs to take an action which contains private information");
+        output.println("Player " + (player.getPlayerId() + 1) + ", now needs to take an action which contains private information");
         output.println("Player: " + (player.getPlayerId() + 1) + ", press <Enter> when you are in control ");
         Game.waiting_on_user = true;
         input.take();
@@ -120,7 +120,7 @@ public class NetworkedWindow {
     }
 
     public void promptToDrawEventDeckCard(BlockingQueue<String> input, PrintWriter output, Player player) throws InterruptedException {
-        output.println("quests/Player " + (player.getPlayerId() + 1) + ", press <Enter> when you are ready for an event deck " +
+        output.println("Player " + (player.getPlayerId() + 1) + ", press <Enter> when you are ready for an event deck " +
                 "card to be drawn");
 
         Game.waiting_on_user = true;
@@ -141,7 +141,7 @@ public class NetworkedWindow {
             output.println();
         }
 
-        output.println("quests/Player " + (player.getPlayerId() + 1) + " would you like to sponsor");
+        output.println("Player " + (player.getPlayerId() + 1) + " would you like to sponsor");
         output.println(quest.display());
         output.print("y for yes or n for no: ");
         output.flush();
