@@ -1,0 +1,23 @@
+.game-output {
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 300px;
+
+    width: 65%;
+    height: 65%;
+    border-style: solid;
+    overflow-y: auto;
+}
+
+.hand {
+    border: double;
+    max-width: fit-content;
+}
+
+hr {
+    border: 2px solid red;
+}
+
+.input-box {
+    min-width: 600px;
+}

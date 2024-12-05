@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Quests</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <button onclick="startGame()" id="start-button">Start / Restart Game</button>
+        <br>
+        <div id="game-output-box" class="game-output">
+            
+        </div>
+        <br/>
+        <input type="text" id="userInput" class="input-box"/>
+        <button type="button" id="submit-button" onclick="submitText()">Submit</button>
+        <div id="player-hands">
+            <br/>
+            <hr/>
+            <div>
+                <label>
+                    Player 1 hand:
+                </label>
+                <p id="player1_hand" class="hand">
+
+                </p>
+                <label>
+                    Player 1 shield count: 
+                </label>
+                <p id="player1_shields">
+                    0
+                </p>
+            </div>
+            <hr/>
+            <div>
+                <label>
+                    Player 2 hand:
+                </label>
+                <p id="player2_hand" class="hand">
+
+                </p>
+                <label>
+                    Player 2 shield count: 
+                </label>
+                <p id="player2_shields">
+                    0
+                </p>
+            </div>
+            <hr/>
+            <div>
+                <label>
+                    Player 3 hand:
+                </label>
+                <p id="player3_hand" class="hand">
+
+                </p>
+                <label>
+                    Player 3 shield count: 
+                </label>
+                <p id="player3_shields">
+                    0
+                </p>
+            </div>
+            <hr/>
+            <div>
+                <label>
+                    Player 4 hand:
+                </label>
+                <p id="player4_hand" class="hand">
+
+                </p>
+                <label>
+                    Player 4 shield count: 
+                </label>
+                <p id="player4_shields">
+                    0
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="642478c6-b72e-40f6-8441-81839121aa50" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/All_Tests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AdventureCard/AdventureCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AdventureCard/AdventureCardType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AdventureCard/FoeCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AdventureCard/WeaponCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AdventureDeck/AdventureDeck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Attack/Attack.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventCard/EventCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventCard/EventCardType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventCard/EventDeckCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventCard/EventType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventCard/QuestCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EventDeck/EventDeck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Player/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Quest/Quest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Window/Window.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AdventureDeck/AdventureDeckTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/EventDeck/EventDeckTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Game/GameTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Player/PlayerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RunCucumberTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StepDefinitions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Window/WindowTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/1winner_game_with_events.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/2Winner_game.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/A1_SCENARIO.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/NO_WINNER_SCENARIO.feature" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2pjHC89UOY00BCDpyMjfyqGEoMP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "a3",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/nicho/Desktop/School-Work/COMP-4004/A1-Veselskiy-Nicholas-101192011/A1-Veselskiy-Nicholas-101192011/backend"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="642478c6-b72e-40f6-8441-81839121aa50" name="Changes" comment="" />
+      <created>1733272433856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733272433856</updated>
+    </task>
+    <servers />
+  </component>
+</project>
