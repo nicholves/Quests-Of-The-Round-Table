@@ -54,9 +54,9 @@ async function scenario1() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        //console.log("Player 1 has the following hand: ");
-        //console.log(p1Hand)
-        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        console.log("Player 1 has the following hand: ");
+        console.log(p1Hand)
+        console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F5, F10, F15, F15, F30, H10, B15, B15, L20") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F5, F10, F15, F15, F30, H10, B15, B15, L20") && p1Shields == 0) {
@@ -66,9 +66,9 @@ async function scenario1() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        //console.log("Player 2 has the following hand: ");
-        //console.log(p2Hand)
-        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        console.log("Player 2 has the following hand: ");
+        console.log(p2Hand)
+        console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
         let cardsInHandp2 = p2Hand.split(', ').length;
@@ -84,9 +84,9 @@ async function scenario1() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        //console.log("Player 3 has the following hand: ");
-        //console.log(p3Hand)
-        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        console.log("Player 3 has the following hand: ");
+        console.log(p3Hand)
+        console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F5, F5, F15, F30, S10") && p3Shields == 0, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F5, F5, F15, F30, S10") && p3Shields == 0) {
@@ -96,9 +96,9 @@ async function scenario1() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        //console.log("Player 4 has the following hand: ");
-        //console.log(p4Hand)
-        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        console.log("Player 4 has the following hand: ");
+        console.log(p4Hand)
+        console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F15, F15, F40, L20") && p4Shields == 4, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F15, F15, F40, L20") && p4Shields == 4) {
@@ -183,9 +183,9 @@ async function scenario2() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        //console.log("Player 1 has the following hand: ");
-        //console.log(p1Hand)
-        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        console.log("Player 1 has the following hand: ");
+        console.log(p1Hand)
+        console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F15, F15, F20, F20, F20, F20, F25, F25, F30, H10, B15, L20") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F15, F15, F20, F20, F20, F20, F25, F25, F30, H10, B15, L20") && p1Shields == 0) {
@@ -195,9 +195,9 @@ async function scenario2() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        //console.log("Player 2 has the following hand: ");
-        //console.log(p2Hand)
-        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        console.log("Player 2 has the following hand: ");
+        console.log(p2Hand)
+        console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
 
@@ -209,9 +209,9 @@ async function scenario2() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        //console.log("Player 3 has the following hand: ");
-        //console.log(p3Hand)
-        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        console.log("Player 3 has the following hand: ");
+        console.log(p3Hand)
+        console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F20, F40, D5, D5, S10, H10, H10, H10, H10, B15, B15, L20") && p3Shields == 0, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F20, F40, D5, D5, S10, H10, H10, H10, H10, B15, B15, L20") && p3Shields == 0) {
@@ -221,9 +221,9 @@ async function scenario2() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        //console.log("Player 4 has the following hand: ");
-        //console.log(p4Hand)
-        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        console.log("Player 4 has the following hand: ");
+        console.log(p4Hand)
+        console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F15, F15, F20, F25, F30, F50, F70, L20, L20") && p4Shields == 7, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F15, F15, F20, F25, F30, F50, F70, L20, L20") && p4Shields == 7) {
@@ -306,9 +306,9 @@ async function scenario3() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        //console.log("Player 1 has the following hand: ");
-        //console.log(p1Hand)
-        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        console.log("Player 1 has the following hand: ");
+        console.log(p1Hand)
+        console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F25, F25, F35, D5, D5, S10, S10, S10, S10, H10, H10, H10") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F25, F25, F35, D5, D5, S10, S10, S10, S10, H10, H10, H10") && p1Shields == 0) {
@@ -318,9 +318,9 @@ async function scenario3() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        //console.log("Player 2 has the following hand: ");
-        //console.log(p2Hand)
-        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        console.log("Player 2 has the following hand: ");
+        console.log(p2Hand)
+        console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
 
@@ -332,9 +332,9 @@ async function scenario3() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        //console.log("Player 3 has the following hand: ");
-        //console.log(p3Hand)
-        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        console.log("Player 3 has the following hand: ");
+        console.log(p3Hand)
+        console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F10, F25, F30, F40, F50, S10, S10, H10, H10, L20") && p3Shields == 7, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F10, F25, F30, F40, F50, S10, S10, H10, H10, L20") && p3Shields == 7) {
@@ -344,9 +344,9 @@ async function scenario3() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        //console.log("Player 4 has the following hand: ");
-        //console.log(p4Hand)
-        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        console.log("Player 4 has the following hand: ");
+        console.log(p4Hand)
+        console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F25, F25, F30, F50, F70, D5, D5, S10, S10, B15, L20") && p4Shields == 4, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F25, F25, F30, F50, F70, D5, D5, S10, S10, B15, L20") && p4Shields == 4) {
@@ -424,9 +424,9 @@ async function scenario4() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        //console.log("Player 1 has the following hand: ");
-        //console.log(p1Hand)
-        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        console.log("Player 1 has the following hand: ");
+        console.log(p1Hand)
+        console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F15, D5, D5, D5, D5, S10, S10, S10, H10, H10, H10, H10") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F15, D5, D5, D5, D5, S10, S10, S10, H10, H10, H10, H10") && p1Shields == 0) {
@@ -436,9 +436,9 @@ async function scenario4() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        //console.log("Player 2 has the following hand: ");
-        //console.log(p2Hand)
-        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        console.log("Player 2 has the following hand: ");
+        console.log(p2Hand)
+        console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
 
@@ -450,9 +450,9 @@ async function scenario4() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        //console.log("Player 3 has the following hand: ");
-        //console.log(p3Hand)
-        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        console.log("Player 3 has the following hand: ");
+        console.log(p3Hand)
+        console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F40, L20") && p3Shields == 0, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F40, L20") && p3Shields == 0) {
@@ -462,9 +462,9 @@ async function scenario4() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        //console.log("Player 4 has the following hand: ");
-        //console.log(p4Hand)
-        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        console.log("Player 4 has the following hand: ");
+        console.log(p4Hand)
+        console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F50, E30") && p4Shields == 0, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F50, E30") && p4Shields == 0) {
