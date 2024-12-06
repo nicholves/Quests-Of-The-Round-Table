@@ -54,9 +54,9 @@ async function scenario1() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        console.log("Player 1 has the following hand: ");
-        console.log(p1Hand)
-        console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        //console.log("Player 1 has the following hand: ");
+        //console.log(p1Hand)
+        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F5, F10, F15, F15, F30, H10, B15, B15, L20") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F5, F10, F15, F15, F30, H10, B15, B15, L20") && p1Shields == 0) {
@@ -66,13 +66,13 @@ async function scenario1() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        console.log("Player 2 has the following hand: ");
-        console.log(p2Hand)
-        console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        //console.log("Player 2 has the following hand: ");
+        //console.log(p2Hand)
+        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
         let cardsInHandp2 = p2Hand.split(', ').length;
-        console.log("Player 2 hand count = " + cardsInHandp2);
+        //console.log("Player 2 hand count = " + cardsInHandp2);
 
 
 
@@ -84,9 +84,9 @@ async function scenario1() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        console.log("Player 3 has the following hand: ");
-        console.log(p3Hand)
-        console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        //console.log("Player 3 has the following hand: ");
+        //console.log(p3Hand)
+        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F5, F5, F15, F30, S10") && p3Shields == 0, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F5, F5, F15, F30, S10") && p3Shields == 0) {
@@ -96,9 +96,9 @@ async function scenario1() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        console.log("Player 4 has the following hand: ");
-        console.log(p4Hand)
-        console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        //console.log("Player 4 has the following hand: ");
+        //console.log(p4Hand)
+        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F15, F15, F40, L20") && p4Shields == 4, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F15, F15, F40, L20") && p4Shields == 4) {
@@ -183,9 +183,9 @@ async function scenario2() {
         // P1 assertions
         let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
         let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
-        console.log("Player 1 has the following hand: ");
-        console.log(p1Hand)
-        console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        //console.log("Player 1 has the following hand: ");
+        //console.log(p1Hand)
+        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
         
         console.assert(p1Hand.includes("F15, F15, F20, F20, F20, F20, F25, F25, F30, H10, B15, L20") && p1Shields == 0, "Player 1 has the correct values\n\n");
         if (p1Hand.includes("F15, F15, F20, F20, F20, F20, F25, F25, F30, H10, B15, L20") && p1Shields == 0) {
@@ -195,9 +195,9 @@ async function scenario2() {
         // P2 assertions
         let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
         let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
-        console.log("Player 2 has the following hand: ");
-        console.log(p2Hand)
-        console.log(`\nPlayer 2 has ${p2Shields} shields`)
+        //console.log("Player 2 has the following hand: ");
+        //console.log(p2Hand)
+        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
 
 
 
@@ -209,9 +209,9 @@ async function scenario2() {
         // P3 assertions
         let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
         let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
-        console.log("Player 3 has the following hand: ");
-        console.log(p3Hand)
-        console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        //console.log("Player 3 has the following hand: ");
+        //console.log(p3Hand)
+        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
         
         console.assert(p3Hand.includes("F20, F40, D5, D5, S10, H10, H10, H10, H10, B15, B15, L20") && p3Shields == 0, "Player 3 has the correct values\n\n");
         if (p3Hand.includes("F20, F40, D5, D5, S10, H10, H10, H10, H10, B15, B15, L20") && p3Shields == 0) {
@@ -221,9 +221,9 @@ async function scenario2() {
         // P4 assertions
         let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
         let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
-        console.log("Player 4 has the following hand: ");
-        console.log(p4Hand)
-        console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        //console.log("Player 4 has the following hand: ");
+        //console.log(p4Hand)
+        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
         
         console.assert(p4Hand.includes("F15, F15, F20, F25, F30, F50, F70, L20, L20") && p4Shields == 7, "Player 4 has the correct values\n\n");
         if (p4Hand.includes("F15, F15, F20, F25, F30, F50, F70, L20, L20") && p4Shields == 7) {
@@ -265,6 +265,7 @@ async function scenario3() {
             await driver.quit();
         }
 
+
         // begin test
         let startButton = await driver.wait(until.elementLocated(By.id("start-button")), timeout);
         let outputBox = await driver.wait(until.elementLocated(By.id("game-output-box")), timeout);
@@ -278,10 +279,93 @@ async function scenario3() {
             return children.length > 0;
         }, timeout);
 
+        let userInput = get1WinnerScenarioInputs();
+
+        while (userInput) {
+            if (userInput[0] === "\n") {
+                await submitButton.click()
+                userInput = userInput.replace(/^\n/, "");
+                await driver.sleep(sleepAmount);
+                continue;
+            }
+
+            inputBox.sendKeys(userInput[0]);
+            userInput = userInput.substring(1);
+        }
+
+        const output = await outputBox.getText();
+        let winnerValid = false;
+        console.assert(output.includes("Congratulations! Player(s) 3 You are knighted and thus victorious!"), "victory is indicated to the user");
+        winnerValid = output.includes("Congratulations! Player(s) 3 You are knighted and thus victorious!");
+
+        let p1Valid = false;
+        let p2Valid = false;
+        let p3Valid = false;
+        let p4Valid = false;
+
+        // P1 assertions
+        let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
+        let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
+        //console.log("Player 1 has the following hand: ");
+        //console.log(p1Hand)
+        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        
+        console.assert(p1Hand.includes("F25, F25, F35, D5, D5, S10, S10, S10, S10, H10, H10, H10") && p1Shields == 0, "Player 1 has the correct values\n\n");
+        if (p1Hand.includes("F25, F25, F35, D5, D5, S10, S10, S10, S10, H10, H10, H10") && p1Shields == 0) {
+            p1Valid = true;
+        }
+
+        // P2 assertions
+        let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
+        let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
+        //console.log("Player 2 has the following hand: ");
+        //console.log(p2Hand)
+        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+
+
+
+        console.assert(p2Hand.includes("F15, F25, F30, F40, S10, S10, S10, H10, E30") && p2Shields == 5, "Player 2 has the correct values\n\n");
+        if (p2Hand.includes("F15, F25, F30, F40, S10, S10, S10, H10, E30") && p2Shields == 5) {
+            p2Valid = true;
+        }
+
+        // P3 assertions
+        let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
+        let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
+        //console.log("Player 3 has the following hand: ");
+        //console.log(p3Hand)
+        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        
+        console.assert(p3Hand.includes("F10, F25, F30, F40, F50, S10, S10, H10, H10, L20") && p3Shields == 7, "Player 3 has the correct values\n\n");
+        if (p3Hand.includes("F10, F25, F30, F40, F50, S10, S10, H10, H10, L20") && p3Shields == 7) {
+            p3Valid = true;
+        }
+
+        // P4 assertions
+        let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
+        let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
+        //console.log("Player 4 has the following hand: ");
+        //console.log(p4Hand)
+        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        
+        console.assert(p4Hand.includes("F25, F25, F30, F50, F70, D5, D5, S10, S10, B15, L20") && p4Shields == 4, "Player 4 has the correct values\n\n");
+        if (p4Hand.includes("F25, F25, F30, F50, F70, D5, D5, S10, S10, B15, L20") && p4Shields == 4) {
+            p4Valid = true;
+        }
+
+        console.assert(p1Valid && p2Valid && p3Valid && p4Valid && winnerValid, "All players should have correct hands and shield counts for the 1 winner scenario");
+
+        if (p1Valid && p2Valid && p3Valid && p4Valid && winnerValid) {
+            console.log("\n\n\nText Passed: 1 winner scenario\n\n\n");
+            return true;
+        } else {
+            return false;
+        }
 
     }
     catch (error) {
         console.error("Test encountered and error: ", error);
+        return false;
     }
     finally {
         await driver.quit();
@@ -318,10 +402,87 @@ async function scenario4() {
             return children.length > 0;
         }, timeout);
 
+        let userInput = get0WinnerScenarioInputs();
 
+        while (userInput) {
+            if (userInput[0] === "\n") {
+                await submitButton.click()
+                userInput = userInput.replace(/^\n/, "");
+                await driver.sleep(sleepAmount);
+                continue;
+            }
+
+            inputBox.sendKeys(userInput[0]);
+            userInput = userInput.substring(1);
+        }
+
+        let p1Valid = false;
+        let p2Valid = false;
+        let p3Valid = false;
+        let p4Valid = false;
+
+        // P1 assertions
+        let p1Hand = await driver.wait(until.elementLocated(By.id("player1_hand")), timeout).getText();
+        let p1Shields = await driver.wait(until.elementLocated(By.id("player1_shields")), timeout).getText();
+        //console.log("Player 1 has the following hand: ");
+        //console.log(p1Hand)
+        //console.log(`\nPlayer 1 has ${p1Shields} shields`)
+        
+        console.assert(p1Hand.includes("F15, D5, D5, D5, D5, S10, S10, S10, H10, H10, H10, H10") && p1Shields == 0, "Player 1 has the correct values\n\n");
+        if (p1Hand.includes("F15, D5, D5, D5, D5, S10, S10, S10, H10, H10, H10, H10") && p1Shields == 0) {
+            p1Valid = true;
+        }
+
+        // P2 assertions
+        let p2Hand = await driver.wait(until.elementLocated(By.id("player2_hand")), timeout).getText();
+        let p2Shields = await driver.wait(until.elementLocated(By.id("player2_shields")), timeout).getText();
+        //console.log("Player 2 has the following hand: ");
+        //console.log(p2Hand)
+        //console.log(`\nPlayer 2 has ${p2Shields} shields`)
+
+
+
+        console.assert(p2Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F30, F30, F40") && p2Shields == 0, "Player 2 has the correct values\n\n");
+        if (p2Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F30, F30, F40") && p2Shields == 0) {
+            p2Valid = true;
+        }
+
+        // P3 assertions
+        let p3Hand = await driver.wait(until.elementLocated(By.id("player3_hand")), timeout).getText();
+        let p3Shields = await driver.wait(until.elementLocated(By.id("player3_shields")), timeout).getText();
+        //console.log("Player 3 has the following hand: ");
+        //console.log(p3Hand)
+        //console.log(`\nPlayer 3 has ${p3Shields} shields`)
+        
+        console.assert(p3Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F40, L20") && p3Shields == 0, "Player 3 has the correct values\n\n");
+        if (p3Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F40, L20") && p3Shields == 0) {
+            p3Valid = true;
+        }
+
+        // P4 assertions
+        let p4Hand = await driver.wait(until.elementLocated(By.id("player4_hand")), timeout).getText();
+        let p4Shields = await driver.wait(until.elementLocated(By.id("player4_shields")), timeout).getText();
+        //console.log("Player 4 has the following hand: ");
+        //console.log(p4Hand)
+        //console.log(`\nPlayer 4 has ${p4Shields} shields`)
+        
+        console.assert(p4Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F50, E30") && p4Shields == 0, "Player 4 has the correct values\n\n");
+        if (p4Hand.includes("F5, F5, F10, F15, F15, F20, F20, F25, F25, F30, F50, E30") && p4Shields == 0) {
+            p4Valid = true;
+        }
+
+        console.assert(p1Valid && p2Valid && p3Valid && p4Valid, "All players should have correct hands and shield counts for the 0 winner scenario");
+
+        if (p1Valid && p2Valid && p3Valid && p4Valid) {
+            console.log("\n\n\nText Passed: 0 winner scenario\n\n\n");
+            return true;
+        } else {
+            return false;
+        }
     }
     catch (error) {
         console.error("Test encountered and error: ", error);
+        return false;
     }
     finally {
         await driver.quit();
@@ -330,7 +491,7 @@ async function scenario4() {
 
 async function runTest() {
     await scenario1();
-    await scenario12();
+    await scenario2();
     await scenario3();
     await scenario4();
 }
@@ -338,8 +499,7 @@ async function runTest() {
 if (process.argv.length > 2) {
     sleepAmount = process.argv[2];
 }
-//runTest()
-scenario2();
+runTest()
 
 
 
@@ -351,7 +511,7 @@ scenario2();
 
 // inputs
 function getA1ScenarioInputs() {
-    userInput = "";
+    let userInput = "";
     userInput += "\n" // p1 confirms it is their turn
 
     userInput += "\n"; // p1 confirms the drawn card (Quest of 4 stages)
@@ -488,7 +648,7 @@ function getA1ScenarioInputs() {
 }
 
 function getTwoWinnerScenarioInputs() {
-    userInput = "";
+    let userInput = "";
     userInput += "\n" // p1 confirms it is their turn
 
     userInput += "\n"; // p1 confirms the drawn card (Quest of 4 stages)
@@ -693,5 +853,350 @@ function getTwoWinnerScenarioInputs() {
     userInput += "\n"; // confirm turn end
 
 
+    return userInput;
+}
+
+function get1WinnerScenarioInputs() {
+    let userInput = "";
+    userInput += "\n" // p1 confirms it is their turn
+
+    userInput += "\n"; // p1 confirms the draw
+
+    userInput += "y\n"; // p1 decides to sponsor
+
+    // building quest
+    // Stage (1)
+    userInput += "0\n"; // f5
+    userInput += "Quit\n";
+
+    // Stage (2)
+    userInput += "1\n"; // f10
+    userInput += "Quit\n";
+
+    // Stage (3)
+    userInput += "2\n"; // f15
+    userInput += "Quit\n";
+
+    // Stage (4)
+    userInput += "3\n"; // f20
+    userInput += "Quit\n";
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // p2's draw
+    userInput += "\n"; // p2 confirms control
+    userInput += "0\n"; // p2 discards an F5 to trimming
+
+    // p3's draw
+    userInput += "\n"; // p3 confirms control
+    userInput += "0\n"; // p3 discards an F10 to trimming
+
+    // p4's draw
+    userInput += "\n"; // p4 confirms control
+    userInput += "0\n"; // p4 discards an F20 to trimming
+
+
+    // build attacks
+    // Stage (1)
+    userInput += "\n"; // p2 confirms control
+    userInput += "2\n"; // p2 adds a sword
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "2\n"; // p3 adds a sword
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "3\n"; // p4 adds a sword
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // Stage (2)
+    userInput += "\n"; // p2 confirms control
+    userInput += "5\n"; // p2 adds a horse
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "5\n"; // p3 adds a horse
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "6\n"; // p4 adds a horse
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // Stage (3)
+    userInput += "\n"; // p2 confirms control
+    userInput += "7\n"; // p2 adds an axe
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "7\n"; // p3 adds an axe
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "8\n"; // p4 adds an axe
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // Stage (4)
+    userInput += "\n"; // p2 confirms control
+    userInput += "9\n"; // p2 adds a lance
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "9\n"; // p3 adds a lance
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "10\n"; // p4 adds a lance
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+
+    // discards of p1
+    userInput += "\n"; // p1 confirms control
+    userInput += "0\n"; // discard F5
+    userInput += "0\n"; // discard F5
+    userInput += "1\n"; // discard F10
+    userInput += "1\n"; // discard F10
+
+    userInput += "\n"; // confirms turn end
+
+    // TURN (2)
+    userInput += "\n"; // confirms control
+    userInput += "\n"; // confirms draw
+    userInput += "\n"; // confirms shield loss
+    userInput += "\n"; // confirms turn end
+
+    // TURN (3)
+    userInput += "\n"; // confirms control
+    userInput += "\n"; // confirms draw
+    userInput += "\n"; // confirms prsoperity
+
+    // discards
+    userInput += "\n"; // p1 confirms control
+    userInput += "0\n"; // p1 discards an F5
+    userInput += "0\n"; // p1 discards an F10
+
+    
+    userInput += "\n"; // p2 confirms control
+    userInput += "0\n"; // p2 discards an F5
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "0\n"; // p3 discards an F5
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "0\n"; // p4 discards an F20
+
+    userInput += "\n"; // confirms turn end
+
+    // TURN (4)
+    userInput += "\n"; // confirms control
+    userInput += "\n"; // confirms draw
+    userInput += "\n"; // confirms queens favor
+
+    // discards
+    userInput += "\n"; // confirms control
+    userInput += "1\n"; // p4 discards F25
+    userInput += "3\n"; // p4 discards F30
+
+    userInput += "\n"; // confirms turn end
+
+    // TURN (5)
+    userInput += "\n"; // confirms control
+    userInput += "\n"; // confirms draw
+    userInput += "\n"; // confirms 3 stage quest
+
+    userInput += "y\n"; // agrees to sponsor
+
+    // building quest
+    // Stage (1)
+    userInput += "0\n"; // f15
+    userInput += "Quit\n";
+
+    // Stage (2)
+    userInput += "0\n"; // f15
+    userInput += "6\n"; // D5
+    userInput += "Quit\n";
+
+    // Stage (3)
+    userInput += "3\n"; // f20
+    userInput += "5\n"; // D5
+    userInput += "Quit\n";
+
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // p2's draw
+    userInput += "\n"; // p2 confirms control
+    userInput += "0\n"; // p2 discards an F5 to trimming
+
+    // p3's draw
+    userInput += "\n"; // p3 confirms control
+    userInput += "0\n"; // p3 discards an F10 to trimming
+
+    // p4's draw
+    userInput += "\n"; // p4 confirms control
+    userInput += "0\n"; // p4 discards an F20 to trimming
+
+
+    // build attacks
+    // Stage (1)
+    userInput += "\n"; // p2 confirms control
+    userInput += "8\n"; // p2 adds an axe
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "8\n"; // p3 adds an axe
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "9\n"; // p4 adds a horse
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+
+
+    // build attacks
+    // Stage (2)
+    userInput += "\n"; // p2 confirms control
+    userInput += "9\n"; // p2 adds an axe
+    userInput += "7\n"; // p2 adds a horse
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "9\n"; // p3 adds an axe
+    userInput += "4\n"; // p3 adds a sword
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // build attacks
+    // Stage (3)
+    userInput += "\n"; // p2 confirms control
+    userInput += "9\n"; // p2 adds a lance
+    userInput += "4\n"; // p2 adds a sword
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "10\n"; // p3 adds an excalibur
+    userInput += "Quit\n"; 
+
+    userInput += "\n"; // confirms victory screen
+
+
+    // discards of p1
+    userInput += "\n"; // p1 confirms control
+    userInput += "0\n"; // discard F15
+    userInput += "0\n"; // discard F15
+    userInput += "0\n"; // discard F15
+
+    userInput += "\n"; // confirms turn end
+
+    userInput += "\n";
+    
+
+    return userInput;
+}
+
+
+function get0WinnerScenarioInputs() {
+    let userInput = "";
+    userInput += "\n" // p1 confirms it is their turn
+
+    userInput += "\n"; // p1 confirms the draw
+
+    userInput += "y\n"; // p1 accepts to sponsor
+
+    // building quest
+    // Stage (1)
+    userInput += "0\n"; // f50
+    userInput += "1\n"; // dagger
+    userInput += "2\n"; // sword
+    userInput += "3\n"; // horse
+    userInput += "4\n"; // axe
+    userInput += "5\n"; // lance
+    userInput += "Quit\n";
+
+    // Stage (2)
+    userInput += "0\n"; // f70
+    userInput += "0\n"; // dagger
+    userInput += "0\n"; // sword
+    userInput += "0\n"; // horse
+    userInput += "0\n"; // axe
+    userInput += "0\n"; // lance
+    userInput += "Quit\n";
+
+    // all players participate
+    userInput += "y\n";
+    userInput += "y\n";
+    userInput += "y\n";
+
+    // discards
+    userInput += "\n"; // p2 confirms control
+    userInput += "0\n"; // p2 discards an f5
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "3\n"; // p3 discards an f15
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "2\n"; // p4 discards an f10
+
+    // build attacks
+
+    userInput += "\n"; // p2 confirms control
+    userInput += "11\n"; // p2 adds an excalibur
+    userInput += "Quit\n";
+
+    userInput += "\n"; // p3 confirms control
+    userInput += "Quit\n"; // p3 attacks with nothing
+
+    userInput += "\n"; // p4 confirms control
+    userInput += "Quit\n"; // p4 attacks with nothing
+
+
+    userInput += "\n"; // confirms everyone lost the quest
+
+    // discards
+    userInput += "\n"; // p1 confirms control
+    userInput += "0\n"; // p1 discards an f5
+    userInput += "0\n"; // p1 discards an f10
+    userInput += "\n";
+    
     return userInput;
 }

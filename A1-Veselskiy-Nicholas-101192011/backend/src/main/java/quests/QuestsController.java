@@ -42,8 +42,10 @@ public class QuestsController {
                     game.rig2Winner2QuestScenario();
                     break;
                 case 3:
+                    game.rig1WinnerGameWithEvents();
                     break;
                 case 4:
+                    game.rig0WinnerScenario();
                     break;
                 default:
                     System.out.println("Invalid rigged scenario chosen defaulting to unrigged");

@@ -1,14 +1,12 @@
 package quests.Game;
 
+import io.cucumber.java.an.E;
 import quests.AdventureCard.AdventureCard;
 import quests.AdventureCard.WeaponCard;
 import quests.AdventureDeck.AdventureDeck;
-import quests.EventCard.EventCardType;
+import quests.EventCard.*;
 import quests.EventDeck.EventDeck;
-import quests.EventCard.EventCard;
-import quests.EventCard.QuestCard;
 import quests.AdventureCard.FoeCard;
-import quests.EventCard.EventDeckCard;
 import quests.Player.Player;
 import quests.Window.NetworkedWindow;
 import quests.Quest.Quest;
@@ -742,6 +740,396 @@ public class Game extends Thread {
         newCards.add(new FoeCard(10));
         newCards.add(new FoeCard(10));
         newCards.add(new FoeCard(40));
+        newCards.add(new FoeCard(5));
+
+        // remove the cards we don't want duplicates of in the deck
+        removeFromDeck(aDeck, newCards);
+
+        // add the cards we do want on top
+        aDeck.addAll(newCards);
+    }
+
+    public void rig1WinnerGameWithEvents() {
+// return all the player hands to the adventure deck
+        for (int i = 0; i < 4; ++i) {
+            this.getAdventureDeck().getDeck().addAll(this.getPlayer(i).getHand());
+            this.getPlayer(i).getHand().clear();
+        }
+
+        List<AdventureCard> p1Hand =  this.getPlayer(0).getHand();
+        // set up P1 hand
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(5));
+        p1Hand.add(new FoeCard(10));
+        p1Hand.add(new FoeCard(10));
+        p1Hand.add(new FoeCard(15));
+        p1Hand.add(new FoeCard(15));
+        p1Hand.add(new FoeCard(20));
+        p1Hand.add(new FoeCard(20));
+
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('D', 5));
+
+        for (AdventureCard card : p1Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+
+        List<AdventureCard> p2Hand =  this.getPlayer(1).getHand();
+        // set up P2 hand
+        p2Hand.add(new FoeCard(25));
+        p2Hand.add(new FoeCard(30));
+
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('S', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('H', 10));
+        p2Hand.add(new WeaponCard('B', 15));
+        p2Hand.add(new WeaponCard('B', 15));
+        p2Hand.add(new WeaponCard('L', 20));
+        p2Hand.add(new WeaponCard('L', 20));
+        p2Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p2Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p3Hand =  this.getPlayer(2).getHand();
+        // set up P3 hand
+        p3Hand.add(new FoeCard(25));
+        p3Hand.add(new FoeCard(30));
+
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('S', 10));
+        p3Hand.add(new WeaponCard('H', 10));
+        p3Hand.add(new WeaponCard('H', 10));
+        p3Hand.add(new WeaponCard('B', 15));
+        p3Hand.add(new WeaponCard('B', 15));
+        p3Hand.add(new WeaponCard('L', 20));
+        p3Hand.add(new WeaponCard('L', 20));
+        p3Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p3Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p4Hand =  this.getPlayer(3).getHand();
+        // set up P4 hand
+        p4Hand.add(new FoeCard(25));
+        p4Hand.add(new FoeCard(30));
+        p4Hand.add(new FoeCard(70));
+
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('S', 10));
+        p4Hand.add(new WeaponCard('S', 10));
+
+        p4Hand.add(new WeaponCard('H', 10));
+        p4Hand.add(new WeaponCard('H', 10));
+
+        p4Hand.add(new WeaponCard('B', 15));
+        p4Hand.add(new WeaponCard('B', 15));
+
+        p4Hand.add(new WeaponCard('L', 20));
+        p4Hand.add(new WeaponCard('L', 20));
+
+        for (AdventureCard card : p4Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        int numPlayers = 4;
+        int initialCards = 100;
+
+        // event deck shenanigans
+        Stack<EventDeckCard> eventDeck = this.getEventDeck().getDeck();
+
+        // remove one quest of size 4 from the deck somewhere
+        EventDeckCard cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 4) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one quest of size 3 from the deck somewhere
+        cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 3) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one plague card
+        cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.EVENTTYPE) {
+                EventCard qCard = (EventCard) card;
+                if (qCard.getEventType() == EventType.PLAGUE) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one prosperity card
+        cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.EVENTTYPE) {
+                EventCard qCard = (EventCard) card;
+                if (qCard.getEventType() == EventType.PROSPERITY) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // remove one Queens Favor card
+        cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.EVENTTYPE) {
+                EventCard qCard = (EventCard) card;
+                if (qCard.getEventType() == EventType.QUEENS_FAVOR) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+
+        // ensure the fifth from the top quest card is a quest of size 3
+        eventDeck.push(new QuestCard(3));
+        // ensure the fourth from the top quest card is a Queens favor card
+        eventDeck.push(new EventCard(EventType.QUEENS_FAVOR));
+        // ensure the third from the top quest card is a prosperity card
+        eventDeck.push(new EventCard(EventType.PROSPERITY));
+        // ensure the second from the top quest card is a plague card
+        eventDeck.push(new EventCard(EventType.PLAGUE));
+        // ensure the top card is a quest of size 4
+        eventDeck.push(new QuestCard(4));
+
+
+        // adventure deck shenanigans
+
+        // build the top of the adventure deck how we need it
+        Stack<AdventureCard> aDeck = this.getAdventureDeck().getDeck();
+
+        Queue<AdventureCard> newCards = new LinkedList<AdventureCard>();
+
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new FoeCard(35));
+
+        newCards.add(new FoeCard(50));
+        newCards.add(new FoeCard(40));
+
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+
+        newCards.add(new FoeCard(50));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('B', 15));
+
+        newCards.add(new FoeCard(25));
+        newCards.add(new FoeCard(30));
+
+        newCards.add(new WeaponCard('D', 5));
+        newCards.add(new WeaponCard('D', 5));
+
+        newCards.add(new WeaponCard('B', 15));
+        newCards.add(new FoeCard(40));
+
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('H', 10));
+
+        newCards.add(new FoeCard(25));
+        newCards.add(new FoeCard(25));
+
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(5));
+        newCards.add(new FoeCard(5));
+
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(5));
+
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(5));
+
+        newCards.add(new FoeCard(25));
+        newCards.add(new FoeCard(5));
+        newCards.add(new FoeCard(15));
+
+        newCards.add(new FoeCard(20));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(5));
+
+        // remove the cards we don't want duplicates of in the deck
+        removeFromDeck(aDeck, newCards);
+
+        // add the cards we do want on top
+        aDeck.addAll(newCards);
+    }
+
+    public void rig0WinnerScenario() {
+        // return all the player hands to the adventure deck
+        for (int i = 0; i < 4; ++i) {
+            this.getAdventureDeck().getDeck().addAll(this.getPlayer(i).getHand());
+            this.getPlayer(i).getHand().clear();
+        }
+
+        List<AdventureCard> p1Hand =  this.getPlayer(0).getHand();
+        // set up P1 hand
+        p1Hand.add(new FoeCard(50));
+        p1Hand.add(new FoeCard(70));
+
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('D', 5));
+        p1Hand.add(new WeaponCard('S', 10));
+        p1Hand.add(new WeaponCard('S', 10));
+        p1Hand.add(new WeaponCard('H', 10));
+        p1Hand.add(new WeaponCard('H', 10));
+        p1Hand.add(new WeaponCard('B', 15));
+        p1Hand.add(new WeaponCard('B', 15));
+        p1Hand.add(new WeaponCard('L', 20));
+        p1Hand.add(new WeaponCard('L', 20));
+
+        for (AdventureCard card : p1Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+
+        List<AdventureCard> p2Hand =  this.getPlayer(1).getHand();
+        // set up P2 hand
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(5));
+        p2Hand.add(new FoeCard(10));
+        p2Hand.add(new FoeCard(15));
+        p2Hand.add(new FoeCard(15));
+        p2Hand.add(new FoeCard(20));
+        p2Hand.add(new FoeCard(20));
+        p2Hand.add(new FoeCard(25));
+        p2Hand.add(new FoeCard(30));
+        p2Hand.add(new FoeCard(30));
+        p2Hand.add(new FoeCard(40));
+
+        p2Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p2Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p3Hand =  this.getPlayer(2).getHand();
+        // set up P3 hand
+        p3Hand.add(new FoeCard(5));
+        p3Hand.add(new FoeCard(5));
+        p3Hand.add(new FoeCard(10));
+        p3Hand.add(new FoeCard(15));
+        p3Hand.add(new FoeCard(15));
+        p3Hand.add(new FoeCard(20));
+        p3Hand.add(new FoeCard(20));
+        p3Hand.add(new FoeCard(25));
+        p3Hand.add(new FoeCard(25));
+        p3Hand.add(new FoeCard(30));
+        p3Hand.add(new FoeCard(40));
+
+        p3Hand.add(new WeaponCard('L', 20));
+
+        for (AdventureCard card : p3Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        List<AdventureCard> p4Hand =  this.getPlayer(3).getHand();
+        // set up P4 hand
+        p4Hand.add(new FoeCard(5));
+        p4Hand.add(new FoeCard(5));
+        p4Hand.add(new FoeCard(10));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(15));
+        p4Hand.add(new FoeCard(20));
+        p4Hand.add(new FoeCard(20));
+        p4Hand.add(new FoeCard(25));
+        p4Hand.add(new FoeCard(25));
+        p4Hand.add(new FoeCard(30));
+        p4Hand.add(new FoeCard(50));
+
+        p4Hand.add(new WeaponCard('E', 30));
+
+        for (AdventureCard card : p4Hand) {
+            this.getAdventureDeck().getDeck().remove(card);
+        }
+
+        // event deck shenanigans
+        Stack<EventDeckCard> eventDeck = this.getEventDeck().getDeck();
+
+        // remove one quest of size 2 from the deck somewhere
+        EventDeckCard cardToRemove = null;
+        for (EventDeckCard card : eventDeck) {
+            if (card.getType() == EventCardType.QUESTTYPE) {
+                QuestCard qCard = (QuestCard)card;
+                if (qCard.getValue() == 2) {
+                    cardToRemove = qCard;
+                    break;
+                }
+            }
+        }
+        eventDeck.remove(cardToRemove);
+
+        // ensure the top card is a quest of size 2
+        eventDeck.push(new QuestCard(2));
+
+
+        // adventure deck shenanigans
+
+        // build the top of the adventure deck how we need it
+        Stack<AdventureCard> aDeck = this.getAdventureDeck().getDeck();
+
+        Queue<AdventureCard> newCards = new LinkedList<AdventureCard>();
+
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('S', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('H', 10));
+        newCards.add(new WeaponCard('D', 5));
+        newCards.add(new WeaponCard('D', 5));
+        newCards.add(new WeaponCard('D', 5));
+        newCards.add(new WeaponCard('D', 5));
+        newCards.add(new FoeCard(15));
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(5));
+
+
+        newCards.add(new FoeCard(10));
+        newCards.add(new FoeCard(15));
         newCards.add(new FoeCard(5));
 
         // remove the cards we don't want duplicates of in the deck
