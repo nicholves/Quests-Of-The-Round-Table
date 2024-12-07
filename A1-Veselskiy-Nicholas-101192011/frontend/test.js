@@ -1,6 +1,7 @@
 const apiBaseUrl = "http://localhost:8080";
 const { Builder, By, until } = require('selenium-webdriver');
-let sleepAmount = 1000
+let sleepAmount = 40
+const importantSleep = 2000
 
 async function scenario1() {
     let driver = await new Builder().forBrowser("chrome").build();
@@ -40,6 +41,11 @@ async function scenario1() {
                 userInput = userInput.replace(/^\n/, "");
                 await driver.sleep(sleepAmount);
                 continue;
+            }
+            if (userInput[0] == '\t') {
+                await driver.sleep(importantSleep)
+                userInput = userInput.replace(/^\t/, "");
+                continue
             }
 
             inputBox.sendKeys(userInput[0]);
@@ -165,10 +171,16 @@ async function scenario2() {
                 await driver.sleep(sleepAmount);
                 continue;
             }
+            if (userInput[0] == '\t') {
+                await driver.sleep(importantSleep)
+                userInput = userInput.replace(/^\t/, "");
+                continue
+            }
 
             inputBox.sendKeys(userInput[0]);
             userInput = userInput.substring(1);
         }
+        
 
         const output = await outputBox.getText();
         let winnerValid = false;
@@ -287,6 +299,11 @@ async function scenario3() {
                 userInput = userInput.replace(/^\n/, "");
                 await driver.sleep(sleepAmount);
                 continue;
+            }
+            if (userInput[0] == '\t') {
+                await driver.sleep(importantSleep)
+                userInput = userInput.replace(/^\t/, "");
+                continue
             }
 
             inputBox.sendKeys(userInput[0]);
@@ -411,6 +428,11 @@ async function scenario4() {
                 await driver.sleep(sleepAmount);
                 continue;
             }
+            if (userInput[0] == '\t') {
+                await driver.sleep(importantSleep)
+                userInput = userInput.replace(/^\t/, "");
+                continue
+            }
 
             inputBox.sendKeys(userInput[0]);
             userInput = userInput.substring(1);
@@ -515,22 +537,24 @@ function getA1ScenarioInputs() {
     userInput += "\n" // p1 confirms it is their turn
 
     userInput += "\n"; // p1 confirms the drawn card (Quest of 4 stages)
+    userInput += "\t"; // wait
 
     userInput += "n\n"; // p1 declines to accept sponsoring
     userInput += "y\n"; // p2 accepts sponsoring
+    userInput += "\t";
 
     // p2 builds the quest from the slides
-    userInput += "0\n6\nQuit\n"; // Stage 1 being a thief and a horse
-    userInput += "1\n4\nQuit\n"; // Stage 2 being a robber-knight and a sword
-    userInput += "1\n2\n3\nQuit\n"; // Stage 3 being a robber-knight and a dagger and a Battleaxe
-    userInput += "1\n2\nQuit\n"; // Stage 4 being a giant and a Battleaxe
+    userInput += "0\n6\n\tQuit\n"; // Stage 1 being a thief and a horse
+    userInput += "1\n4\n\tQuit\n"; // Stage 2 being a robber-knight and a sword
+    userInput += "1\n2\n3\n\tQuit\n"; // Stage 3 being a robber-knight and a dagger and a Battleaxe
+    userInput += "1\n2\n\tQuit\n"; // Stage 4 being a giant and a Battleaxe
 
 
     // 6) Stage 1:
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p1's draw
     userInput += "y\n"; // p1 confirms control
@@ -548,62 +572,71 @@ function getA1ScenarioInputs() {
     userInput += "\n"; // p1 confirms control
     userInput += "4\n"; // p1 adds a dagger to their attack
     userInput += "4\n"; // p1 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p1 confirms attack
 
     // p3's attack
     userInput += "\n"; // p3 confirms control
     userInput += "5\n"; // p3 adds a sword to their attack
     userInput += "3\n"; // p3 adds a dagger to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "4\n"; // p4 adds a dagger to their attack
     userInput += "5\n"; // p4 adds a horse to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // all attack are sufficient
+    userInput += "\t"; // wait
     userInput += "\n"; // confirm the victory screen
 
     // 7) Stage 2:
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
 
     // p1's attack
     userInput += "\n"; // p1 confirms control
     userInput += "6\n"; // p1 adds a horse to their attack
     userInput += "5\n"; // p1 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p1 confirms attack
 
     // p3's attack
     userInput += "\n"; // p3 confirms control
     userInput += "8\n"; // p3 adds an axe to their attack
     userInput += "4\n"; // p3 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "5\n"; // p4 adds a horse to their attack
     userInput += "6\n"; // p4 adds an axe to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
 
     // p1's attack is insufficient p1 is eliminated
+    userInput += "\t"; // wait
     userInput += "\n"; // confirm the victory screen
 
     // 8) Stage 3:
     // all 2 players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p3's attack
     userInput += "\n"; // p3 confirms control
     userInput += "9\n"; // p3 adds a lance to their attack
     userInput += "5\n"; // p3 adds a horse to their attack
     userInput += "4\n"; // p3 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 confirms attack
 
     // p4's attack
@@ -611,21 +644,24 @@ function getA1ScenarioInputs() {
     userInput += "6\n"; // p4 adds an axe to their attack
     userInput += "4\n"; // p4 adds a sword to their attack
     userInput += "6\n"; // p4 adds a lance to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // Confirm the winners of this stage, p3 and p4
+    userInput += "\t"; // wait
     userInput += "\n";
 
     // 8) Stage 4:
     // all 2 players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p3's attack
     userInput += "\n"; // p3 confirms control
     userInput += "6\n"; // p3 adds an axe to their attack
     userInput += "5\n"; // p3 adds a horse to their attack
     userInput += "5\n"; // p3 adds a Lance to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 confirms attack
 
     // p4's attack
@@ -634,14 +670,17 @@ function getA1ScenarioInputs() {
     userInput += "3\n"; // p4 adds a sword to their attack
     userInput += "3\n"; // p4 adds a lance to their attack
     userInput += "4\n"; // p4 adds an excalibur to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // Confirm the winners of this stage, just p4 who is victorious in the entire quest
+    userInput += "\t"; // wait
     userInput += "\n";
 
 
     // trim the hand of the quest sponsor (p2) who now has to discard 4 cards
     userInput += "\n"; // confirm p2 has control
+    userInput += "\t"; // wait
     userInput += "0\n0\n0\n0\n\n"; // we just discard the four lowest foes in their hand randomly
 
     return userInput;
@@ -653,114 +692,129 @@ function getTwoWinnerScenarioInputs() {
 
     userInput += "\n"; // p1 confirms the drawn card (Quest of 4 stages)
 
+    userInput += "\t"; // wait
     userInput += "y\n"; // p1 accepts sponsoring
 
     // p1 builds the quest
-    userInput += "0\nQuit\n"; // Stage 1 being an f5
-    userInput += "0\n4\nQuit\n"; // Stage 2 being a f5 and dagger
+    userInput += "0\n\tQuit\n"; // Stage 1 being an f5
+    userInput += "0\n4\n\tQuit\n"; // Stage 2 being a f5 and dagger
 
-    userInput += "0\n3\nQuit\n"; // Stage 3
+    userInput += "0\n3\n\tQuit\n"; // Stage 3
 
-    userInput += "0\n3\nQuit\n"; // Stage 4 f10 plus axe
+    userInput += "0\n3\n\tQuit\n"; // Stage 4 f10 plus axe
 
 
     // 6) Stage 1:
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p2's draw
     userInput += "\n"; // p2 confirms control
-    userInput += "0\n"; // p2 discards an F5 to trimming
+    userInput += "0\t\n"; // p2 discards an F5 to trimming
 
     // p3's draw
     userInput += "\n"; // p3 confirms control
-    userInput += "0\n"; // p3 discards an F5 to trimming
+    userInput += "0\t\n"; // p3 discards an F5 to trimming
 
     // p4's draw
     userInput += "\n"; // p4 confirms control
-    userInput += "0\n"; // p4 discards an F5 to trimming
+    userInput += "0\t\n"; // p4 discards an F5 to trimming
 
     // p2's attack
     userInput += "\n"; // p2 confirms control
     userInput += "5\n"; // p2 adds a horse to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p2 confirms attack
 
     // p3's attack
     userInput += "\n"; // p3 confirms control
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "5\n"; // p4 adds a horse to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // all attack are sufficient
+    userInput += "\t"; // wait
     userInput += "\n"; // confirm the victory screen
 
     // 7) Stage 2:
     // all players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
 
     // p2's attack
     userInput += "\n"; // p2 confirms control
     userInput += "3\n"; // p2 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p2 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "3\n"; // p4 adds a sword to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirm the victory screen
 
     // 8) Stage 3:
     // all 2 players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p2's attack
     userInput += "\n"; // p2 confirms control
     userInput += "4\n"; // p2 adds a sword to their attack
     userInput += "5\n"; // p2 adds a horse to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p2 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "4\n"; // p4 adds a sword to their attack
     userInput += "5\n"; // p4 adds a horse to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // Confirm the winners of this stage, p2 and p4
+    userInput += "\t"; // wait
     userInput += "\n";
 
     // 8) Stage 4:
     // all 2 players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p2's attack
     userInput += "\n"; // p2 confirms control
     userInput += "5\n"; // p2 adds a sword to their attack
     userInput += "5\n"; // p2 adds an axe to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p2 confirms attack
 
     // p4's attack
     userInput += "\n"; // p4 confirms control
     userInput += "5\n"; // p4 adds a sword to their attack
     userInput += "5\n"; // p4 adds an axe to their attack
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 confirms attack
 
     // Confirm the winners of this stage, just p4 who is victorious in the entire quest
+    userInput += "\t"; // wait
     userInput += "\n";
 
 
     // trim the hand of the quest sponsor (p2)
     userInput += "\n"; // confirm p1 has control
+    userInput += "\t"; // wait
     userInput += "0\n0\n0\n0\n\n"; // we just discard the four lowest foes in their hand randomly
 
     // confirm turn end
@@ -768,58 +822,66 @@ function getTwoWinnerScenarioInputs() {
 
     userInput += "\n" // p2 confirms it is their turn\
 
+    userInput += "\t"; // wait
     userInput += "\n"; // p2 confirms the drawn card (Quest of 3 stages)
 
 
 
     userInput += "n\n"; // p2 declines to sponsor
-    userInput += "y\n"; // p3 sponsors
+    userInput += "y\t\n"; // p3 sponsors
 
     // building quest 2
     // stage 1
     userInput += "0\n";
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // stage 2
     userInput += "0\n"; // f5
     userInput += "2\n"; // dagger
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // stage 3
     userInput += "0\n"; // f5
     userInput += "3\n"; // horse
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
 
     // all players participate except p1 participate
     userInput += "n\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
 
     // stage (1)
     userInput += "\n"; // p3 confirms control
     userInput += "5\n"; // p3 attacks with dagger
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p4 confirms control
     userInput += "5\n"; // p4 attacks with dagger
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // Confirms congratulations
 
     // all players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
 
     // stage (2)
     userInput += "\n"; // p2 confirms control
     userInput += "6\n"; // p2 attacks with axe
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p4 confirms control
     userInput += "6\n"; // p4 attacks with dagger
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
 
@@ -828,22 +890,26 @@ function getTwoWinnerScenarioInputs() {
 
     // all players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // stage (3)
     userInput += "\n"; // p2 confirms control
     userInput += "9\n"; // p2 attacks with excal
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p4 confirms control
     userInput += "9\n"; // p4 attacks with excal
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
+    userInput += "\t"; // wait
     userInput += "\n"; // Confirms congratulations
 
     userInput += "\n"; // p3 confirms control
 
     // p3 discrads
+    userInput += "\t"; // wait
     userInput += "0\n";
     userInput += "1\n";
     userInput += "1\n";
@@ -851,6 +917,7 @@ function getTwoWinnerScenarioInputs() {
     userInput += "\n"; // confirm quest end
 
     userInput += "\n"; // confirm turn end
+    userInput += "\t"; // wait
 
 
     return userInput;
@@ -862,122 +929,144 @@ function get1WinnerScenarioInputs() {
 
     userInput += "\n"; // p1 confirms the draw
 
+    userInput += "\t"; // wait
     userInput += "y\n"; // p1 decides to sponsor
 
     // building quest
     // Stage (1)
     userInput += "0\n"; // f5
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (2)
     userInput += "1\n"; // f10
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (3)
     userInput += "2\n"; // f15
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (4)
     userInput += "3\n"; // f20
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p2's draw
     userInput += "\n"; // p2 confirms control
-    userInput += "0\n"; // p2 discards an F5 to trimming
+    userInput += "0\t\n"; // p2 discards an F5 to trimming
 
     // p3's draw
     userInput += "\n"; // p3 confirms control
-    userInput += "0\n"; // p3 discards an F10 to trimming
+    userInput += "0\t\n"; // p3 discards an F10 to trimming
 
     // p4's draw
     userInput += "\n"; // p4 confirms control
-    userInput += "0\n"; // p4 discards an F20 to trimming
+    userInput += "0\t\n"; // p4 discards an F20 to trimming
 
 
     // build attacks
     // Stage (1)
     userInput += "\n"; // p2 confirms control
     userInput += "2\n"; // p2 adds a sword
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "2\n"; // p3 adds a sword
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
     userInput += "\n"; // p4 confirms control
     userInput += "3\n"; // p4 adds a sword
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // Stage (2)
     userInput += "\n"; // p2 confirms control
     userInput += "5\n"; // p2 adds a horse
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "5\n"; // p3 adds a horse
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
     userInput += "\n"; // p4 confirms control
     userInput += "6\n"; // p4 adds a horse
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // Stage (3)
     userInput += "\n"; // p2 confirms control
     userInput += "7\n"; // p2 adds an axe
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "7\n"; // p3 adds an axe
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
     userInput += "\n"; // p4 confirms control
     userInput += "8\n"; // p4 adds an axe
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // Stage (4)
     userInput += "\n"; // p2 confirms control
     userInput += "9\n"; // p2 adds a lance
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "9\n"; // p3 adds a lance
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
     userInput += "\n"; // p4 confirms control
     userInput += "10\n"; // p4 adds a lance
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
 
     // discards of p1
     userInput += "\n"; // p1 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // discard F5
     userInput += "0\n"; // discard F5
     userInput += "1\n"; // discard F10
@@ -988,27 +1077,33 @@ function get1WinnerScenarioInputs() {
     // TURN (2)
     userInput += "\n"; // confirms control
     userInput += "\n"; // confirms draw
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms shield loss
     userInput += "\n"; // confirms turn end
 
     // TURN (3)
     userInput += "\n"; // confirms control
     userInput += "\n"; // confirms draw
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms prsoperity
 
     // discards
     userInput += "\n"; // p1 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p1 discards an F5
     userInput += "0\n"; // p1 discards an F10
 
     
     userInput += "\n"; // p2 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p2 discards an F5
 
     userInput += "\n"; // p3 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p3 discards an F5
 
     userInput += "\n"; // p4 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p4 discards an F20
 
     userInput += "\n"; // confirms turn end
@@ -1016,18 +1111,22 @@ function get1WinnerScenarioInputs() {
     // TURN (4)
     userInput += "\n"; // confirms control
     userInput += "\n"; // confirms draw
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms queens favor
 
     // discards
     userInput += "\n"; // confirms control
+    userInput += "\t"; // wait
     userInput += "1\n"; // p4 discards F25
     userInput += "3\n"; // p4 discards F30
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms turn end
 
     // TURN (5)
     userInput += "\n"; // confirms control
     userInput += "\n"; // confirms draw
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms 3 stage quest
 
     userInput += "y\n"; // agrees to sponsor
@@ -1035,34 +1134,40 @@ function get1WinnerScenarioInputs() {
     // building quest
     // Stage (1)
     userInput += "0\n"; // f15
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (2)
     userInput += "0\n"; // f15
     userInput += "6\n"; // D5
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (3)
     userInput += "3\n"; // f20
     userInput += "5\n"; // D5
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // p2's draw
     userInput += "\n"; // p2 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p2 discards an F5 to trimming
 
     // p3's draw
     userInput += "\n"; // p3 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p3 discards an F10 to trimming
 
     // p4's draw
     userInput += "\n"; // p4 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p4 discards an F20 to trimming
 
 
@@ -1070,22 +1175,26 @@ function get1WinnerScenarioInputs() {
     // Stage (1)
     userInput += "\n"; // p2 confirms control
     userInput += "8\n"; // p2 adds an axe
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "8\n"; // p3 adds an axe
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
     userInput += "\n"; // p4 confirms control
     userInput += "9\n"; // p4 adds a horse
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
 
     // all players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
 
     // build attacks
@@ -1093,43 +1202,51 @@ function get1WinnerScenarioInputs() {
     userInput += "\n"; // p2 confirms control
     userInput += "9\n"; // p2 adds an axe
     userInput += "7\n"; // p2 adds a horse
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "9\n"; // p3 adds an axe
     userInput += "4\n"; // p3 adds a sword
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
     // all players participate
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // build attacks
     // Stage (3)
     userInput += "\n"; // p2 confirms control
     userInput += "9\n"; // p2 adds a lance
     userInput += "4\n"; // p2 adds a sword
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
     userInput += "10\n"; // p3 adds an excalibur
+    userInput += "\t"; // wait
     userInput += "Quit\n"; 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms victory screen
 
 
     // discards of p1
     userInput += "\n"; // p1 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // discard F15
     userInput += "0\n"; // discard F15
     userInput += "0\n"; // discard F15
 
     userInput += "\n"; // confirms turn end
 
+    userInput += "\t"; // wait
     userInput += "\n";
-    
+    userInput += "\t"; // wait
 
     return userInput;
 }
@@ -1139,6 +1256,7 @@ function get0WinnerScenarioInputs() {
     let userInput = "";
     userInput += "\n" // p1 confirms it is their turn
 
+    userInput += "\t"; // wait
     userInput += "\n"; // p1 confirms the draw
 
     userInput += "y\n"; // p1 accepts to sponsor
@@ -1151,6 +1269,7 @@ function get0WinnerScenarioInputs() {
     userInput += "3\n"; // horse
     userInput += "4\n"; // axe
     userInput += "5\n"; // lance
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // Stage (2)
@@ -1160,42 +1279,53 @@ function get0WinnerScenarioInputs() {
     userInput += "0\n"; // horse
     userInput += "0\n"; // axe
     userInput += "0\n"; // lance
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     // all players participate
     userInput += "y\n";
     userInput += "y\n";
-    userInput += "y\n";
+    userInput += "y\t\n";
 
     // discards
     userInput += "\n"; // p2 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p2 discards an f5
 
     userInput += "\n"; // p3 confirms control
+    userInput += "\t"; // wait
     userInput += "3\n"; // p3 discards an f15
 
     userInput += "\n"; // p4 confirms control
+    userInput += "\t"; // wait
     userInput += "2\n"; // p4 discards an f10
 
     // build attacks
 
     userInput += "\n"; // p2 confirms control
     userInput += "11\n"; // p2 adds an excalibur
+    userInput += "\t"; // wait
     userInput += "Quit\n";
 
     userInput += "\n"; // p3 confirms control
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p3 attacks with nothing
 
     userInput += "\n"; // p4 confirms control
+    userInput += "\t"; // wait
     userInput += "Quit\n"; // p4 attacks with nothing
 
 
+    userInput += "\t"; // wait
     userInput += "\n"; // confirms everyone lost the quest
 
     // discards
     userInput += "\n"; // p1 confirms control
+    userInput += "\t"; // wait
     userInput += "0\n"; // p1 discards an f5
+    userInput += "\t"; // wait
     userInput += "0\n"; // p1 discards an f10
+    userInput += "\t"; // wait
     userInput += "\n";
     
     return userInput;
